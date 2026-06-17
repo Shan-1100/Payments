@@ -18,6 +18,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   setInterval(updateSidebarTimestamp, 60 * 1000);
 
   await loadAndRenderFeed();
+  await loadArchives();
   setupFilters();
   setupSubmitForm();
   setupMonitor();
@@ -604,6 +605,136 @@ function setStatus(el, text, type) {
   el.style.background = s.bg;
   el.style.color      = s.color;
   el.style.border     = `1px solid ${s.border}`;
+}
+
+// ─── Summary Archives ─────────────────────────────────────────────────────────
+let dailyArchive = [];
+let weeklyArchive = [];
+let monthlyArchive = [];
+let currentDailyIndex = 0;
+let currentWeeklyIndex = 0;
+let currentMonthlyIndex = 0;
+
+async function loadArchives() {
+  dailyArchive   = await loadJSON('/api/summaries/daily-archive') || await loadJSON('./data/daily_summaries_archive.json') || [];
+  weeklyArchive  = await loadJSON('/api/summaries/weekly-archive') || await loadJSON('./data/weekly_summaries_archive.json') || [];
+  monthlyArchive = await loadJSON('/api/summaries/monthly-archive') || await loadJSON('./data/monthly_summaries_archive.json') || [];
+
+  setupArchiveNav();
+}
+
+function setupArchiveNav() {
+  // Daily archive navigation
+  document.getElementById('daily-archive-back')?.addEventListener('click', () => {
+    if (currentDailyIndex < dailyArchive.length - 1) {
+      currentDailyIndex++;
+      renderDailyArchive();
+    }
+  });
+  document.getElementById('daily-archive-forward')?.addEventListener('click', () => {
+    if (currentDailyIndex > 0) {
+      currentDailyIndex--;
+      renderDailyArchive();
+    }
+  });
+
+  // Weekly archive navigation
+  document.getElementById('weekly-archive-back')?.addEventListener('click', () => {
+    if (currentWeeklyIndex < weeklyArchive.length - 1) {
+      currentWeeklyIndex++;
+      renderWeeklyArchive();
+    }
+  });
+  document.getElementById('weekly-archive-forward')?.addEventListener('click', () => {
+    if (currentWeeklyIndex > 0) {
+      currentWeeklyIndex--;
+      renderWeeklyArchive();
+    }
+  });
+
+  // Monthly archive navigation
+  document.getElementById('monthly-archive-back')?.addEventListener('click', () => {
+    if (currentMonthlyIndex < monthlyArchive.length - 1) {
+      currentMonthlyIndex++;
+      renderMonthlyArchive();
+    }
+  });
+  document.getElementById('monthly-archive-forward')?.addEventListener('click', () => {
+    if (currentMonthlyIndex > 0) {
+      currentMonthlyIndex--;
+      renderMonthlyArchive();
+    }
+  });
+
+  renderDailyArchive();
+  renderWeeklyArchive();
+  renderMonthlyArchive();
+}
+
+function renderDailyArchive() {
+  const item = dailyArchive[currentDailyIndex];
+  const container = document.getElementById('daily-archive-content');
+  const dateEl = document.getElementById('daily-archive-date');
+  const backBtn = document.getElementById('daily-archive-back');
+  const forwardBtn = document.getElementById('daily-archive-forward');
+
+  if (!item || !container) return;
+
+  container.innerHTML = '';
+  let html = '';
+  if (item.period) html += `<div class="summary-period">${item.period}</div>`;
+  if (item.headline) html += `<div class="summary-headline">${item.headline}</div>`;
+  html += renderMarkdown(item.summary || '');
+  if (item.authorNote) html += `<div class="summary-author-note">${item.authorNote}</div>`;
+  container.innerHTML = html;
+
+  dateEl.textContent = item.period || '';
+  backBtn.disabled = currentDailyIndex >= dailyArchive.length - 1;
+  forwardBtn.disabled = currentDailyIndex <= 0;
+}
+
+function renderWeeklyArchive() {
+  const item = weeklyArchive[currentWeeklyIndex];
+  const container = document.getElementById('weekly-archive-content');
+  const dateEl = document.getElementById('weekly-archive-date');
+  const backBtn = document.getElementById('weekly-archive-back');
+  const forwardBtn = document.getElementById('weekly-archive-forward');
+
+  if (!item || !container) return;
+
+  container.innerHTML = '';
+  let html = '';
+  if (item.period) html += `<div class="summary-period">${item.period}</div>`;
+  if (item.headline) html += `<div class="summary-headline">${item.headline}</div>`;
+  html += renderMarkdown(item.summary || '');
+  if (item.authorNote) html += `<div class="summary-author-note">${item.authorNote}</div>`;
+  container.innerHTML = html;
+
+  dateEl.textContent = item.period || '';
+  backBtn.disabled = currentWeeklyIndex >= weeklyArchive.length - 1;
+  forwardBtn.disabled = currentWeeklyIndex <= 0;
+}
+
+function renderMonthlyArchive() {
+  const item = monthlyArchive[currentMonthlyIndex];
+  const container = document.getElementById('monthly-archive-content');
+  const dateEl = document.getElementById('monthly-archive-date');
+  const backBtn = document.getElementById('monthly-archive-back');
+  const forwardBtn = document.getElementById('monthly-archive-forward');
+
+  if (!item || !container) return;
+
+  container.innerHTML = '';
+  let html = '';
+  if (item.period) html += `<div class="summary-period">${item.period}</div>`;
+  if (item.headline) html += `<div class="summary-headline">${item.headline}</div>`;
+  html += renderMarkdown(item.summary || '');
+  if (item.authorNote) html += `<div class="summary-author-note">${item.authorNote}</div>`;
+  container.innerHTML = html;
+
+  dateEl.textContent = item.period || '';
+  backBtn.disabled = currentMonthlyIndex >= monthlyArchive.length - 1;
+  forwardBtn.disabled = currentMonthlyIndex <= 0;
 }
 
 // ─── Public mode ──────────────────────────────────────────────────────────────

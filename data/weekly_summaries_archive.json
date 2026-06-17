@@ -1,0 +1,18 @@
+[
+  {
+    "week": "2025-W24",
+    "dateRange": "June 9-15, 2025",
+    "period": "Week of June 9, 2025",
+    "headline": "Real-Time Payments Inflection & Tokenization Scaling — Twin Threats to Treasury Banking Margin",
+    "summary": "**Executive Summary:**\n\nThis week marked two critical inflection points in payment infrastructure evolution:\n\n**1. Real-Time Payments Volume Acceleration**\n- RTP B2B transaction value reached 60% of total volume\n- FedNow participation crossed 1,000 institutions\n- ERP integration gap identified as primary barrier to hockey-stick growth\n- Banks investing in ERP-native payment initiation (Oracle, SAP, Dynamics) creating distribution moat\n\n**2. Tokenized Deposit Scaling & Non-Bank Competitive Entry**\n- JPMorgan Kinexis now processing $1B daily volume\n- TCH RLN pilot advancing interbank tokenized settlement\n- MoneyGram expanded stablecoin B2B platform to 20 markets\n- Western Union B2B launched with ERP API integration\n\n**Strategic Implications:**\n\nTreasury-serving banks face simultaneous margin compression from two directions:\n- **Pricing pressure from non-bank stablecoin platforms** (MoneyGram, Western Union) commoditizing cross-border wire fees\n- **Product displacement from tokenized deposits** (Kinexis, RLN) replacing intraday liquidity and repo products\n\nBanks that do not have both (1) ERP-integrated real-time payment capability AND (2) a tokenized deposit product pilot in market within 12 months will face accelerating client defection in institutional and large corporate treasury segments.\n\n**Regulatory Moat Closing Window:** Fed guidance provides temporary advantage to bank-issued tokenized deposits, but advantage erodes as GENIUS Act licensing framework clarifies. Speed to market is strategic imperative.",
+    "authorNote": "Summary compiled from 47 collected articles across 14 sources."
+  },
+  {
+    "week": "2025-W23",
+    "dateRange": "June 2-8, 2025",
+    "period": "Week of June 2, 2025",
+    "headline": "Regulatory Clarity on Stablecoins & Tokenized Deposits Creates Strategic Window",
+    "summary": "**Executive Summary:**\n\n**Regulatory Developments:**\n- Federal Reserve issued supervisory guidance clarifying bank authority to issue tokenized deposits\n- OCC guidance reinforces chartered bank primacy in digital asset engagement\n- GENIUS Act draft language published with expected 2025-2026 legislative timeline\n- Financial Stability Board issued recommendations on stablecoin regulatory framework\n\n**Market Implications:**\n\nThe regulatory clarity creates a narrow window (estimated 12-24 months) where bank-issued tokenized deposits have legal standing that non-bank stablecoins do not. This is a product development sprint window, not a waiting period.\n\nBanks that establish pilot programs in this window create regulatory precedent and operational expertise advantage when licensing regime clarifies.\n\n**Competitive Positioning:**\n\nNon-bank payments platforms (Stripe, Square, PayPal) are preparing stablecoin payment products for GENIUS Act licensing when regulations finalize. Banks' primary competitive advantage is the current regulatory moat — this advantage is time-limited.\n\n**Key Takeaway:** The 12-month window for establishing tokenized deposit pilot advantage closes faster than product development typically moves. Strategic decisions must be made in Q2 2025 to hit market timing.",
+    "authorNote": "Summary compiled from 38 collected articles across 12 sources."
+  }
+]

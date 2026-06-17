@@ -1539,6 +1539,56 @@ code {
 }
 
 /* ─────────────────────────────────────────
+   Summary Archive Navigation
+───────────────────────────────────────── */
+.archive-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  padding: 1.25rem;
+  background: linear-gradient(135deg, var(--primary-light) 0%, rgba(184,134,11,0.03) 100%);
+  border: 1px solid var(--primary-light);
+  border-radius: var(--radius-lg);
+}
+
+.archive-nav-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.6rem 1.2rem;
+  background: var(--white);
+  color: var(--primary);
+  border: 1.5px solid var(--primary-light);
+  border-radius: var(--radius);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.archive-nav-btn:hover:not(:disabled) {
+  background: var(--primary);
+  color: var(--white);
+  border-color: var(--primary);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow);
+}
+
+.archive-nav-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.archive-date {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--primary-dark);
+  min-width: 200px;
+  text-align: center;
+}
+
+/* ─────────────────────────────────────────
    Large desktop polish
 ───────────────────────────────────────── */
 @media (min-width: 1280px) {
