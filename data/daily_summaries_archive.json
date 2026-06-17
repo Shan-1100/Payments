@@ -1,1 +1,32 @@
-[]
+[
+  {
+    "date": "2026-06-17",
+    "headline": "Interchecks Raises $50 Million to Expand Instant Payments Infrastructure",
+    "summary": "## Series C Funding Round\n\nFintech company Interchecks announced a $50 million Series C funding round focused on expanding its instant payments infrastructure serving sportsbooks, fintech companies, and financial institutions. The platform now supports Account Funding Transactions (AFT) that enable businesses to use debit credentials to fund eligible accounts.\n\n## Platform Expansion\n\nInterchecks made Account Funding Transactions (AFT) generally available, expanding the platform to cover the full lifecycle of money movement for its clients. This development addresses growing demand for instant payment capabilities across multiple use cases and industries.\n\n## Market Context\n\nThe funding round comes amid accelerating adoption of real-time payment rails across the U.S., with both FedNow and RTP networks expanding their participation and transaction volumes.",
+    "sources": ["pymnts"]
+  },
+  {
+    "date": "2026-06-16",
+    "headline": "Cross-Border Payments Framework: 25+ Banks Commit to New Payment Corridor Standards",
+    "summary": "## Global Payment Framework Launch\n\nMore than 25 banks have committed to processing payments under a new cross-border payments framework affecting payment corridors across Australia, Bangladesh, Canada, China, Germany, India, Pakistan, Spain, Thailand, the UK and the US. The framework aims to deliver certainty of cost, full-value delivery, and the fastest possible speeds including instant settlement where possible.\n\n## SWIFT Integration\n\nSWIFT announced that banks are rolling out a new framework for transforming consumer payments in retail transactions. This represents a significant shift toward instant settlement capabilities in cross-border payment corridors globally.\n\n## Infrastructure Progress\n\nThe new framework addresses longstanding challenges in cross-border payments by providing standardized routing, settlement assurances, and cost transparency to participating financial institutions.",
+    "sources": ["swift"]
+  },
+  {
+    "date": "2026-06-15",
+    "headline": "FedNow Service Fortifies Security With New Risk Mitigation Tools",
+    "summary": "## Risk Management Enhancement\n\nFederal Reserve Financial Services launched a new risk mitigation tool for FedNow Service participants on April 28, 2026. The network intelligence application programming interface (API) provides receiver account-level data observed over the service and uses historical FedNow Service data to enrich insights over time.\n\n## Participant Benefits\n\nParticipating financial institutions and service providers now have access to instant, actionable risk insights. This represents a significant advancement in FedNow's capability to support the unique requirements of instant payment networks operating at scale.\n\n## Network Growth\n\nFedNow has attracted over 1,700 banks that have been enabled for receive-side capabilities, though the network continues to work on supporting send-side participation to achieve balanced growth.",
+    "sources": ["fed-board", "fednow"]
+  },
+  {
+    "date": "2026-06-14",
+    "headline": "Federal Reserve Proposes FedNow Cross-Border Payment Support Via Intermediaries",
+    "summary": "## Cross-Border Expansion Proposal\n\nIn April 2026, the Federal Reserve Board invited public comment on a proposal that would allow U.S. banks and credit unions to use intermediaries to transfer funds through the FedNow Service. This would enable U.S. banks to use FedNow to transact with correspondent banks to facilitate the international portion of a cross-border payment.\n\n## Public Comment Period\n\nComments on the proposal were due within 60 days after publication in the Federal Register. This timeline would place the comment deadline near early June 2026, with potential implementation following approval.\n\n## Strategic Importance\n\nThe proposal represents a significant step toward extending FedNow's instant payment capabilities beyond domestic U.S. transactions, positioning the service as a critical infrastructure element for cross-border commerce.",
+    "sources": ["fed-board", "fednow"]
+  },
+  {
+    "date": "2026-06-13",
+    "headline": "RTP Network Expands With 1,100+ Connected Financial Institutions",
+    "summary": "## Network Growth Milestone\n\nThe Clearing House's Real-Time Payments (RTP) network now supports more than 1,100 financial institutions connected to the network. The RTP network supports continuous settlement and rich messaging capabilities that enable institutions to move away from batch processing.\n\n## Operational Capabilities\n\nThe RTP network provides participating financial institutions with instant clearing and settlement of payments, enabling more efficient cash management and working capital optimization. Participating institutions benefit from standardized rich data messaging that supports faster reconciliation.\n\n## Market Position\n\nRTP continues to expand its position as a leading real-time payments infrastructure in the United States, supporting both consumer and business payment use cases with increasing participation from major and community financial institutions.",
+    "sources": ["clearing-house"]
+  }
+]
