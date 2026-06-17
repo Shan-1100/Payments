@@ -235,7 +235,6 @@ function renderSummary() {
   document.getElementById('current-date').textContent = formatted;
   document.getElementById('summary-body').innerHTML = formatBody(body);
 
-  loadArticles(item);
   renderSources(item);
   updatePaginationUI();
 }
@@ -282,31 +281,6 @@ function escapeHtml(str) {
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#39;');
-}
-
-/* ─── Article loader ─────────────────────────────────────────── */
-async function loadArticles(item) {
-  const container = document.getElementById('articles-container');
-  container.innerHTML = '';
-
-  if (!item.sources || item.sources.length === 0) return;
-
-  try {
-    const sources = await fetchJSON('data/approved_sources.json');
-    item.sources.forEach(id => {
-      const src = sources.find(s => s.id === id);
-      if (!src) return;
-      const card = document.createElement('div');
-      card.className = 'article-card';
-      card.innerHTML = `
-        <div class="article-title">${escapeHtml(src.name || src.institution || '')}</div>
-        <div class="article-source">${escapeHtml(src.category || 'Source')}</div>
-      `;
-      container.appendChild(card);
-    });
-  } catch (err) {
-    console.error('Failed to load articles:', err);
-  }
 }
 
 /* ─── Sources renderer ───────────────────────────────────────── */
