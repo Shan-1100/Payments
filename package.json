@@ -5,7 +5,14 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "build-public": "node scripts/build-public-site.js"
+    "build-public": "node scripts/build-public-site.js",
+    "pipeline": "node scripts/run-pipeline.js",
+    "pipeline:weekly": "node scripts/run-pipeline.js --weekly",
+    "pipeline:monthly": "node scripts/run-pipeline.js --monthly"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.39.0",
+    "rss-parser": "^3.13.0"
   },
   "keywords": ["payments", "intelligence", "RTP", "FedNow"],
   "author": "",

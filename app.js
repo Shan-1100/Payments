@@ -503,27 +503,40 @@ function setupSubmitForm() {
   if (!btn) return;
 
   btn.addEventListener('click', async () => {
-    const url     = document.getElementById('submit-url').value;
-    const title   = document.getElementById('submit-title').value || '';
-    const summary = document.getElementById('submit-summary').value || '';
+    const articleUrl = document.getElementById('submit-url').value.trim();
+    const title      = document.getElementById('submit-title').value.trim()   || '';
+    const summary    = document.getElementById('submit-summary').value.trim() || '';
 
-    if (!url) { alert('Please enter a URL'); return; }
+    if (!articleUrl) { alert('Please enter a URL'); return; }
+
+    const original = btn.textContent;
+    btn.textContent = 'Synthesizing…';
+    btn.disabled = true;
 
     try {
-      const res = await fetch('/api/submissions', {
-        method: 'POST',
+      const res  = await fetch('/api/submissions', {
+        method:  'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ url, title, summary })
+        body:    JSON.stringify({ url: articleUrl, title, summary })
       });
+      const data = await res.json();
+
       if (res.ok) {
-        alert('Submission received');
+        alert(data.message || 'Article added to feed');
         document.getElementById('submit-url').value     = '';
         document.getElementById('submit-title').value   = '';
         document.getElementById('submit-summary').value = '';
+        // Refresh the feed so the new item appears immediately
+        await loadAndRenderFeed();
+      } else {
+        alert('Error: ' + (data.error || 'Submission failed'));
       }
     } catch (e) {
-      console.error('Submission error:', e);
+      alert('Network error: ' + e.message);
     }
+
+    btn.textContent = original;
+    btn.disabled = false;
   });
 }
 
