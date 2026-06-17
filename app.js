@@ -237,14 +237,6 @@ function createCardElement(item, options = {}) {
     ? `<span class="intel-badge intel-${item.intelligenceType}">${intelLabels[item.intelligenceType]}</span>`
     : '';
 
-  const tierBadge = item.sourceTier
-    ? `<span class="badge badge-tier-${item.sourceTier === 'Tier 1' ? '1' : '2'}">${item.sourceTier}</span>`
-    : '';
-
-  const priorityBadge = item.priorityBand
-    ? `<span class="badge badge-${item.priorityBand}">${cap(item.priorityBand)}</span>`
-    : '';
-
   const commentaryBadge = options.isCommentary
     ? `<span class="card-commentary-label">
         <svg width="10" height="10" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg>
@@ -260,9 +252,7 @@ function createCardElement(item, options = {}) {
     date             ? `<span>${date}</span>` : '',
     (date && item.sourceName) ? `<span class="sep">·</span>` : '',
     item.sourceName  ? `<span>${item.sourceName}</span>` : '',
-    item.rail        ? `<span class="sep">·</span><span>${item.rail}</span>` : '',
-    tierBadge        ? `<span class="sep">·</span>${tierBadge}` : '',
-    priorityBadge    ? ` ${priorityBadge}` : ''
+    item.rail        ? `<span class="sep">·</span><span>${item.rail}</span>` : ''
   ].filter(Boolean).join('');
 
   const businessImpactHtml = item.businessImpact
@@ -585,10 +575,4 @@ function setPublicMode() {
 
   const opsSection = document.getElementById('ops');
   if (opsSection) opsSection.style.display = 'none';
-
-  const badge = document.getElementById('topbar-public-badge');
-  if (badge) badge.style.display = 'inline-flex';
-
-  const footerNote = document.getElementById('footer-public-note');
-  if (footerNote) footerNote.style.display = 'inline';
 }
