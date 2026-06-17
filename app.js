@@ -1,225 +1,450 @@
-// State management
-let state = {
+/**
+ * Payments Intelligence — app.js
+ * Vanilla JS, no frameworks. Single-page with section switching,
+ * daily/weekly/monthly tabs, and paginated summary cards.
+ */
+
+/* ─── State ─────────────────────────────────────────────────── */
+const state = {
+  activeSection: 'executive',
   currentTab: 'daily',
-  currentDailyIndex: 0,
-  currentWeeklyIndex: 0,
-  currentMonthlyIndex: 0,
-  dailySummaries: [],
-  weeklySummaries: [],
-  monthlySummaries: [],
+  indices: { daily: 0, weekly: 0, monthly: 0 },
+  data: {
+    daily: [],
+    weekly: [],
+    monthly: [],
+    deepDives: [],
+    expert: [],
+    sources: [],
+    watchlist: [],
+    partners: [],
+  },
+  loaded: {
+    executive: false,
+    deepdives: false,
+    expert: false,
+    reference: false,
+    partners: false,
+  },
 };
 
-// Initialize app
+/* ─── Boot ───────────────────────────────────────────────────── */
 document.addEventListener('DOMContentLoaded', async () => {
-  await loadSummaryData();
-  setupTabListeners();
-  setupPaginationListeners();
+  initNav();
+  initSummaryTabs();
+  initPagination();
+
+  // Start loading executive data immediately (default section)
+  await loadExecutiveData();
   renderSummary();
+  state.loaded.executive = true;
 });
 
-// Load summary data from JSON files
-async function loadSummaryData() {
-  try {
-    const [daily, weekly, monthly] = await Promise.all([
-      fetch('data/daily_summaries_archive.json').then(r => r.json()),
-      fetch('data/weekly_summaries_archive.json').then(r => r.json()),
-      fetch('data/monthly_summaries_archive.json').then(r => r.json()),
-    ]);
+/* ─── Section navigation ─────────────────────────────────────── */
+function initNav() {
+  document.querySelectorAll('.nav-pill').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = btn.dataset.section;
+      if (target === state.activeSection) return;
+      switchSection(target);
+    });
+  });
+}
 
-    state.dailySummaries = Array.isArray(daily) ? daily.reverse() : [];
-    state.weeklySummaries = Array.isArray(weekly) ? weekly.reverse() : [];
-    state.monthlySummaries = Array.isArray(monthly) ? monthly.reverse() : [];
-  } catch (error) {
-    console.error('Error loading summaries:', error);
-    state.dailySummaries = [];
-    state.weeklySummaries = [];
-    state.monthlySummaries = [];
+async function switchSection(name) {
+  // Update nav pills
+  document.querySelectorAll('.nav-pill').forEach(btn => {
+    const active = btn.dataset.section === name;
+    btn.classList.toggle('active', active);
+    btn.setAttribute('aria-selected', String(active));
+  });
+
+  // Update section visibility
+  document.querySelectorAll('.section').forEach(sec => {
+    const match = sec.id === `section-${name}`;
+    sec.hidden = !match;
+    sec.classList.toggle('active', match);
+  });
+
+  state.activeSection = name;
+
+  // Lazy-load section data
+  if (!state.loaded[name]) {
+    await loadSection(name);
+    state.loaded[name] = true;
   }
 }
 
-// Setup tab listeners
-function setupTabListeners() {
+/* ─── Load executive (summary) data ─────────────────────────── */
+async function loadExecutiveData() {
+  try {
+    const [daily, weekly, monthly] = await Promise.all([
+      fetchJSON('data/daily_summaries_archive.json'),
+      fetchJSON('data/weekly_summaries_archive.json'),
+      fetchJSON('data/monthly_summaries_archive.json'),
+    ]);
+
+    // Store newest-first (JSON is already newest-first but normalise)
+    state.data.daily = Array.isArray(daily) ? daily : [];
+    state.data.weekly = Array.isArray(weekly) ? weekly : [];
+    state.data.monthly = Array.isArray(monthly) ? monthly : [];
+  } catch (err) {
+    console.error('Failed to load summary data:', err);
+  }
+}
+
+/* ─── Lazy section loaders ───────────────────────────────────── */
+async function loadSection(name) {
+  switch (name) {
+    case 'deepdives':
+      await loadDeepDives();
+      break;
+    case 'expert':
+      await loadExpert();
+      break;
+    case 'reference':
+      await loadReference();
+      break;
+    case 'partners':
+      await loadPartners();
+      break;
+  }
+}
+
+async function loadDeepDives() {
+  try {
+    const data = await fetchJSON('data/deep_dives.json');
+    state.data.deepDives = Array.isArray(data) ? data : [];
+    renderDeepDives();
+  } catch (err) {
+    console.error('Failed to load deep dives:', err);
+    document.getElementById('deepdives-container').innerHTML =
+      '<div class="loading-msg">Unable to load deep dives.</div>';
+  }
+}
+
+async function loadExpert() {
+  try {
+    const data = await fetchJSON('data/expert_commentary.json');
+    state.data.expert = Array.isArray(data) ? data : [];
+    renderExpert();
+  } catch (err) {
+    console.error('Failed to load expert commentary:', err);
+    document.getElementById('expert-container').innerHTML =
+      '<div class="loading-msg">Unable to load expert commentary.</div>';
+  }
+}
+
+async function loadReference() {
+  try {
+    const [sources, watchlist] = await Promise.all([
+      fetchJSON('data/approved_sources.json'),
+      fetchJSON('data/watchlist.json'),
+    ]);
+    state.data.sources = Array.isArray(sources) ? sources : [];
+    state.data.watchlist = Array.isArray(watchlist) ? watchlist : [];
+    renderReference();
+  } catch (err) {
+    console.error('Failed to load reference data:', err);
+  }
+}
+
+async function loadPartners() {
+  try {
+    const data = await fetchJSON('data/internal_partners.json');
+    // internal_partners.json may be an object {groups:[]} or a flat array
+    state.data.partners = data;
+    renderPartners();
+  } catch (err) {
+    console.error('Failed to load partner data:', err);
+    document.getElementById('partners-container').innerHTML =
+      '<div class="loading-msg">Unable to load partner data.</div>';
+  }
+}
+
+/* ─── Summary tabs ───────────────────────────────────────────── */
+function initSummaryTabs() {
   document.querySelectorAll('.tab-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       const tab = btn.dataset.tab;
       if (tab === state.currentTab) return;
 
-      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(b => {
+        b.classList.remove('active');
+        b.setAttribute('aria-selected', 'false');
+      });
       btn.classList.add('active');
+      btn.setAttribute('aria-selected', 'true');
+
       state.currentTab = tab;
       renderSummary();
     });
   });
-
-  // Set initial active tab
-  document.querySelector('[data-tab="daily"]').classList.add('active');
 }
 
-// Setup pagination listeners
-function setupPaginationListeners() {
+/* ─── Pagination ─────────────────────────────────────────────── */
+function initPagination() {
   document.getElementById('prev-btn').addEventListener('click', () => {
-    const summaries = getCurrentSummaries();
-    if (summaries.length === 0) return;
-
-    const key = state.currentTab === 'daily' ? 'currentDailyIndex' :
-                state.currentTab === 'weekly' ? 'currentWeeklyIndex' :
-                'currentMonthlyIndex';
-    if (state[key] < summaries.length - 1) {
-      state[key]++;
+    const key = state.currentTab;
+    const len = state.data[key].length;
+    if (state.indices[key] < len - 1) {
+      state.indices[key]++;
       renderSummary();
     }
   });
 
   document.getElementById('next-btn').addEventListener('click', () => {
-    const key = state.currentTab === 'daily' ? 'currentDailyIndex' :
-                state.currentTab === 'weekly' ? 'currentWeeklyIndex' :
-                'currentMonthlyIndex';
-    if (state[key] > 0) {
-      state[key]--;
+    const key = state.currentTab;
+    if (state.indices[key] > 0) {
+      state.indices[key]--;
       renderSummary();
     }
   });
 }
 
-// Get current summaries based on tab
-function getCurrentSummaries() {
-  switch (state.currentTab) {
-    case 'daily':
-      return state.dailySummaries;
-    case 'weekly':
-      return state.weeklySummaries;
-    case 'monthly':
-      return state.monthlySummaries;
-    default:
-      return [];
-  }
-}
-
-// Get current index
-function getCurrentIndex() {
-  switch (state.currentTab) {
-    case 'daily':
-      return state.currentDailyIndex;
-    case 'weekly':
-      return state.currentWeeklyIndex;
-    case 'monthly':
-      return state.currentMonthlyIndex;
-    default:
-      return 0;
-  }
-}
-
-// Render current summary
+/* ─── Render summary ─────────────────────────────────────────── */
 function renderSummary() {
-  const summaries = getCurrentSummaries();
-  const index = getCurrentIndex();
+  const tab = state.currentTab;
+  const summaries = state.data[tab];
+  const index = state.indices[tab];
 
-  if (summaries.length === 0) {
+  // Update period label
+  const labels = { daily: 'Daily Summary', weekly: 'Weekly Summary', monthly: 'Monthly Review' };
+  document.getElementById('period-label').textContent = labels[tab] || 'Summary';
+
+  if (!summaries || summaries.length === 0) {
     document.getElementById('summary-headline').textContent = 'No summaries available';
     document.getElementById('summary-date').textContent = '—';
-    document.getElementById('summary-body').innerHTML = '<p>Loading summary data...</p>';
+    document.getElementById('summary-body').innerHTML =
+      '<p>Summary data is loading or unavailable.</p>';
     document.getElementById('current-date').textContent = 'N/A';
-    updatePaginationState();
+    updatePaginationUI();
     return;
   }
 
-  const summary = summaries[index];
-  const headline = summary.headline || summary.title || 'Summary';
-  const body = summary.summary || summary.body || '';
-  const date = summary.date || summary.publishedAt || new Date().toISOString();
+  const item = summaries[index];
+  const headline = item.headline || item.title || 'Summary';
+  const body = item.summary || item.body || '';
+  const dateStr = item.date || item.publishedAt || '';
+  const formatted = formatDate(dateStr, tab);
 
   document.getElementById('summary-headline').textContent = headline;
-  document.getElementById('summary-date').textContent = formatDate(date);
+  // id="summary-date" is the in-card date display
+  document.getElementById('summary-date').textContent = formatted;
+  // id="current-date" is the nav bar date
+  document.getElementById('current-date').textContent = formatted;
   document.getElementById('summary-body').innerHTML = formatBody(body);
-  document.getElementById('current-date').textContent = formatDate(date);
 
-  // Load related articles
-  loadArticles(summary);
-  updatePaginationState();
+  loadArticles(item);
+  updatePaginationUI();
 }
 
-// Format date
-function formatDate(dateStr) {
+/* ─── Render helpers ─────────────────────────────────────────── */
+function formatDate(dateStr, period) {
+  if (!dateStr) return '—';
   try {
-    const date = new Date(dateStr);
-    return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+    const d = new Date(dateStr + (dateStr.length === 10 ? 'T00:00:00' : ''));
+    const opts = { year: 'numeric', month: 'long', day: 'numeric' };
+    if (period === 'monthly') {
+      return d.toLocaleDateString('en-US', { year: 'numeric', month: 'long' });
+    }
+    return d.toLocaleDateString('en-US', opts);
   } catch {
     return dateStr;
   }
 }
 
-// Format body text (handle markdown-like content)
 function formatBody(text) {
-  if (!text) return '<p>No content available</p>';
-
-  let html = text
-    .split('\n\n')
-    .map(para => {
-      if (para.startsWith('##')) {
-        return `<h3>${para.replace('## ', '')}</h3>`;
-      }
-      if (para.startsWith('- ')) {
-        const items = para.split('\n').filter(l => l.startsWith('- '));
-        return `<ul>${items.map(item => `<li>${item.replace('- ', '')}</li>`).join('')}</ul>`;
-      }
-      return `<p>${para}</p>`;
-    })
-    .join('');
-
-  return html;
+  if (!text) return '<p>No content available.</p>';
+  const lines = text.split('\n\n');
+  return lines.map(block => {
+    const trimmed = block.trim();
+    if (!trimmed) return '';
+    if (trimmed.startsWith('## ')) {
+      return `<h3>${escapeHtml(trimmed.slice(3))}</h3>`;
+    }
+    if (trimmed.startsWith('- ')) {
+      const items = trimmed.split('\n')
+        .filter(l => l.startsWith('- '))
+        .map(l => `<li>${escapeHtml(l.slice(2))}</li>`)
+        .join('');
+      return `<ul>${items}</ul>`;
+    }
+    return `<p>${escapeHtml(trimmed)}</p>`;
+  }).join('');
 }
 
-// Load and display related articles
-async function loadArticles(summary) {
+function escapeHtml(str) {
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+/* ─── Article loader ─────────────────────────────────────────── */
+async function loadArticles(item) {
   const container = document.getElementById('articles-container');
   container.innerHTML = '';
 
-  if (!summary.sources || summary.sources.length === 0) {
-    return;
-  }
+  if (!item.sources || item.sources.length === 0) return;
 
   try {
-    const sources = await fetch('data/approved_sources.json').then(r => r.json());
-
-    summary.sources.forEach(sourceId => {
-      const source = sources.find(s => s.id === sourceId);
-      if (source) {
-        const card = document.createElement('div');
-        card.className = 'article-card';
-        card.innerHTML = `
-          <div class="article-title">${source.name || source.institution}</div>
-          <div class="article-source">${source.category || 'Source'}</div>
-        `;
-        container.appendChild(card);
-      }
+    const sources = await fetchJSON('data/approved_sources.json');
+    item.sources.forEach(id => {
+      const src = sources.find(s => s.id === id);
+      if (!src) return;
+      const card = document.createElement('div');
+      card.className = 'article-card';
+      card.innerHTML = `
+        <div class="article-title">${escapeHtml(src.name || src.institution || '')}</div>
+        <div class="article-source">${escapeHtml(src.category || 'Source')}</div>
+      `;
+      container.appendChild(card);
     });
-  } catch (error) {
-    console.error('Error loading articles:', error);
+  } catch (err) {
+    console.error('Failed to load articles:', err);
   }
 }
 
-// Update pagination button states
-function updatePaginationState() {
-  const summaries = getCurrentSummaries();
-  const index = getCurrentIndex();
+/* ─── Pagination UI state ────────────────────────────────────── */
+function updatePaginationUI() {
+  const tab = state.currentTab;
+  const len = state.data[tab].length;
+  const idx = state.indices[tab];
 
-  document.getElementById('prev-btn').disabled = index >= summaries.length - 1;
-  document.getElementById('next-btn').disabled = index <= 0;
+  const prevBtn = document.getElementById('prev-btn');
+  const nextBtn = document.getElementById('next-btn');
 
-  // Add visual styling for disabled state
-  if (index >= summaries.length - 1) {
-    document.getElementById('prev-btn').style.opacity = '0.5';
-    document.getElementById('prev-btn').style.cursor = 'not-allowed';
+  prevBtn.disabled = idx >= len - 1;
+  nextBtn.disabled = idx <= 0;
+}
+
+/* ─── Deep Dives renderer ────────────────────────────────────── */
+function renderDeepDives() {
+  const container = document.getElementById('deepdives-container');
+  if (!state.data.deepDives.length) {
+    container.innerHTML = '<div class="loading-msg">No deep dives available.</div>';
+    return;
+  }
+  container.innerHTML = state.data.deepDives.map(item => contentCard(item)).join('');
+}
+
+/* ─── Expert Commentary renderer ─────────────────────────────── */
+function renderExpert() {
+  const container = document.getElementById('expert-container');
+  if (!state.data.expert.length) {
+    container.innerHTML = '<div class="loading-msg">No expert commentary available.</div>';
+    return;
+  }
+  container.innerHTML = state.data.expert.map(item => contentCard(item)).join('');
+}
+
+/* ─── Shared content card template ──────────────────────────── */
+function contentCard(item) {
+  const tier = escapeHtml(item.sourceTier || '');
+  const type = escapeHtml(item.intelligenceType || '');
+  const band = item.priorityBand || 'medium';
+  const bandLabel = band === 'high' ? 'High Priority' : band === 'medium' ? 'Medium' : band;
+  const date = item.publishedAt || item.collectedAt || '';
+
+  const takeaway = item.businessImpact || item.businessTakeaway || '';
+
+  return `
+    <div class="content-card">
+      <div class="card-eyebrow">
+        ${tier ? `<span class="card-tag card-tag-tier1">${tier}</span>` : ''}
+        ${type ? `<span class="card-tag card-tag-type">${type}</span>` : ''}
+        <span class="card-tag card-tag-band-${band}">${bandLabel}</span>
+      </div>
+      <div class="card-title">${escapeHtml(item.title || '')}</div>
+      <div class="card-source">${escapeHtml(item.sourceName || '')}</div>
+      <div class="card-summary">${escapeHtml(item.summary || '')}</div>
+      ${takeaway ? `
+        <div class="card-impact">
+          <div class="card-impact-label">Business Impact</div>
+          ${escapeHtml(takeaway)}
+        </div>
+      ` : ''}
+      ${date ? `<div class="card-date">${formatDate(date, 'daily')}</div>` : ''}
+    </div>
+  `;
+}
+
+/* ─── Reference library renderer ────────────────────────────── */
+function renderReference() {
+  const sourcesEl = document.getElementById('sources-container');
+  const watchlistEl = document.getElementById('watchlist-container');
+
+  if (state.data.sources.length) {
+    sourcesEl.innerHTML = state.data.sources.map(s => `
+      <div class="ref-item">
+        <div class="ref-item-name">
+          ${escapeHtml(s.name || s.institution || s.sourceName || '')}
+          ${s.tier ? `<span class="ref-item-tier">${escapeHtml(s.tier)}</span>` : ''}
+        </div>
+        <div class="ref-item-meta">${escapeHtml(s.category || s.type || '')}</div>
+      </div>
+    `).join('');
   } else {
-    document.getElementById('prev-btn').style.opacity = '1';
-    document.getElementById('prev-btn').style.cursor = 'pointer';
+    sourcesEl.innerHTML = '<div class="loading-msg">No sources available.</div>';
   }
 
-  if (index <= 0) {
-    document.getElementById('next-btn').style.opacity = '0.5';
-    document.getElementById('next-btn').style.cursor = 'not-allowed';
+  if (state.data.watchlist.length) {
+    watchlistEl.innerHTML = state.data.watchlist.map(w => `
+      <div class="ref-item">
+        <div class="ref-item-name">${escapeHtml(w.name || w.company || w.entity || '')}</div>
+        <div class="ref-item-meta">${escapeHtml(w.category || w.reason || w.type || '')}</div>
+      </div>
+    `).join('');
   } else {
-    document.getElementById('next-btn').style.opacity = '1';
-    document.getElementById('next-btn').style.cursor = 'pointer';
+    watchlistEl.innerHTML = '<div class="loading-msg">No watchlist entries.</div>';
   }
+}
+
+/* ─── Partner inputs renderer ────────────────────────────────── */
+function renderPartners() {
+  const container = document.getElementById('partners-container');
+  // internal_partners.json is an object with a `groups` array
+  const raw = state.data.partners;
+  const groups = Array.isArray(raw) ? raw : (raw && raw.groups ? raw.groups : []);
+
+  if (!groups.length) {
+    container.innerHTML = '<div class="loading-msg">No partner data available.</div>';
+    return;
+  }
+
+  const statusLabel = { pending: 'Pending', 'not-connected': 'Not Connected', active: 'Active' };
+  const statusColor = { pending: '#7a5500', 'not-connected': '#526883', active: '#0f6640' };
+
+  container.innerHTML = groups.map(p => {
+    const status = p.status || 'pending';
+    const color = statusColor[status] || '#526883';
+    const label = statusLabel[status] || status;
+    return `
+      <div class="content-card">
+        <div class="card-eyebrow">
+          <span class="card-tag card-tag-type">${escapeHtml(p.format || 'Input Feed')}</span>
+          <span class="card-tag" style="background:rgba(0,0,0,0.05);color:${color}">${label}</span>
+        </div>
+        <div class="card-title">${escapeHtml(p.name || '')}</div>
+        <div class="card-source">${escapeHtml(p.frequency || '')}</div>
+        <div class="card-summary">${escapeHtml(p.description || '')}</div>
+        ${p.statusNote ? `
+          <div class="card-impact">
+            <div class="card-impact-label">Status Note</div>
+            ${escapeHtml(p.statusNote)}
+          </div>
+        ` : ''}
+      </div>
+    `;
+  }).join('');
+}
+
+/* ─── Fetch utility ──────────────────────────────────────────── */
+async function fetchJSON(url) {
+  const res = await fetch(url);
+  if (!res.ok) throw new Error(`HTTP ${res.status} for ${url}`);
+  return res.json();
 }

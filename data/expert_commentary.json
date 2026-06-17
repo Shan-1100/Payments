@@ -13,8 +13,8 @@
     "primaryTopic": "RTP / FedNow Adoption",
     "rail": "RTP",
     "tags": ["RTP", "FedNow", "ERP-integration", "B2B", "fintech-competition"],
-    "publishedAt": "2025-06-10T09:00:00Z",
-    "collectedAt": "2025-06-10T09:00:00Z",
+    "publishedAt": "2026-06-10T09:00:00Z",
+    "collectedAt": "2026-06-10T09:00:00Z",
     "status": "collected",
     "priorityBand": "high"
   },
@@ -32,8 +32,8 @@
     "primaryTopic": "Tokenized Deposits",
     "rail": "Adjacent",
     "tags": ["tokenized-deposits", "stablecoins", "regulatory-moat", "programmable-money", "GENIUS-Act"],
-    "publishedAt": "2025-06-05T09:00:00Z",
-    "collectedAt": "2025-06-05T09:00:00Z",
+    "publishedAt": "2026-06-05T09:00:00Z",
+    "collectedAt": "2026-06-05T09:00:00Z",
     "status": "collected",
     "priorityBand": "high"
   },
@@ -51,8 +51,8 @@
     "primaryTopic": "FedNow Participation Gap",
     "rail": "FedNow",
     "tags": ["FedNow", "community-banks", "send-side", "treasury-attrition", "competitive-risk"],
-    "publishedAt": "2025-06-01T09:00:00Z",
-    "collectedAt": "2025-06-01T09:00:00Z",
+    "publishedAt": "2026-06-01T09:00:00Z",
+    "collectedAt": "2026-06-01T09:00:00Z",
     "status": "collected",
     "priorityBand": "medium"
   }

@@ -1,65 +1,86 @@
 [
   {
-    "date": "2025-06-16",
+    "date": "2026-06-16",
     "period": "week",
-    "headline": "Week of June 16: Tokenization Milestone + Regulatory Clarity",
-    "summary": "JPMorgan Kinexis reaches $1B daily volume. Federal Reserve issues stablecoin guidance. RTP processes $180B monthly. Blockchain settlement pilots show 87% efficiency gains. Payment industry consolidation accelerates with $45B YTD M&A activity.",
+    "headline": "Week of June 16: GENIUS Act Live, FedNow Hits 3,000 Banks, RTP Sets Volume Record",
+    "summary": "The week of June 16 marked a watershed moment for U.S. payments as three simultaneous milestones reshaped the competitive landscape. The GENIUS Act stablecoin framework took legal effect on June 16, immediately prompting JPMorgan, Bank of America, and Wells Fargo to announce compliant bank-issued stablecoin products backed by Treasury reserves, while the OCC disclosed it had received 14 charter applications in 60 days. The following day, FedNow send-side participation crossed 3,000 financial institutions, underscoring the accelerating adoption of the Fed's instant payment network driven by community bank competitive pressures. RTP simultaneously reported record monthly volume of $280 billion for May, reflecting growing B2B adoption as the impending interoperability launch with FedNow encourages corporates to shift ACH payables to real-time rails. The Digital Euro Phase 2 launch across 8 eurozone central banks on June 14 added an international dimension to the CBDC narrative, with the ECB targeting a legislative decision by Q2 2027. Together, the week's developments signaled that real-time and digital money infrastructure is transitioning from pilot phase to mainstream financial plumbing.",
     "sources": []
   },
   {
-    "date": "2025-06-09",
+    "date": "2026-06-09",
     "period": "week",
-    "headline": "Week of June 9: Payment Infrastructure Modernization Continues",
-    "summary": "FedNow adoption accelerates to 2.3M daily transactions. Open Banking 2.0 regulations finalized for Q4 2025. Payment fintech consolidation wave picks up speed. Cybersecurity threats target RTP infrastructure. Corporate treasury digital transformation gains momentum.",
+    "headline": "Week of June 9: ISO 20022 Compliance Achieved, Visa Tokenizes 40 New Markets, Capital One-Discover Closes",
+    "summary": "The week of June 9 delivered several landmark infrastructure and industry-structure developments. ISO 20022's final SWIFT migration deadline passed on June 5 with a reported 98% compliance rate, with SWIFT confirming that straight-through cross-border processing rates have risen to 91% and AML false positives have declined 22% on the back of richer payment data. Visa expanded its tokenized card network to 40 new markets on June 10, bringing coverage to 180 countries and establishing a cross-network token interoperability bridge with Mastercard. Capital One completed its $35 billion acquisition of Discover Financial on June 8, creating the largest U.S. credit card issuer and a formidable four-party network competitor to Visa and Mastercard. The European Open Finance Framework was shown to be driving a 200% year-over-year surge in B2B payment initiation as corporate treasurers migrate off SEPA Credit Transfer rails. FedNow-RTP interoperability testing also entered its final validation phase, with a public launch targeted for early July and end-to-end test settlement times measuring under 3 seconds.",
     "sources": []
   },
   {
-    "date": "2025-06-02",
+    "date": "2026-06-02",
     "period": "week",
-    "headline": "Week of June 2: Real-Time Payments Cross Critical Adoption Threshold",
-    "summary": "FedNow participation reaches 95% of US banks. RTP real-time payment adoption accelerates across consumer and business segments. BNPL regulation clarified by CFPB. Mobile money in Africa reaches $400B annually. Payment data privacy enforcement intensifies in EU.",
+    "headline": "Week of June 2: Stripe AI Suite, BNPL Regulation Live, Tokenized Treasuries Hit $50 Billion",
+    "summary": "The first week of June brought important product launches and regulatory milestones across multiple payment sub-sectors. The CFPB's BNPL credit card rule took effect on June 1, bringing Affirm, Klarna, and Afterpay under Regulation Z periodic statement and dispute-right requirements that cover 42 million U.S. borrowers. Stripe launched its AI-powered Stripe Intelligence enterprise suite on June 3, offering merchants a 2.3 percentage point authorization rate lift through real-time routing optimization, intensifying competition with Adyen and Braintree in the large-merchant segment. The tokenized Treasury market crossed $50 billion in market cap during the week, driven by institutional use of tokenized T-bills as DeFi collateral and repo settlement assets. Mastercard's global rollout of biometric authentication to 60 countries also gained attention, as the network retired SMS OTP in key markets and reported an 83% reduction in account takeover fraud. ACH network 2025 annual statistics published on June 1 showed $84 trillion in volume with Same-Day ACH growing 35%, affirming that legacy rails remain resilient even as real-time options expand.",
     "sources": []
   },
   {
-    "date": "2025-05-26",
+    "date": "2026-05-26",
     "period": "week",
-    "headline": "Week of May 26: Crypto Integration Accelerates in Traditional Finance",
-    "summary": "Major banks announce stablecoin payment pilots. Crypto custody standards mature. CBDC timelines accelerate globally. Payment processing margins face compression from real-time payment competition. Payment operator earnings show technology investment priorities shifting.",
+    "headline": "Week of May 26: JPMorgan Tokenized Deposits Hit $3B Daily, PYUSD Surpasses $8B, Visa B2B Connect Expands",
+    "summary": "The week of May 26 was dominated by tokenization milestones that illustrated the accelerating mainstreaming of digital money. JPMorgan's Kinexys tokenized deposit platform achieved $3 billion in daily volume on May 28, with Goldman Sachs and BNY Mellon confirming plans to join as interoperability partners ahead of the GENIUS Act's June 16 effective date. PayPal's PYUSD stablecoin surpassed $8 billion in market cap, a 170% increase from January, buoyed by Venmo business account integration and acceptance at 2.5 million Shopify and WooCommerce merchants. Visa's B2B Connect corporate payment network reached 100-country coverage on May 26, offering same-day settlement at fees 40% below SWIFT correspondent equivalents. Citi Treasury and Trade Solutions won a $2.2 billion Department of Defense payments contract on May 29, underscoring that government payment modernization remains a significant commercial opportunity for transaction banks. SWIFT also launched its low-value cross-border rail with 8 regional partners on May 30, targeting $1.20 per-transaction pricing and sub-60-second settlement for retail international payments.",
     "sources": []
   },
   {
-    "date": "2025-05-19",
+    "date": "2026-05-19",
     "period": "week",
-    "headline": "Week of May 19: Global Payment Rails Converge on Real-Time Settlement",
-    "summary": "Cross-border payment corridor launches with sub-2-hour settlement. Bank of England CBDC pilot results released. ISO 20022 migration timeline adjusted. Emerging market payment innovation accelerates. Central bank digital currency implementation timelines compress.",
+    "headline": "Week of May 19: Treasury Stablecoin Standards Published, Google Pay Integrates FedNow and RTP",
+    "summary": "The week of May 19 featured key regulatory publications and distribution-channel expansions that advanced the practical readiness of the U.S. digital payment ecosystem. The Treasury Department's Office of Financial Research published mandatory stablecoin reserve attestation standards ahead of the GENIUS Act, defining qualifying assets as short-term Treasuries, overnight repos, and insured deposits, while requiring public custodian disclosure and 24-hour deficiency notification. Tether signaled potential U.S. exit in response to the attestation burden, a development that could accelerate Circle and bank-issued stablecoin market share gains. Google Pay integrated FedNow and RTP into Google Wallet on May 18, giving 180 million U.S. users access to instant bank-to-bank transfers via open banking APIs, directly challenging Zelle's bank-backed dominance. Visa and Mastercard both reported record Q1 earnings on May 20, with cross-border volume growing 19-24% in constant currency and tokenized transactions driving net pricing improvement. The Bank of England confirmed a retail CBDC pilot for Q4 2026 with a £10,000 per-person holding limit, adding momentum to the global central bank digital currency narrative.",
     "sources": []
   },
   {
-    "date": "2025-05-12",
+    "date": "2026-05-12",
     "period": "week",
-    "headline": "Week of May 12: Tokenized Assets Reshape Payment Infrastructure",
-    "summary": "Tokenized deposits approach $750B milestone. Interoperability testing between RTP and FedNow shows 98.7% success rate. API-first architecture becomes standard. Blockchain-based settlement gains institutional acceptance. Payment technology vendors prioritize cloud migration.",
+    "headline": "Week of May 12: Wholesale CBDC Framework Published, Adyen Banking Expansion, Zelle Hits $1 Trillion Run Rate",
+    "summary": "The week of May 12 brought major institutional developments spanning CBDC research, payment processor earnings, and network scale milestones. The Federal Reserve published its landmark wholesale CBDC framework paper on May 15, exploring three settlement architecture options and citing 35-55% intraday liquidity efficiency gains as the primary potential benefit, while carefully signaling no decision to issue has been made. Adyen reported 31% Q1 processed volume growth to €380 billion and launched embedded banking services for platform customers in Europe, intensifying its competition with Stripe and traditional acquirers. Zelle crossed $1 trillion in annualized payment run rate on May 12, driven by 143 financial institution participants covering 93% of the banked population, though fraud liability policy negotiations with the CFPB remain unresolved. The Bank of England's digital pound confirmation the following day created a notable CBDC news cluster that prompted fresh analysis of disintermediation risk to commercial banks. Analysts broadly noted that the convergence of CBDC research, stablecoin regulation, and instant payment network scale in a single week reflected the accelerating pace of monetary infrastructure change.",
     "sources": []
   },
   {
-    "date": "2025-05-05",
+    "date": "2026-05-05",
     "period": "week",
-    "headline": "Week of May 5: Real-Time Payments Reach Consumer Mainstream",
-    "summary": "RTP consumer adoption reaches 35% for bill payments. FedNow transaction volume accelerates. Payment fintech vendors announce API-first platforms. Customer experience investments lead budget allocation. Institutional payment infrastructure modernization accelerates.",
+    "headline": "Week of May 5: FedNow-RTP Interoperability Launched, Apple Pay BNPL Goes International, Ant Group Super-App Debuts",
+    "summary": "The first week of May opened with the landmark May 1 FedNow-RTP interoperability framework announcement, which immediately became the most discussed U.S. payments development of 2026, with the U.S. Faster Payments Council estimating instant payment reach could expand to 95% of U.S. deposit accounts. Apple's BNPL expansion to 15 countries with Goldman Sachs on May 5 signaled that embedded installment lending is entering a new competitive phase internationally, with 12 million U.S. monthly active users already established. Ant Group's Alipay+ Southeast Asia super-app launch on May 22 (formally announced this week) drew significant attention as a model for multi-country wallet interoperability, connecting PayNow, DuitNow, PromptPay, and InstaPay under a unified QR standard. Nacha's final Third-Party Sender registration rule published on May 8 addressed a structural transparency gap in the ACH supply chain covering $8 trillion in annual originations. Fed officials speaking at the Chicago payments conference indicated FedNow limit expansion was under active review, foreshadowing the formal RFC published on May 23.",
     "sources": []
   },
   {
-    "date": "2025-04-28",
+    "date": "2026-04-28",
     "period": "week",
-    "headline": "Week of April 28: Regulatory Framework Clarity Enables Innovation",
-    "summary": "FDIC guidance on stablecoins issued. Payment operator compliance costs estimated at $2-5M annually. Data privacy enforcement increases. Zero-trust security adoption accelerates across payment industry. Bank custody offerings for crypto expand to 42 institutions.",
+    "headline": "Week of April 28: Revolut Gets U.S. Bank Charter, Mastercard Crypto Credential Expands, GENIUS Act Senate Passage",
+    "summary": "The final week of April delivered one of the most consequential regulatory weeks for U.S. fintech in recent memory. Revolut received conditional OCC bank charter approval on April 29, committing $500 million in capital and planning full U.S. digital bank operations by Q3 2026 — the most significant European fintech U.S. banking entry in the current cycle. Mastercard expanded its Crypto Credential travel-rule compliance service to 40 blockchain networks on April 28, serving 12 exchanges and 8 custodians across 28 countries, a significant infrastructure play ahead of GENIUS Act implementation. The GENIUS Act itself passed the Senate 68-30 on April 22, with an effective date of June 16, 2026, sending Circle, Coinbase, and bank stablecoin program stocks sharply higher. ECB acceleration of the SCT Inst mandatory deadline to July 2026 on April 26 added European dimension to the real-time payment narrative. The Klarna IPO's 22% first-day gain on April 20 was widely interpreted as a vote of confidence in profitable fintech business models, opening the door for additional fintech listings in 2026.",
     "sources": []
   },
   {
-    "date": "2025-04-21",
+    "date": "2026-04-21",
     "period": "week",
-    "headline": "Week of April 21: Payment Infrastructure Consolidation Wave Begins",
-    "summary": "Stripe acquires key infrastructure provider in $2.1B deal. Square announces JPMorgan partnership. Payment fintech consolidation accelerates. Smaller players exit market. Industry revenue concentration increases.",
+    "headline": "Week of April 21: Klarna IPO, Tokenized MMF Safe Harbor, JPMorgan Acquires Spreedly",
+    "summary": "The week of April 21 combined a high-profile fintech IPO with regulatory clarity and strategic M&A that cumulatively advanced the maturity of the payments and digital assets landscape. Klarna's NYSE IPO priced at a $12.2 billion valuation on April 20, with the stock gaining 22% on its debut, demonstrating that profitable fintech companies with AI-driven underwriting and diversified revenue streams can command strong public market premiums. The SEC's tokenized money market fund no-action letter on April 19 provided the safe harbor the industry needed to accelerate tokenized fund use as settlement assets in institutional markets, with Goldman Sachs, Fidelity, and BlackRock all announcing expanded programs. JPMorgan's $1.1 billion acquisition of payment orchestration platform Spreedly on April 24 reflected the strategic importance of multi-gateway routing and developer-friendly payment APIs in retaining enterprise merchant relationships. SWIFT Transaction Manager's achievement of 50% eligible message coverage on April 23 underscored how ISO 20022-enabled tracking is transforming corporate treasury visibility into cross-border payments. The CFPB's Open Banking 3.0 standards on April 25 capped the week by introducing payment initiation APIs to the Section 1033 framework.",
+    "sources": []
+  },
+  {
+    "date": "2026-04-14",
+    "period": "week",
+    "headline": "Week of April 14: Mastercard 85-Country Corridor Launch, Plaid Payments, CFPB Open Banking 3.0",
+    "summary": "The week of April 14 opened with Mastercard's launch of its 85-country cross-border payment corridor network on April 18, offering near-real-time settlement at 28-second median times and pricing 30-50% below SWIFT correspondent banking, a development that immediately intensified cross-border competitive dynamics. Plaid unveiled its Payments product on April 17, offering $0.50 per-initiation RTP and FedNow payment origination through open banking APIs, positioning account-to-account transfers as a low-cost alternative to card processing for high-value bill payments and lending disbursements. The CFPB published Open Banking 3.0 standards on April 25, adding payment initiation APIs and enhanced consent management to the Section 1033 data access framework. Brazil's Central Bank announced bilateral cross-border Pix agreements with 6 countries including Portugal on April 16, further expanding the real-time payment globalization trend. OCC's True Lender rule finalization on April 15 resolved bank-fintech lending partnership uncertainty covering $180 billion in annual originations, with Affirm, LendingClub, and Upstart each welcoming the clarity.",
+    "sources": []
+  },
+  {
+    "date": "2026-04-07",
+    "period": "week",
+    "headline": "Week of April 7: FIS-Global Payments Merger, Block International Launch, India UPI Records 18 Billion Transactions",
+    "summary": "The week of April 7 was defined by major industry consolidation and international payment scale milestones. FIS and Global Payments announced a $40 billion merger of equals on April 7, creating a combined entity processing $10 trillion annually in 130 countries with $1.2 billion in anticipated cost synergies, a deal driven by competitive pressure from integrated fintech platforms. Block launched Square International to 30 countries on April 13, offering SMB payment processing 35% below incumbent pricing along with integrated working capital lending and Bitcoin Lightning Network acceptance. India's UPI reported a record 18 billion transactions worth $295 billion in March 2026, confirming its position as the world's most-used real-time payment system by transaction count with ambitions for 50 billion monthly by 2028. Worldline and Nexi's all-stock merger announcement on April 14 created Europe's largest payment processor at €6.2 billion in combined revenue, responding to the same margin-compression and open-banking forces as the FIS-Global Payments combination. Amazon Pay's merchant financing launch on April 8 added embedded lending to the competitive pressures on traditional merchant cash advance providers.",
+    "sources": []
+  },
+  {
+    "date": "2026-04-06",
+    "period": "week",
+    "headline": "Week of April 6: CFPB Payday Rule Finalized, Moody's Upgrades Digital Asset Outlook, PayFac Market Tops $4.8B",
+    "summary": "The week opening April 6 set the regulatory and market-structure tone for the second quarter. The CFPB's withdrawal of its Supreme Court challenge finalized the path for a revised small-dollar lending rule requiring ability-to-repay assessments and limiting loan rollovers, expected to reduce payday loan volume by approximately 30% as high-risk borrowers are declined by compliant lenders. Moody's upgraded the U.S. digital asset sector outlook from Negative to Stable on April 9, citing GENIUS Act passage and progress on crypto market structure legislation, publishing new criteria for assessing stablecoin issuer creditworthiness. The PayFac-as-a-Service market's crossing of $4.8 billion in annual revenue, with 44% year-over-year growth reported on April 12, reflected the continuing monetization opportunity embedded payments represent for vertical SaaS platforms. Amazon Pay's merchant financing product launch on April 8 used real-time transaction data to offer same-day lending decisions for amounts up to $2 million, intensifying competition with Square Capital, Stripe Capital, and PayPal Working Capital. These developments collectively framed a second-quarter environment characterized by consolidation, regulatory clarification, and the deepening integration of payments into adjacent financial services.",
     "sources": []
   }
 ]
