@@ -1,8 +1,1 @@
-{
-  "period": "Week of June 9–15, 2025",
-  "generatedAt": "2025-06-15T18:00:00Z",
-  "headline": "Stablecoin Clarity Meets RTP Volume Records — A Pivotal Week for Treasury Banking",
-  "summary": "This week delivered two developments that demand immediate attention from treasury product and risk teams.\n\nFirst, the Federal Reserve's supervisory guidance on tokenized deposits provided the clearest regulatory green light yet for bank-issued programmable money — distinguishing it favorably from non-bank stablecoins under the proposed GENIUS Act. Banks with the infrastructure to move quickly have a narrowing window to build tokenized deposit products before non-bank competitors gain equivalent regulatory standing.\n\nSecond, FedNow crossed 1,000 participating institutions and RTP set a new monthly B2B volume record — with B2B use cases now representing 60% of RTP value. The data validates what the market has been signaling for 18 months: real-time payments are a B2B treasury product, not a consumer novelty. The persistent barrier is not demand; it is the ERP integration and RfP workflow gaps that banks have been slow to close.\n\n**Three things for your team this week:**\n\n1. **Assess your tokenized deposit roadmap** against the Fed guidance — the regulatory window is open but not permanent.\n2. **Map your top 20 corporate treasury clients** against FedNow send-side activation status — the gap between receive-only and full bidirectional activation is your most immediate competitive vulnerability.\n3. **Request a briefing on your ERP integration pipeline** for real-time payment initiation — if you don't have certified Oracle/SAP connectors in development, this is the conversation to have now.",
-  "items": ["fednow-volume-001", "rtp-volume-001", "stablecoin-reg-001", "kinexis-001"],
-  "authorNote": "Synthesized from Tier 1 and Tier 2 sources collected during the week. No commentary presented as fact."
-}
+{}
