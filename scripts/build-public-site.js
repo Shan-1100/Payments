@@ -11,12 +11,27 @@ if (!fs.existsSync(path.join(DIST_DIR, 'data'))) {
   fs.mkdirSync(path.join(DIST_DIR, 'data'), { recursive: true });
 }
 
+// Cache-busting version stamp (changes every build) so browsers never serve
+// a stale app.js/styles.css against a fresh index.html.
+const VERSION = Date.now().toString();
+
 const files = ['index.html', 'styles.css', 'app.js'];
 files.forEach(file => {
   const src = path.join(__dirname, '..', file);
   const dst = path.join(DIST_DIR, file);
-  fs.copyFileSync(src, dst);
+  if (file === 'index.html') {
+    let html = fs.readFileSync(src, 'utf8');
+    // Append ?v=VERSION to local asset references in the built HTML only.
+    html = html
+      .replace('href="styles.css"', `href="styles.css?v=${VERSION}"`)
+      .replace('src="app.js"', `src="app.js?v=${VERSION}"`);
+    fs.writeFileSync(dst, html);
+  } else {
+    fs.copyFileSync(src, dst);
+  }
 });
+
+console.log(`Cache-bust version: ${VERSION}`);
 
 const dataFiles = [
   'content_items.json',

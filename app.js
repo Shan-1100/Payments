@@ -424,7 +424,7 @@ function contentCard(item) {
 
 /* ─── Reference library renderer ────────────────────────────── */
 function renderReference() {
-  const sourcesEl = document.getElementById('sources-container');
+  const sourcesEl = document.getElementById('ref-sources-container');
   const watchlistEl = document.getElementById('watchlist-container');
 
   if (state.data.sources.length) {
