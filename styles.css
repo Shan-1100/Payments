@@ -1399,6 +1399,99 @@ code {
 }
 
 /* ─────────────────────────────────────────
+   Daily Intelligence Brief — Sections
+───────────────────────────────────────── */
+.intelligence-section {
+  margin-bottom: 2.5rem;
+  padding-bottom: 2.5rem;
+  border-bottom: 1px solid var(--surface-border);
+}
+
+.intelligence-section:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.section-subheader {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+}
+
+.section-subtitle {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--primary);
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+  margin-bottom: 0.3rem;
+}
+
+.section-subtitle-desc {
+  font-size: 0.85rem;
+  color: var(--gray-500);
+  margin-top: 0.2rem;
+}
+
+.summary-content {
+  padding: 1.25rem;
+  background: linear-gradient(135deg, var(--primary-light) 0%, rgba(184,134,11,0.05) 100%);
+  border: 1px solid var(--primary-light);
+  border-radius: var(--radius-lg);
+  font-size: 0.95rem;
+  line-height: 1.75;
+  color: var(--gray-800);
+}
+
+.summary-content ul, .summary-content ol {
+  margin-left: 1.5rem;
+  margin-top: 0.75rem;
+}
+
+.summary-content li {
+  margin-bottom: 0.5rem;
+}
+
+.summary-content strong {
+  color: var(--primary-dark);
+  font-weight: 600;
+}
+
+/* ─────────────────────────────────────────
+   Reference Library — Subsections
+───────────────────────────────────────── */
+.reference-subsection {
+  margin-bottom: 2.25rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--surface-border);
+}
+
+.reference-subsection:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.subsection-header {
+  margin-bottom: 1.5rem;
+}
+
+.subsection-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--primary);
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+  margin-bottom: 0.3rem;
+}
+
+.subsection-desc {
+  font-size: 0.85rem;
+  color: var(--gray-500);
+  margin-top: 0.2rem;
+}
+
+/* ─────────────────────────────────────────
    Large desktop polish
 ───────────────────────────────────────── */
 @media (min-width: 1280px) {

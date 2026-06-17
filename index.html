@@ -25,31 +25,19 @@
       <nav class="sidebar-nav">
         <button class="nav-item active" data-tab="daily" aria-current="page">
           <svg class="nav-icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M2 4a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H3a1 1 0 01-1-1V4zm0 6a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H3a1 1 0 01-1-1v-2zm0 6a1 1 0 011-1h7a1 1 0 010 2H3a1 1 0 01-1-1z"/></svg>
-          <span>Daily Feed</span>
-        </button>
-        <button class="nav-item" data-tab="archive">
-          <svg class="nav-icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4zM2 9v7a2 2 0 002 2h12a2 2 0 002-2V9H2zm4 3a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1z"/></svg>
-          <span>Archive</span>
+          <span>Daily Brief</span>
         </button>
         <button class="nav-item" data-tab="deep-dives">
           <svg class="nav-icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"/></svg>
           <span>Deep Dives</span>
         </button>
-        <button class="nav-item" data-tab="watchlist">
-          <svg class="nav-icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 12a2 2 0 100-4 2 2 0 000 4z"/><path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"/></svg>
-          <span>Watchlist</span>
-        </button>
-        <button class="nav-item" data-tab="sources">
-          <svg class="nav-icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"/></svg>
-          <span>Sources</span>
-        </button>
         <button class="nav-item" data-tab="expert">
           <svg class="nav-icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg>
           <span>Expert Commentary</span>
         </button>
-        <button class="nav-item" data-tab="qa">
-          <svg class="nav-icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"/></svg>
-          <span>Q&amp;A</span>
+        <button class="nav-item" data-tab="reference">
+          <svg class="nav-icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"/></svg>
+          <span>Reference Library</span>
         </button>
         <button class="nav-item" data-tab="partners">
           <svg class="nav-icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v1h8v-1zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-1a4 4 0 00-4-4H8a4 4 0 00-4 4v1h12z"/></svg>
@@ -88,36 +76,51 @@
       <!-- Page content -->
       <main class="main-content" id="main-content" role="main">
 
-        <!-- Daily Feed -->
-        <section id="daily" class="tab-content active" aria-label="Daily Feed">
+        <!-- Daily Intelligence Brief -->
+        <section id="daily" class="tab-content active" aria-label="Daily Intelligence Brief">
           <div class="section-header">
-            <h2 class="section-title">Daily Feed</h2>
-            <p class="section-desc">Synthesized intelligence across RTP, FedNow, tokenized deposits, and adjacent payment rails — with direct business impact assessment for each development</p>
+            <h2 class="section-title">Daily Intelligence Brief</h2>
+            <p class="section-desc">Executive summary of recent developments across RTP, FedNow, tokenized deposits, and adjacent payment rails</p>
           </div>
-          <div class="search-bar">
-            <svg class="search-icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"/></svg>
-            <input type="text" id="search" placeholder="Search intelligence…" aria-label="Search">
-          </div>
-          <div id="feed-container" class="feed"></div>
-        </section>
 
-        <!-- Archive -->
-        <section id="archive" class="tab-content" aria-label="Archive">
-          <div class="section-header">
-            <h2 class="section-title">Archive</h2>
-            <p class="section-desc">Weekly and monthly recap summaries</p>
+          <!-- Daily Summary Section -->
+          <div class="intelligence-section">
+            <div class="section-subheader">
+              <h3 class="section-subtitle">Today's Summary</h3>
+              <p class="section-subtitle-desc" id="today-date"></p>
+            </div>
+            <div id="daily-summary" class="summary-content"></div>
           </div>
-          <div class="archive-blocks">
-            <div class="summary-block">
-              <div class="summary-block-label">Weekly Recap</div>
-              <div id="weekly-summary" class="summary-block-body"></div>
-              <button id="view-weekly" class="btn-secondary" style="display:none;">View Full Recap</button>
+
+          <!-- Weekly Summary Section -->
+          <div class="intelligence-section">
+            <div class="section-subheader">
+              <h3 class="section-subtitle">Weekly Highlights</h3>
+              <p class="section-subtitle-desc">Key developments from the past 7 days</p>
             </div>
-            <div class="summary-block">
-              <div class="summary-block-label">Monthly Recap</div>
-              <div id="monthly-summary" class="summary-block-body"></div>
-              <button id="view-monthly" class="btn-secondary" style="display:none;">View Full Recap</button>
+            <div id="weekly-summary" class="summary-content"></div>
+          </div>
+
+          <!-- Monthly Summary Section -->
+          <div class="intelligence-section">
+            <div class="section-subheader">
+              <h3 class="section-subtitle">Monthly Overview</h3>
+              <p class="section-subtitle-desc">Major trends from the past 30 days</p>
             </div>
+            <div id="monthly-summary" class="summary-content"></div>
+          </div>
+
+          <!-- Detailed Daily Feed (optional drill-down) -->
+          <div class="intelligence-section">
+            <div class="section-subheader">
+              <h3 class="section-subtitle">Detailed Articles</h3>
+              <p class="section-subtitle-desc">Full content behind the day's summaries</p>
+            </div>
+            <div class="search-bar">
+              <svg class="search-icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"/></svg>
+              <input type="text" id="search" placeholder="Search articles…" aria-label="Search">
+            </div>
+            <div id="feed-container" class="feed"></div>
           </div>
         </section>
 
@@ -130,22 +133,39 @@
           <div id="deep-dives-container" class="feed"></div>
         </section>
 
-        <!-- Watchlist -->
-        <section id="watchlist" class="tab-content" aria-label="Watchlist">
+        <!-- Reference Library (Watchlist + Sources + Q&A) -->
+        <section id="reference" class="tab-content" aria-label="Reference Library">
           <div class="section-header">
-            <h2 class="section-title">Competitive Watchlist</h2>
-            <p class="section-desc">Entities and organizations under active monitoring</p>
+            <h2 class="section-title">Reference Library</h2>
+            <p class="section-desc">Watchlist, approved sources, and frequently asked questions</p>
           </div>
-          <div id="watchlist-container"></div>
-        </section>
 
-        <!-- Sources -->
-        <section id="sources" class="tab-content" aria-label="Sources">
-          <div class="section-header">
-            <h2 class="section-title">Approved Sources</h2>
-            <p class="section-desc">Curated intelligence sources by tier</p>
+          <!-- Watchlist -->
+          <div class="reference-subsection">
+            <div class="subsection-header">
+              <h3 class="subsection-title">Competitive Watchlist</h3>
+              <p class="subsection-desc">Entities and organizations under active monitoring</p>
+            </div>
+            <div id="watchlist-container"></div>
           </div>
-          <div id="sources-container"></div>
+
+          <!-- Sources -->
+          <div class="reference-subsection">
+            <div class="subsection-header">
+              <h3 class="subsection-title">Approved Sources</h3>
+              <p class="subsection-desc">Curated intelligence sources by category and tier</p>
+            </div>
+            <div id="sources-container"></div>
+          </div>
+
+          <!-- Q&A -->
+          <div class="reference-subsection">
+            <div class="subsection-header">
+              <h3 class="subsection-title">Frequently Asked Questions</h3>
+              <p class="subsection-desc">Common questions about instant payment rails and strategy</p>
+            </div>
+            <div id="qa-container" class="qa-list"></div>
+          </div>
         </section>
 
         <!-- Expert Commentary -->
@@ -159,15 +179,6 @@
             <span>Content in this section represents expert analysis and opinion — not official announcements or verified facts.</span>
           </div>
           <div id="expert-container" class="feed"></div>
-        </section>
-
-        <!-- Q&A -->
-        <section id="qa" class="tab-content" aria-label="Q and A">
-          <div class="section-header">
-            <h2 class="section-title">Frequently Asked Questions</h2>
-            <p class="section-desc">Common questions about instant payment rails and strategy</p>
-          </div>
-          <div id="qa-container" class="qa-list"></div>
         </section>
 
         <!-- Partner Inputs -->
