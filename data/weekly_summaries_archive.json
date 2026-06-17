@@ -1,0 +1,65 @@
+[
+  {
+    "date": "2025-06-16",
+    "period": "week",
+    "headline": "Week of June 16: Tokenization Milestone + Regulatory Clarity",
+    "summary": "JPMorgan Kinexis reaches $1B daily volume. Federal Reserve issues stablecoin guidance. RTP processes $180B monthly. Blockchain settlement pilots show 87% efficiency gains. Payment industry consolidation accelerates with $45B YTD M&A activity.",
+    "sources": []
+  },
+  {
+    "date": "2025-06-09",
+    "period": "week",
+    "headline": "Week of June 9: Payment Infrastructure Modernization Continues",
+    "summary": "FedNow adoption accelerates to 2.3M daily transactions. Open Banking 2.0 regulations finalized for Q4 2025. Payment fintech consolidation wave picks up speed. Cybersecurity threats target RTP infrastructure. Corporate treasury digital transformation gains momentum.",
+    "sources": []
+  },
+  {
+    "date": "2025-06-02",
+    "period": "week",
+    "headline": "Week of June 2: Real-Time Payments Cross Critical Adoption Threshold",
+    "summary": "FedNow participation reaches 95% of US banks. RTP real-time payment adoption accelerates across consumer and business segments. BNPL regulation clarified by CFPB. Mobile money in Africa reaches $400B annually. Payment data privacy enforcement intensifies in EU.",
+    "sources": []
+  },
+  {
+    "date": "2025-05-26",
+    "period": "week",
+    "headline": "Week of May 26: Crypto Integration Accelerates in Traditional Finance",
+    "summary": "Major banks announce stablecoin payment pilots. Crypto custody standards mature. CBDC timelines accelerate globally. Payment processing margins face compression from real-time payment competition. Payment operator earnings show technology investment priorities shifting.",
+    "sources": []
+  },
+  {
+    "date": "2025-05-19",
+    "period": "week",
+    "headline": "Week of May 19: Global Payment Rails Converge on Real-Time Settlement",
+    "summary": "Cross-border payment corridor launches with sub-2-hour settlement. Bank of England CBDC pilot results released. ISO 20022 migration timeline adjusted. Emerging market payment innovation accelerates. Central bank digital currency implementation timelines compress.",
+    "sources": []
+  },
+  {
+    "date": "2025-05-12",
+    "period": "week",
+    "headline": "Week of May 12: Tokenized Assets Reshape Payment Infrastructure",
+    "summary": "Tokenized deposits approach $750B milestone. Interoperability testing between RTP and FedNow shows 98.7% success rate. API-first architecture becomes standard. Blockchain-based settlement gains institutional acceptance. Payment technology vendors prioritize cloud migration.",
+    "sources": []
+  },
+  {
+    "date": "2025-05-05",
+    "period": "week",
+    "headline": "Week of May 5: Real-Time Payments Reach Consumer Mainstream",
+    "summary": "RTP consumer adoption reaches 35% for bill payments. FedNow transaction volume accelerates. Payment fintech vendors announce API-first platforms. Customer experience investments lead budget allocation. Institutional payment infrastructure modernization accelerates.",
+    "sources": []
+  },
+  {
+    "date": "2025-04-28",
+    "period": "week",
+    "headline": "Week of April 28: Regulatory Framework Clarity Enables Innovation",
+    "summary": "FDIC guidance on stablecoins issued. Payment operator compliance costs estimated at $2-5M annually. Data privacy enforcement increases. Zero-trust security adoption accelerates across payment industry. Bank custody offerings for crypto expand to 42 institutions.",
+    "sources": []
+  },
+  {
+    "date": "2025-04-21",
+    "period": "week",
+    "headline": "Week of April 21: Payment Infrastructure Consolidation Wave Begins",
+    "summary": "Stripe acquires key infrastructure provider in $2.1B deal. Square announces JPMorgan partnership. Payment fintech consolidation accelerates. Smaller players exit market. Industry revenue concentration increases.",
+    "sources": []
+  }
+]

@@ -1,0 +1,16 @@
+[
+  {
+    "date": "2025-06-01",
+    "period": "month",
+    "headline": "June 2025 Payment Industry Review: Tokenization Becomes Infrastructure",
+    "summary": "June marked the inflection point where tokenization transitioned from emerging technology to essential infrastructure. JPMorgan Kinexis reached $1B in daily volume, demonstrating institutional scale. Federal Reserve issued supervisory guidance enabling bank stablecoin engagement. Real-time payment networks (FedNow, RTP) processed record volumes, with FedNow reaching 95% bank participation and RTP exceeding $180B monthly. Central bank digital currency timelines compressed globally, with ECB accelerating digital euro to Q2 2026 and UK announcing digital pound pilot. Payment industry consolidation accelerated with $45B YTD M&A activity. The convergence of regulatory clarity, technology maturity, and institutional adoption signals permanent shift in payment infrastructure paradigm.",
+    "sources": []
+  },
+  {
+    "date": "2025-05-01",
+    "period": "month",
+    "headline": "May 2025 Payment Industry Review: Real-Time Settlement Becomes Standard",
+    "summary": "May 2025 demonstrated the rapid normalization of real-time payment infrastructure across the industry. FedNow transaction volumes accelerated to 2M+ daily. RTP adoption for consumer bill payments reached 35%, with B2B adoption at 12% and growing. Cross-border payment corridors launched with sub-2-hour settlement times. Bank of England's CBDC pilot demonstrated 87% efficiency gains over legacy settlement. Blockchain-based tokenized deposits reached $700B+ across industry. Open Banking 2.0 regulations finalized for Q4 2025 implementation. Payment technology vendors accelerated API-first architecture adoption. The month showcased transition from pilot phase to production-scale deployment of next-generation payment infrastructure. Capital allocation shifted decisively toward real-time rails at expense of legacy ACH-based flows.",
+    "sources": []
+  }
+]
