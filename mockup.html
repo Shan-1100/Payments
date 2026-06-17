@@ -4,73 +4,86 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Executive Intelligence Mockup</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Lato:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Inter', sans-serif; background: linear-gradient(180deg, #0a1628 0%, #162a4a 100%); color: #e5e7eb; line-height: 1.6; min-height: 100vh; }
 
-    .container { max-width: 900px; margin: 0 auto; padding: 2rem; }
+    body {
+      font-family: 'Lato', sans-serif;
+      background: #f5f3f0;
+      color: #3d3a37;
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    .container { max-width: 900px; margin: 0 auto; padding: 3rem 2rem; }
 
     header {
-      background: linear-gradient(135deg, rgba(10, 22, 40, 0.5) 0%, rgba(22, 42, 74, 0.7) 100%);
-      border: 2px solid transparent;
-      border-image: linear-gradient(135deg, #06b6d4 0%, #8b5cf6 50%, #ec4899 100%) 1;
-      padding: 2.5rem;
+      background: #fff;
+      padding: 3rem;
       margin-bottom: 3rem;
-      border-radius: 16px;
-      backdrop-filter: blur(10px);
-      box-shadow: 0 20px 50px rgba(6, 182, 212, 0.15);
+      border-bottom: 3px solid #8b7355;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      position: relative;
+    }
+
+    header::after {
+      content: '';
+      position: absolute;
+      bottom: -3px;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #8b7355 0%, #a89968 50%, transparent 100%);
     }
 
     h1 {
-      font-size: 2.8rem;
-      margin-bottom: 0.5rem;
-      background: linear-gradient(135deg, #06b6d4 0%, #8b5cf6 50%, #ec4899 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      font-weight: 800;
+      font-family: 'Merriweather', serif;
+      font-size: 3rem;
+      color: #1a1411;
+      margin-bottom: 1rem;
+      font-weight: 700;
       letter-spacing: -0.5px;
+      line-height: 1.2;
     }
 
     .description {
-      font-size: 1rem;
-      color: #cbd5e1;
-      border-left: 3px solid #06b6d4;
-      padding-left: 1rem;
-      font-weight: 500;
+      font-size: 1.1rem;
+      color: #6b6561;
+      font-weight: 400;
+      font-style: italic;
     }
 
     .summary-tabs {
       display: flex;
-      gap: 1rem;
+      gap: 2.5rem;
       margin: 3rem 0 2rem 0;
-      border-bottom: 2px solid rgba(6, 182, 212, 0.2);
+      border-bottom: 2px solid #d4cfc8;
       padding-bottom: 0;
     }
 
     .summary-tabs button {
-      padding: 1rem 1.75rem;
+      padding: 1.25rem 0;
       border: none;
       background: transparent;
-      font-size: 1.05rem;
+      font-size: 1rem;
       font-weight: 700;
-      color: #94a3b8;
+      color: #9a8f85;
       cursor: pointer;
       border-bottom: 3px solid transparent;
       transition: all 0.3s ease;
-      text-transform: uppercase;
+      font-family: 'Lato', sans-serif;
       letter-spacing: 0.5px;
+      text-transform: capitalize;
     }
 
     .summary-tabs button.active {
-      color: #06b6d4;
-      border-bottom-color: #06b6d4;
-      box-shadow: 0 4px 12px rgba(6, 182, 212, 0.3);
+      color: #1a1411;
+      border-bottom-color: #8b7355;
     }
 
     .summary-tabs button:hover {
-      color: #8b5cf6;
+      color: #6b6561;
     }
 
     .summary-nav {
@@ -78,52 +91,47 @@
       align-items: center;
       justify-content: space-between;
       gap: 1rem;
-      margin: 2.5rem 0;
-      padding: 1.5rem 2rem;
-      background: linear-gradient(135deg, rgba(6, 182, 212, 0.1) 0%, rgba(139, 92, 246, 0.08) 100%);
-      border: 1px solid rgba(6, 182, 212, 0.3);
-      border-radius: 12px;
-      backdrop-filter: blur(8px);
+      margin: 3rem 0;
+      padding: 2rem;
+      background: #fff;
+      border: 1px solid #d4cfc8;
+      border-radius: 0;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
     }
 
     .summary-nav button {
-      padding: 0.75rem 1.5rem;
-      background: linear-gradient(135deg, #06b6d4 0%, #8b5cf6 100%);
+      padding: 0.9rem 1.8rem;
+      background: #8b7355;
       color: white;
       border: none;
-      border-radius: 8px;
-      font-weight: 700;
+      border-radius: 2px;
+      font-weight: 600;
       cursor: pointer;
       transition: all 0.3s ease;
-      box-shadow: 0 4px 15px rgba(6, 182, 212, 0.3);
       font-size: 0.95rem;
+      font-family: 'Lato', sans-serif;
     }
 
     .summary-nav button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(6, 182, 212, 0.5);
+      background: #6b5347;
     }
 
     .summary-date {
       font-size: 1rem;
-      font-weight: 700;
-      color: #06b6d4;
+      font-weight: 600;
+      color: #8b7355;
       min-width: 220px;
       text-align: center;
       letter-spacing: 0.5px;
     }
 
     .summary-card {
-      background: linear-gradient(135deg, rgba(15, 28, 64, 0.6) 0%, rgba(22, 42, 74, 0.8) 100%);
-      border: 2px solid;
-      border-image: linear-gradient(135deg, #06b6d4 0%, #8b5cf6 50%, #ec4899 100%) 1;
-      border-left: 5px solid #06b6d4;
-      border-radius: 16px;
-      padding: 2.5rem;
-      box-shadow: 0 20px 60px rgba(6, 182, 212, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      background: #fff;
+      border: 1px solid #d4cfc8;
+      padding: 3rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
       position: relative;
       margin-bottom: 3rem;
-      backdrop-filter: blur(10px);
     }
 
     .summary-card::before {
@@ -131,75 +139,80 @@
       position: absolute;
       top: 0;
       left: 0;
-      right: 0;
-      height: 4px;
-      background: linear-gradient(90deg, #06b6d4, #8b5cf6, #ec4899, transparent);
-      border-radius: 16px 16px 0 0;
+      width: 6px;
+      height: 100%;
+      background: #8b7355;
     }
 
     .summary-headline {
-      font-size: 1.75rem;
-      font-weight: 800;
-      color: #f1f5f9;
-      margin-bottom: 1rem;
-      line-height: 1.3;
-      letter-spacing: -0.5px;
+      font-family: 'Merriweather', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: #1a1411;
+      margin-bottom: 1.25rem;
+      line-height: 1.35;
+      letter-spacing: -0.3px;
     }
 
     .summary-date-display {
       font-size: 0.95rem;
-      color: #94a3b8;
-      margin-bottom: 1.5rem;
-      padding-bottom: 1.25rem;
-      border-bottom: 1px solid rgba(6, 182, 212, 0.2);
+      color: #9a8f85;
+      margin-bottom: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid #e8e3dc;
       font-weight: 500;
     }
 
     .summary-body {
       font-size: 1rem;
       line-height: 1.8;
-      color: #cbd5e1;
+      color: #3d3a37;
     }
 
     .summary-body ul {
-      margin: 1.25rem 0 1.25rem 1.5rem;
+      margin: 1.5rem 0 1.5rem 2rem;
+      list-style: none;
     }
 
     .summary-body li {
-      margin-bottom: 1rem;
+      margin-bottom: 1.25rem;
+      position: relative;
+      padding-left: 1rem;
+    }
+
+    .summary-body li::before {
+      content: '–';
+      position: absolute;
+      left: -1rem;
+      color: #8b7355;
+      font-weight: 700;
     }
 
     .summary-body strong {
-      color: #06b6d4;
+      color: #1a1411;
       font-weight: 700;
-      text-decoration: underline;
-      text-decoration-color: #8b5cf6;
-      text-decoration-thickness: 2px;
-      text-underline-offset: 4px;
     }
 
     .articles-section {
       margin-top: 4rem;
-      padding-top: 2.5rem;
-      border-top: 2px solid rgba(6, 182, 212, 0.2);
+      padding-top: 3rem;
+      border-top: 1px solid #d4cfc8;
     }
 
     .articles-section h3 {
+      font-family: 'Merriweather', serif;
       font-size: 1.5rem;
-      font-weight: 800;
-      background: linear-gradient(135deg, #06b6d4 0%, #8b5cf6 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      font-weight: 700;
+      color: #1a1411;
       margin-bottom: 0.5rem;
-      letter-spacing: -0.3px;
+      letter-spacing: -0.2px;
     }
 
     .articles-section p {
       font-size: 0.95rem;
-      color: #cbd5e1;
+      color: #6b6561;
       margin-bottom: 1.5rem;
-      font-weight: 500;
+      font-weight: 400;
     }
   </style>
 </head>
