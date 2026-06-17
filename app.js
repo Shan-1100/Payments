@@ -2,13 +2,10 @@ const IS_PUBLIC = !window.location.hostname.includes('localhost');
 
 // ─── Section display names ───────────────────────────────────────────────────
 const SECTION_NAMES = {
-  'daily':      'Daily Feed',
-  'archive':    'Archive',
+  'daily':      'Daily Intelligence Brief',
   'deep-dives': 'Deep Dives',
-  'watchlist':  'Watchlist',
-  'sources':    'Sources',
   'expert':     'Expert Commentary',
-  'qa':         'Q&A',
+  'reference':  'Reference Library',
   'partners':   'Partner Inputs',
   'ops':        'Operations'
 };
@@ -81,14 +78,11 @@ function showTab(tabName) {
   const titleEl = document.getElementById('topbar-section-title');
   if (titleEl) titleEl.textContent = SECTION_NAMES[tabName] || tabName;
 
-  if      (tabName === 'daily')      loadAndRenderFeed();
-  else if (tabName === 'archive')    loadAndRenderArchive();
-  else if (tabName === 'deep-dives') loadAndRenderDeepDives();
-  else if (tabName === 'watchlist')  loadAndRenderWatchlist();
-  else if (tabName === 'sources')    loadAndRenderSources();
-  else if (tabName === 'expert')     loadAndRenderExpert();
-  else if (tabName === 'qa')         loadAndRenderQA();
-  else if (tabName === 'partners')   loadAndRenderPartners();
+  if      (tabName === 'daily')       loadAndRenderDailyBrief();
+  else if (tabName === 'deep-dives')  loadAndRenderDeepDives();
+  else if (tabName === 'expert')      loadAndRenderExpert();
+  else if (tabName === 'reference')   loadAndRenderReference();
+  else if (tabName === 'partners')    loadAndRenderPartners();
 }
 
 // ─── Date / time helpers ──────────────────────────────────────────────────────
@@ -196,19 +190,56 @@ function renderMarkdown(md) {
   return out.join('');
 }
 
-// ─── Daily Feed ───────────────────────────────────────────────────────────────
-async function loadAndRenderFeed() {
-  const items     = await loadJSON('/api/content-items') || await loadJSON('./data/content_items.json') || [];
+// ─── Daily Intelligence Brief ─────────────────────────────────────────────────
+async function loadAndRenderDailyBrief() {
+  // Load all data
+  const items    = await loadJSON('/api/content-items') || await loadJSON('./data/content_items.json') || [];
+  const daily    = await loadJSON('/api/summary/daily') || await loadJSON('./data/daily_summary.json');
+  const weekly   = await loadJSON('/api/summary/weekly') || await loadJSON('./data/weekly_summary.json');
+  const monthly  = await loadJSON('/api/summary/monthly') || await loadJSON('./data/monthly_summary.json');
+
+  // Render summaries
+  renderSummarySection('daily-summary', daily);
+  renderSummarySection('weekly-summary', weekly);
+  renderSummarySection('monthly-summary', monthly);
+
+  // Update today's date
+  const todayEl = document.getElementById('today-date');
+  if (todayEl) {
+    todayEl.textContent = new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
+  }
+
+  // Render detailed feed
   const filtered  = filterItems(items);
   const container = document.getElementById('feed-container');
   container.innerHTML = '';
 
   if (filtered.length === 0) {
-    container.innerHTML = '<div class="empty-state">No items match your search.</div>';
+    container.innerHTML = '<div class="empty-state">No articles match your search.</div>';
     return;
   }
 
   filtered.forEach(item => container.appendChild(createCardElement(item)));
+}
+
+// Helper to render summary sections
+function renderSummarySection(elId, data) {
+  const el = document.getElementById(elId);
+  if (!el || !data) {
+    if (el) el.innerHTML = '<div class="summary-placeholder">Summary not yet available.</div>';
+    return;
+  }
+  let html = '';
+  if (data.period)   html += `<div class="summary-period">${data.period}</div>`;
+  if (data.headline) html += `<div class="summary-headline">${data.headline}</div>`;
+  html += renderMarkdown(data.summary || '');
+  if (data.authorNote) html += `<div class="summary-author-note">${data.authorNote}</div>`;
+  el.innerHTML = html;
+}
+
+// ─── Daily Feed (legacy - kept for compatibility) ────────────────────────────
+async function loadAndRenderFeed() {
+  await loadAndRenderDailyBrief();
 }
 
 function filterItems(items) {
@@ -441,6 +472,13 @@ async function loadAndRenderQA() {
     });
     container.appendChild(div);
   });
+}
+
+// ─── Reference Library (Watchlist + Sources + Q&A) ──────────────────────────
+async function loadAndRenderReference() {
+  await loadAndRenderWatchlist();
+  await loadAndRenderSources();
+  await loadAndRenderQA();
 }
 
 // ─── Partner Inputs ───────────────────────────────────────────────────────────
