@@ -1,121 +1,29 @@
 [
-  {
-    "id": "clearing-house",
-    "name": "The Clearing House",
-    "url": "https://www.theclearinghouse.org",
-    "tier": "Tier 1",
-    "category": "Official Operator"
-  },
-  {
-    "id": "fednow",
-    "name": "FedNow Service",
-    "url": "https://www.fednow.org",
-    "tier": "Tier 1",
-    "category": "Official Operator"
-  },
-  {
-    "id": "fed-board",
-    "name": "Federal Reserve Board",
-    "url": "https://www.federalreserve.gov",
-    "tier": "Tier 1",
-    "category": "Regulator"
-  },
-  {
-    "id": "occ",
-    "name": "Office of the Comptroller of the Currency",
-    "url": "https://www.occ.treas.gov",
-    "tier": "Tier 1",
-    "category": "Regulator"
-  },
-  {
-    "id": "fdic",
-    "name": "FDIC",
-    "url": "https://www.fdic.gov",
-    "tier": "Tier 1",
-    "category": "Regulator"
-  },
-  {
-    "id": "cfpb",
-    "name": "Consumer Financial Protection Bureau",
-    "url": "https://www.consumerfinance.gov",
-    "tier": "Tier 1",
-    "category": "Regulator"
-  },
-  {
-    "id": "nacha",
-    "name": "NACHA",
-    "url": "https://www.nacha.org",
-    "tier": "Tier 1",
-    "category": "Official Operator"
-  },
-  {
-    "id": "fiserv",
-    "name": "Fiserv",
-    "url": "https://www.fiserv.com",
-    "tier": "Tier 1",
-    "category": "Core Provider"
-  },
-  {
-    "id": "finastra",
-    "name": "Finastra",
-    "url": "https://www.finastra.com",
-    "tier": "Tier 1",
-    "category": "Core Provider"
-  },
-  {
-    "id": "fis",
-    "name": "FIS",
-    "url": "https://www.fis.com",
-    "tier": "Tier 1",
-    "category": "Core Provider"
-  },
-  {
-    "id": "jack-henry",
-    "name": "Jack Henry & Associates",
-    "url": "https://www.jackhenry.com",
-    "tier": "Tier 1",
-    "category": "Core Provider"
-  },
-  {
-    "id": "american-banker",
-    "name": "American Banker",
-    "url": "https://www.americanbanker.com",
-    "tier": "Tier 2",
-    "category": "Industry Publication"
-  },
-  {
-    "id": "payments-dive",
-    "name": "Payments Dive",
-    "url": "https://www.paymentsdive.com",
-    "tier": "Tier 2",
-    "category": "Industry Publication"
-  },
-  {
-    "id": "paypers",
-    "name": "The Paypers",
-    "url": "https://www.thepaypers.com",
-    "tier": "Tier 2",
-    "category": "Industry Publication"
-  },
-  {
-    "id": "tearsheet",
-    "name": "Tearsheet",
-    "url": "https://www.tearsheet.co",
-    "tier": "Tier 2",
-    "category": "Industry Publication"
-  },
-  {
-    "id": "mckinsey",
-    "name": "McKinsey Financial Services",
-    "url": "https://www.mckinsey.com/industries/financial-services",
-    "tier": "Tier 2",
-    "category": "Consulting"
-  },
-  {
-    "id": "pwc",
-    "name": "PwC Financial Services",
-    "url": "https://www.pwc.com/us/en/industries/financial-services.html",
-    "tier": "Tier 2",
-    "category": "Consulting"
-  }
+  { "id": "clearing-house", "name": "The Clearing House", "url": "https://www.theclearinghouse.org/payments/rtp", "tier": "Tier 1", "category": "Official Operator" },
+  { "id": "fednow", "name": "FedNow Service", "url": "https://www.fednow.org", "tier": "Tier 1", "category": "Official Operator" },
+  { "id": "fed-board", "name": "Federal Reserve Board", "url": "https://www.federalreserve.gov/paymentsystems.htm", "tier": "Tier 1", "category": "Regulator" },
+  { "id": "occ", "name": "OCC", "url": "https://www.occ.treas.gov/topics/charters-and-licensing/fintech/index-fintech.html", "tier": "Tier 1", "category": "Regulator" },
+  { "id": "fdic", "name": "FDIC", "url": "https://www.fdic.gov/regulations/applications/fintech.html", "tier": "Tier 1", "category": "Regulator" },
+  { "id": "cfpb", "name": "CFPB", "url": "https://www.consumerfinance.gov/consumer-tools/payments/", "tier": "Tier 1", "category": "Regulator" },
+  { "id": "nacha", "name": "NACHA", "url": "https://www.nacha.org/news", "tier": "Tier 1", "category": "Official Operator" },
+  { "id": "bis", "name": "Bank for International Settlements", "url": "https://www.bis.org/topic/payments.htm", "tier": "Tier 1", "category": "Regulatory / Research" },
+  { "id": "fsb", "name": "Financial Stability Board", "url": "https://www.fsb.org/work-of-the-fsb/financial-innovation-and-structural-change/crypto-assets/", "tier": "Tier 1", "category": "Regulatory / Research" },
+  { "id": "fiserv", "name": "Fiserv", "url": "https://www.fiserv.com/en/about-fiserv/newsroom.html", "tier": "Tier 1", "category": "Core Provider" },
+  { "id": "finastra", "name": "Finastra", "url": "https://www.finastra.com/news-events/press-releases", "tier": "Tier 1", "category": "Core Provider" },
+  { "id": "fis", "name": "FIS", "url": "https://www.fisglobal.com/en/insights", "tier": "Tier 1", "category": "Core Provider" },
+  { "id": "jack-henry", "name": "Jack Henry & Associates", "url": "https://www.jackhenry.com/news", "tier": "Tier 1", "category": "Core Provider" },
+  { "id": "swift", "name": "SWIFT", "url": "https://www.swift.com/news-events/news", "tier": "Tier 1", "category": "Infrastructure" },
+  { "id": "american-banker", "name": "American Banker", "url": "https://www.americanbanker.com", "tier": "Tier 2", "category": "Industry Publication" },
+  { "id": "payments-dive", "name": "Payments Dive", "url": "https://www.paymentsdive.com", "tier": "Tier 2", "category": "Industry Publication" },
+  { "id": "digital-transactions", "name": "Digital Transactions", "url": "https://www.digitaltransactions.net", "tier": "Tier 2", "category": "Industry Publication" },
+  { "id": "pymnts", "name": "PYMNTS.com", "url": "https://www.pymnts.com/real-time-payments/", "tier": "Tier 2", "category": "Industry Publication" },
+  { "id": "finextra", "name": "Finextra", "url": "https://www.finextra.com/channel/payments", "tier": "Tier 2", "category": "Industry Publication" },
+  { "id": "payments-journal", "name": "PaymentsJournal", "url": "https://www.paymentsjournal.com", "tier": "Tier 2", "category": "Industry Publication" },
+  { "id": "paypers", "name": "The Paypers", "url": "https://www.thepaypers.com", "tier": "Tier 2", "category": "Industry Publication" },
+  { "id": "tearsheet", "name": "Tearsheet", "url": "https://www.tearsheet.co", "tier": "Tier 2", "category": "Industry Publication" },
+  { "id": "mckinsey", "name": "McKinsey Financial Services", "url": "https://www.mckinsey.com/industries/financial-services", "tier": "Tier 2", "category": "Research / Consulting" },
+  { "id": "pwc", "name": "PwC Financial Services", "url": "https://www.pwc.com/us/en/industries/financial-services.html", "tier": "Tier 2", "category": "Research / Consulting" },
+  { "id": "deloitte", "name": "Deloitte Insights — Banking", "url": "https://www2.deloitte.com/us/en/insights/industry/financial-services/financial-services-industry-outlooks/banking-industry-outlook.html", "tier": "Tier 2", "category": "Research / Consulting" },
+  { "id": "accenture", "name": "Accenture Banking", "url": "https://www.accenture.com/us-en/industries/banking-index", "tier": "Tier 2", "category": "Research / Consulting" },
+  { "id": "oliver-wyman", "name": "Oliver Wyman Financial Services", "url": "https://www.oliverwyman.com/our-expertise/industries/financial-services.html", "tier": "Tier 2", "category": "Research / Consulting" }
 ]
