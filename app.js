@@ -1,4 +1,4 @@
-const IS_PUBLIC = window.location.pathname.includes('/dist/');
+const IS_PUBLIC = !window.location.hostname.includes('localhost');
 
 document.addEventListener('DOMContentLoaded', async () => {
   setupTabs();
