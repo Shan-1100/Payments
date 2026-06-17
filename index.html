@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <base href="/Payments/">
+  <title>Instant Payments Intelligence Aggregator</title>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=1781733090398">
+</head>
+<body>
+  <!-- Top navigation -->
+  <nav class="top-nav" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+      <div class="nav-brand">
+        <span class="nav-brand-icon">◈</span>
+        <span class="nav-brand-text">Instant Payments Intelligence Aggregator</span>
+      </div>
+      <div class="nav-pills" role="tablist">
+        <button class="nav-pill active" data-section="executive" role="tab" aria-selected="true">Executive Intelligence</button>
+        <button class="nav-pill" data-section="deepdives" role="tab" aria-selected="false">Deep Dives</button>
+        <button class="nav-pill" data-section="expert" role="tab" aria-selected="false">Expert Commentary</button>
+        <button class="nav-pill" data-section="reference" role="tab" aria-selected="false">Reference Library</button>
+        <button class="nav-pill" data-section="partners" role="tab" aria-selected="false">Partner Inputs</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="page-wrap">
+
+    <!-- ─── EXECUTIVE INTELLIGENCE ─────────────────────────────── -->
+    <section id="section-executive" class="section active" aria-labelledby="exec-heading">
+
+      <!-- Hero -->
+      <div class="hero">
+        <div class="hero-content">
+          <p class="hero-eyebrow">Real-time aggregation · Updated daily</p>
+          <h1 id="exec-heading" class="hero-title">Instant Payments Intelligence Aggregator</h1>
+          <p class="hero-tagline">Real payment industry developments from verified sources—delivered when it matters</p>
+        </div>
+      </div>
+
+      <!-- Summary tabs -->
+      <div class="summary-tabs-wrap">
+        <div class="summary-tabs" role="tablist" aria-label="Summary period">
+          <button class="tab-btn active" data-tab="daily" role="tab" aria-selected="true">Daily</button>
+          <button class="tab-btn" data-tab="weekly" role="tab" aria-selected="false">Weekly</button>
+          <button class="tab-btn" data-tab="monthly" role="tab" aria-selected="false">Monthly</button>
+        </div>
+      </div>
+
+      <!-- Pagination nav -->
+      <div class="summary-nav" aria-label="Summary navigation">
+        <button id="prev-btn" class="nav-btn" aria-label="Previous summary">← Previous</button>
+        <div class="nav-date-wrap">
+          <span class="summary-period-label" id="period-label">Daily Summary</span>
+          <span class="summary-date" id="current-date">—</span>
+        </div>
+        <button id="next-btn" class="nav-btn" aria-label="Next summary">Next →</button>
+      </div>
+
+      <!-- Summary card -->
+      <div id="summary-container" class="summary-card" role="article" aria-live="polite">
+        <div class="summary-card-inner">
+          <div class="summary-headline" id="summary-headline">Loading…</div>
+          <div class="summary-date-display" id="summary-date">—</div>
+          <div class="summary-body" id="summary-body">
+            <p>Loading summary data…</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sources container -->
+      <div id="sources-container" class="sources-section">
+        <h3>Source Materials</h3>
+        <div id="sources-list" class="sources-list"></div>
+      </div>
+
+      <!-- Source articles -->
+      <div class="articles-section">
+        <h3 class="section-subheading">Source Articles</h3>
+        <p class="section-subdesc">Full articles and deep dives behind this summary</p>
+        <div id="articles-container" class="articles-grid"></div>
+      </div>
+
+    </section>
+
+    <!-- ─── DEEP DIVES ─────────────────────────────────────────── -->
+    <section id="section-deepdives" class="section" aria-labelledby="dd-heading" hidden>
+
+      <div class="hero">
+        <div class="hero-content">
+          <p class="hero-eyebrow">Strategic research · Tier 1 sources</p>
+          <h1 id="dd-heading" class="hero-title">Deep Dives</h1>
+          <p class="hero-tagline">In-depth strategic research reports from leading industry analysts and regulators</p>
+        </div>
+      </div>
+
+      <div id="deepdives-container" class="cards-grid" role="feed" aria-label="Deep dive reports">
+        <div class="loading-msg">Loading deep dives…</div>
+      </div>
+
+    </section>
+
+    <!-- ─── EXPERT COMMENTARY ──────────────────────────────────── -->
+    <section id="section-expert" class="section" aria-labelledby="expert-heading" hidden>
+
+      <div class="hero">
+        <div class="hero-content">
+          <p class="hero-eyebrow">Analyst perspective · Curated voices</p>
+          <h1 id="expert-heading" class="hero-title">Expert Commentary</h1>
+          <p class="hero-tagline">Curated analyst opinions and expert perspectives from trusted payment industry voices</p>
+        </div>
+      </div>
+
+      <div id="expert-container" class="cards-grid" role="feed" aria-label="Expert commentary">
+        <div class="loading-msg">Loading commentary…</div>
+      </div>
+
+    </section>
+
+    <!-- ─── REFERENCE LIBRARY ──────────────────────────────────── -->
+    <section id="section-reference" class="section" aria-labelledby="ref-heading" hidden>
+
+      <div class="hero">
+        <div class="hero-content">
+          <p class="hero-eyebrow">Approved sources · Watchlist</p>
+          <h1 id="ref-heading" class="hero-title">Reference Library</h1>
+          <p class="hero-tagline">Approved information sources, watchlist companies, and research reference materials</p>
+        </div>
+      </div>
+
+      <div class="ref-grid">
+        <div class="ref-column">
+          <h2 class="ref-col-heading">Approved Sources</h2>
+          <div id="ref-sources-container" class="ref-list">
+            <div class="loading-msg">Loading sources…</div>
+          </div>
+        </div>
+        <div class="ref-column">
+          <h2 class="ref-col-heading">Watchlist</h2>
+          <div id="watchlist-container" class="ref-list">
+            <div class="loading-msg">Loading watchlist…</div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ─── PARTNER INPUTS ─────────────────────────────────────── -->
+    <section id="section-partners" class="section" aria-labelledby="partners-heading" hidden>
+
+      <div class="hero">
+        <div class="hero-content">
+          <p class="hero-eyebrow">Internal data · Partner intelligence</p>
+          <h1 id="partners-heading" class="hero-title">Partner Inputs</h1>
+          <p class="hero-tagline">Internal partner data, proprietary intelligence feeds, and relationship-sourced insights</p>
+        </div>
+      </div>
+
+      <div id="partners-container" class="cards-grid" role="feed" aria-label="Partner inputs">
+        <div class="loading-msg">Loading partner data…</div>
+      </div>
+
+    </section>
+
+  </div><!-- /page-wrap -->
+
+  <script src="app.js?v=1781733090398"></script>
+</body>
+</html>

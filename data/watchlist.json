@@ -1,0 +1,52 @@
+{
+  "categories": [
+    {
+      "name": "Top 10 U.S. Banks by Deposit Size",
+      "entities": [
+        "JPMorgan Chase",
+        "Bank of America",
+        "Wells Fargo",
+        "Citigroup",
+        "U.S. Bancorp",
+        "Goldman Sachs",
+        "Morgan Stanley",
+        "TD Bank",
+        "PNC Financial",
+        "Truist Financial"
+      ]
+    },
+    {
+      "name": "Major Treasury Service Providers",
+      "entities": [
+        "BNY Mellon",
+        "State Street",
+        "Citi Treasury",
+        "Bank of New York Mellon",
+        "Northern Trust",
+        "SS&C Technologies"
+      ]
+    },
+    {
+      "name": "Leading Fintech & Treasury Vendors",
+      "entities": [
+        "Kyriba",
+        "Anacomp",
+        "CoreTreasury",
+        "BlackLine",
+        "Coupa",
+        "Netsmart Treasury"
+      ]
+    },
+    {
+      "name": "Core Infrastructure & Payments Providers",
+      "entities": [
+        "Fiserv",
+        "Finastra",
+        "FIS",
+        "Jack Henry & Associates",
+        "SS&C",
+        "Bottomline Technologies"
+      ]
+    }
+  ]
+}

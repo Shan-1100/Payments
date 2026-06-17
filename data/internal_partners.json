@@ -1,0 +1,59 @@
+{
+  "description": "Internal partner input streams being evaluated for integration with this intelligence tool. Each partner group provides a distinct perspective on payments developments — operational, technical, client-facing, or analytical.",
+  "groups": [
+    {
+      "id": "ops",
+      "name": "Operations",
+      "description": "Payment operations team — settlement exceptions, counterparty issues, operational friction signals",
+      "format": "Email digest",
+      "frequency": "Weekly",
+      "status": "pending",
+      "statusNote": "Format alignment in progress. Contact established."
+    },
+    {
+      "id": "tech",
+      "name": "Technology",
+      "description": "Engineering and architecture team — platform capability updates, API readiness, infrastructure roadmap",
+      "format": "Slack channel feed",
+      "frequency": "Ad hoc",
+      "status": "pending",
+      "statusNote": "Evaluating structured export from internal project tracking."
+    },
+    {
+      "id": "marketing",
+      "name": "Marketing",
+      "description": "Product marketing — campaign signals, competitive positioning materials, client-facing messaging",
+      "format": "Manual submission",
+      "frequency": "Monthly",
+      "status": "not-connected",
+      "statusNote": "Not yet onboarded. Intake form available."
+    },
+    {
+      "id": "data",
+      "name": "Data & Analytics",
+      "description": "Internal analytics — transaction volume trends, client behavior data, product performance metrics",
+      "format": "Dashboard export / API",
+      "frequency": "Weekly",
+      "status": "not-connected",
+      "statusNote": "API connection spec being reviewed by data governance."
+    },
+    {
+      "id": "risk",
+      "name": "Risk Management",
+      "description": "Risk and compliance team — fraud pattern signals, regulatory watch items, counterparty risk flags",
+      "format": "Email digest",
+      "frequency": "Bi-weekly",
+      "status": "not-connected",
+      "statusNote": "Not yet onboarded. Intake form available."
+    },
+    {
+      "id": "product",
+      "name": "Product",
+      "description": "Product management — roadmap context, client feedback themes, feature prioritization signals",
+      "format": "Manual submission",
+      "frequency": "Monthly",
+      "status": "not-connected",
+      "statusNote": "Not yet onboarded. Intake form available."
+    }
+  ]
+}
