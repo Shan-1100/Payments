@@ -1,111 +1,228 @@
-const http = require('http');
-const fs = require('fs');
-const path = require('path');
-const url = require('url');
+'use strict';
+
+const http   = require('http');
+const fs     = require('fs');
+const path   = require('path');
+const url    = require('url');
+const crypto = require('crypto');
+const { exec } = require('child_process');
 
 const DATA_DIR = path.join(__dirname, 'data');
-const PORT = process.env.PORT || 3000;
+const PORT     = process.env.PORT || 3000;
 
-if (!fs.existsSync(DATA_DIR)) {
-  fs.mkdirSync(DATA_DIR, { recursive: true });
+if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true });
+
+// ── lazy-load pipeline modules (require npm install) ─────────────────────────
+let synthesize, fetchRss;
+try { synthesize = require('./scripts/synthesize'); } catch { /* npm install not yet run */ }
+try { fetchRss   = require('./scripts/fetch-rss');  } catch { /* npm install not yet run */ }
+
+// ── helpers ──────────────────────────────────────────────────────────────────
+function readJSON(filename) {
+  const fp = path.join(DATA_DIR, filename);
+  try { if (fs.existsSync(fp)) return JSON.parse(fs.readFileSync(fp, 'utf8')); }
+  catch (e) { console.error(`Read error ${filename}:`, e.message); }
+  return null;
 }
 
-const server = http.createServer(async (req, res) => {
-  const parsedUrl = url.parse(req.url, true);
-  const pathname = parsedUrl.pathname;
-  const method = req.method;
+function writeJSON(filename, data) {
+  fs.writeFileSync(path.join(DATA_DIR, filename), JSON.stringify(data, null, 2));
+}
 
-  res.setHeader('Access-Control-Allow-Origin', '*');
+function urlHash(u) {
+  return crypto.createHash('md5').update(u).digest('hex').slice(0, 12);
+}
+
+async function fetchArticleContent(articleUrl) {
+  try {
+    const res = await fetch(articleUrl, {
+      signal:  AbortSignal.timeout(9000),
+      headers: { 'User-Agent': 'PaymentsIntel/1.0' }
+    });
+    const html = await res.text();
+    return html.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 4000);
+  } catch {
+    return '';
+  }
+}
+
+async function discoverAndSaveRss(articleUrl) {
+  if (!fetchRss) return;
+  try {
+    const { hostname } = new URL(articleUrl);
+    const domain = hostname.replace(/^www\./, '');
+
+    const discovered = readJSON('discovered_sources.json') || [];
+    const approved   = readJSON('approved_sources.json')   || [];
+
+    const alreadyTracked =
+      discovered.some(s => s.domain === domain) ||
+      approved.some(s => {
+        try { return new URL(s.url).hostname.replace(/^www\./, '') === domain; } catch { return false; }
+      });
+
+    if (alreadyTracked) return;
+
+    const rssUrl = await fetchRss.discoverRssFromUrl(articleUrl);
+    if (rssUrl) {
+      discovered.push({
+        id:            `discovered-${domain.replace(/\./g, '-')}-${Date.now()}`,
+        name:          domain,
+        domain,
+        rssUrl,
+        tier:          'Tier 2',
+        discoveredFrom: articleUrl,
+        discoveredAt:  new Date().toISOString()
+      });
+      writeJSON('discovered_sources.json', discovered);
+      console.log(`  RSS discovered for ${domain}: ${rssUrl}`);
+    }
+  } catch (err) {
+    console.warn('RSS discovery error:', err.message);
+  }
+}
+
+// ── HTTP server ───────────────────────────────────────────────────────────────
+const server = http.createServer(async (req, res) => {
+  const { pathname } = url.parse(req.url, true);
+  const method       = req.method;
+
+  res.setHeader('Access-Control-Allow-Origin',  '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
   res.setHeader('Content-Type', 'application/json');
 
-  if (method === 'OPTIONS') {
-    res.writeHead(200);
-    res.end();
-    return;
-  }
+  if (method === 'OPTIONS') { res.writeHead(200); res.end(); return; }
 
   try {
+    // ── GET endpoints ────────────────────────────────────────────────────────
     if (pathname === '/api/content-items' && method === 'GET') {
-      const items = readJSON('content_items.json') || [];
       res.writeHead(200);
-      res.end(JSON.stringify(items));
-    }
-    else if (pathname === '/api/daily-feed' && method === 'GET') {
-      const items = readJSON('content_items.json') || [];
-      const today = new Date().toISOString().split('T')[0];
-      const dailyItems = items.filter(i => i.collectedAt?.startsWith(today));
-      res.writeHead(200);
-      res.end(JSON.stringify(dailyItems));
+      res.end(JSON.stringify(readJSON('content_items.json') || []));
     }
     else if (pathname === '/api/summary/weekly' && method === 'GET') {
-      const summary = readJSON('weekly_summary.json') || { summary: 'No summary available' };
       res.writeHead(200);
-      res.end(JSON.stringify(summary));
+      res.end(JSON.stringify(readJSON('weekly_summary.json') || { summary: 'No summary available' }));
     }
     else if (pathname === '/api/summary/monthly' && method === 'GET') {
-      const summary = readJSON('monthly_summary.json') || { summary: 'No summary available' };
       res.writeHead(200);
-      res.end(JSON.stringify(summary));
+      res.end(JSON.stringify(readJSON('monthly_summary.json') || { summary: 'No summary available' }));
     }
     else if (pathname === '/api/approved-sources' && method === 'GET') {
-      const sources = readJSON('approved_sources.json') || [];
       res.writeHead(200);
-      res.end(JSON.stringify(sources));
+      res.end(JSON.stringify(readJSON('approved_sources.json') || []));
     }
     else if (pathname === '/api/expert-commentary' && method === 'GET') {
-      const items = readJSON('expert_commentary.json') || [];
       res.writeHead(200);
-      res.end(JSON.stringify(items));
+      res.end(JSON.stringify(readJSON('expert_commentary.json') || []));
     }
     else if (pathname === '/api/watchlist' && method === 'GET') {
-      const watchlist = readJSON('watchlist.json');
       res.writeHead(200);
-      res.end(JSON.stringify(watchlist || { categories: [] }));
+      res.end(JSON.stringify(readJSON('watchlist.json') || { categories: [] }));
     }
     else if (pathname === '/api/deep-dives' && method === 'GET') {
-      const dives = readJSON('deep_dives.json') || [];
       res.writeHead(200);
-      res.end(JSON.stringify(dives));
+      res.end(JSON.stringify(readJSON('deep_dives.json') || []));
     }
+    else if (pathname === '/api/discovered-sources' && method === 'GET') {
+      res.writeHead(200);
+      res.end(JSON.stringify(readJSON('discovered_sources.json') || []));
+    }
+
+    // ── POST /api/submissions — synthesize + persist + discover RSS ──────────
     else if (pathname === '/api/submissions' && method === 'POST') {
-      let body = '';
-      req.on('data', chunk => body += chunk);
-      req.on('end', () => {
+      const body = await readBody(req);
+      const { url: articleUrl, title, summary } = JSON.parse(body);
+
+      if (!articleUrl) {
+        res.writeHead(400);
+        res.end(JSON.stringify({ error: 'URL required' }));
+        return;
+      }
+
+      console.log(`\nSubmission: ${articleUrl}`);
+
+      // Synthesize if API key is set
+      let synthesized = null;
+      if (synthesize && process.env.ANTHROPIC_API_KEY) {
         try {
-          const data = JSON.parse(body);
-          const submissions = readJSON('submissions.json') || [];
-          submissions.push({
-            ...data,
-            submittedAt: new Date().toISOString(),
-            id: Date.now().toString()
-          });
-          writeJSON('submissions.json', submissions);
-          res.writeHead(200);
-          res.end(JSON.stringify({ success: true }));
-        } catch (e) {
-          res.writeHead(400);
-          res.end(JSON.stringify({ error: e.message }));
+          console.log('  Fetching article content...');
+          const content       = await fetchArticleContent(articleUrl);
+          const sourceName    = new URL(articleUrl).hostname.replace(/^www\./, '');
+          console.log('  Synthesizing with Claude...');
+          synthesized         = await synthesize.synthesizeArticle(
+            title || sourceName, content, articleUrl, sourceName
+          );
+          console.log(`  ✓ Classified as: ${synthesized.intelligenceType} / ${synthesized.priorityBand}`);
+        } catch (err) {
+          console.warn('  Synthesis failed:', err.message);
         }
-      });
+      }
+
+      // Save to content_items.json
+      const id    = urlHash(articleUrl);
+      const items = readJSON('content_items.json') || [];
+
+      if (!items.find(i => i.sourceUrl === articleUrl)) {
+        const newItem = {
+          id,
+          sourceType:        'manual',
+          sourceName:        new URL(articleUrl).hostname.replace(/^www\./, ''),
+          sourceUrl:         articleUrl,
+          sourceTier:        'Tier 2',
+          title:             title || synthesized?.primaryTopic || 'Submitted Article',
+          summary:           summary || synthesized?.summary || '',
+          intelligenceType:  synthesized?.intelligenceType  || null,
+          businessImpact:    synthesized?.businessImpact    || null,
+          technicalTakeaway: synthesized?.technicalTakeaway || null,
+          businessTakeaway:  synthesized?.businessTakeaway  || null,
+          treasuryTakeaway:  synthesized?.treasuryTakeaway  || null,
+          primaryTopic:      synthesized?.primaryTopic      || null,
+          rail:              synthesized?.rail              || 'Adjacent',
+          tags:              synthesized?.tags              || [],
+          priorityBand:      synthesized?.priorityBand      || 'monitor',
+          importanceScore:   synthesized?.priorityBand === 'high' ? 88 : synthesized?.priorityBand === 'medium' ? 72 : 55,
+          publishedAt:       new Date().toISOString(),
+          collectedAt:       new Date().toISOString(),
+          status:            'collected'
+        };
+        items.unshift(newItem);
+        writeJSON('content_items.json', items);
+        console.log('  Item saved to feed.');
+      } else {
+        console.log('  Item already in feed (duplicate URL).');
+      }
+
+      // Auto-discover and persist RSS for this domain (non-blocking)
+      discoverAndSaveRss(articleUrl);
+
+      const msg = synthesized
+        ? 'Article synthesized and added to feed'
+        : `Article added${process.env.ANTHROPIC_API_KEY ? ' (synthesis failed)' : ' (set ANTHROPIC_API_KEY to enable synthesis)'}`;
+
+      res.writeHead(200);
+      res.end(JSON.stringify({ success: true, synthesized: !!synthesized, message: msg }));
     }
+
+    // ── POST /api/run-monitor — run the full RSS pipeline ───────────────────
     else if (pathname === '/api/run-monitor' && method === 'POST') {
       res.writeHead(200);
-      res.end(JSON.stringify({ status: 'Monitor started' }));
-      runSourceMonitor();
+      res.end(JSON.stringify({ status: 'Pipeline started — check server console for progress' }));
+
+      const env = { ...process.env };
+      exec('node scripts/run-pipeline.js', { cwd: __dirname, env }, (err, stdout, stderr) => {
+        if (stdout) console.log(stdout);
+        if (stderr) console.error(stderr);
+        if (err)    console.error('Pipeline error:', err.message);
+      });
     }
+
+    // ── Static file serving ──────────────────────────────────────────────────
     else if (pathname.startsWith('/')) {
       const filePath = path.join(__dirname, pathname === '/' ? 'index.html' : pathname);
       if (fs.existsSync(filePath) && filePath.startsWith(__dirname)) {
-        const ext = path.extname(filePath);
-        const mimeTypes = {
-          '.html': 'text/html',
-          '.css': 'text/css',
-          '.js': 'text/javascript',
-          '.json': 'application/json'
-        };
-        res.setHeader('Content-Type', mimeTypes[ext] || 'text/plain');
+        const mimeTypes = { '.html': 'text/html', '.css': 'text/css', '.js': 'text/javascript', '.json': 'application/json' };
+        res.setHeader('Content-Type', mimeTypes[path.extname(filePath)] || 'text/plain');
         res.writeHead(200);
         res.end(fs.readFileSync(filePath));
       } else {
@@ -118,67 +235,27 @@ const server = http.createServer(async (req, res) => {
       res.end(JSON.stringify({ error: 'Not found' }));
     }
   } catch (e) {
-    console.error('Error:', e);
+    console.error('Server error:', e);
     res.writeHead(500);
     res.end(JSON.stringify({ error: e.message }));
   }
 });
 
-function readJSON(filename) {
-  const filePath = path.join(DATA_DIR, filename);
-  try {
-    if (fs.existsSync(filePath)) {
-      return JSON.parse(fs.readFileSync(filePath, 'utf8'));
-    }
-  } catch (e) {
-    console.error(`Error reading ${filename}:`, e);
-  }
-  return null;
-}
-
-function writeJSON(filename, data) {
-  const filePath = path.join(DATA_DIR, filename);
-  fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
-}
-
-function scoreItem(item) {
-  const factors = {
-    marketImpact: 3,
-    treasuryRelevance: 3,
-    technicalSignificance: 2,
-    commercialSignificance: 2,
-    sourceCredibility: item.sourceTier === 'Tier 1' ? 5 : 3,
-    timeSensitivity: 2
-  };
-
-  const weights = {
-    marketImpact: 0.25,
-    treasuryRelevance: 0.20,
-    technicalSignificance: 0.20,
-    commercialSignificance: 0.20,
-    sourceCredibility: 0.10,
-    timeSensitivity: 0.05
-  };
-
-  const score = Math.round(
-    (factors.marketImpact * weights.marketImpact +
-     factors.treasuryRelevance * weights.treasuryRelevance +
-     factors.technicalSignificance * weights.technicalSignificance +
-     factors.commercialSignificance * weights.commercialSignificance +
-     factors.sourceCredibility * weights.sourceCredibility +
-     factors.timeSensitivity * weights.timeSensitivity) * 20
-  );
-
-  return {
-    importanceScore: Math.min(100, score),
-    priorityBand: score >= 80 ? 'high' : score >= 60 ? 'medium' : 'monitor'
-  };
-}
-
-function runSourceMonitor() {
-  console.log('Source monitor running...');
+function readBody(req) {
+  return new Promise((resolve, reject) => {
+    const chunks = [];
+    req.on('data', c => chunks.push(c));
+    req.on('end',  () => resolve(Buffer.concat(chunks).toString()));
+    req.on('error', reject);
+  });
 }
 
 server.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+  console.log(`Server: http://localhost:${PORT}`);
+  if (!process.env.ANTHROPIC_API_KEY) {
+    console.warn('  ⚠ ANTHROPIC_API_KEY not set — synthesis disabled. Set it to enable auto-synthesis on submission.');
+  }
+  if (!synthesize) {
+    console.warn('  ⚠ Pipeline modules not loaded — run: npm install');
+  }
 });

@@ -1,0 +1,56 @@
+name: Daily Intelligence Pipeline
+
+on:
+  schedule:
+    - cron: '0 10 * * *'   # 10:00 UTC (6am ET) every day
+  workflow_dispatch:
+    inputs:
+      weekly:
+        description: 'Force weekly summary generation'
+        type: boolean
+        default: false
+      monthly:
+        description: 'Force monthly summary generation'
+        type: boolean
+        default: false
+
+# Allow the workflow to push data updates back to the repo
+permissions:
+  contents: write
+
+jobs:
+  pipeline:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run intelligence pipeline
+        run: |
+          ARGS=""
+          [[ "${{ github.event.inputs.weekly }}"  == "true" ]] && ARGS="$ARGS --weekly"
+          [[ "${{ github.event.inputs.monthly }}" == "true" ]] && ARGS="$ARGS --monthly"
+          node scripts/run-pipeline.js $ARGS
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+
+      - name: Commit and push updated data
+        run: |
+          git config user.name  "Payments Intel Bot"
+          git config user.email "noreply@anthropic.com"
+          git add data/
+          git diff --staged --quiet && echo "No new intelligence today." || (
+            git commit -m "Intel update: $(date -u +%Y-%m-%d)"
+            git push
+          )
