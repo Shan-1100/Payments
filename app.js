@@ -236,6 +236,7 @@ function renderSummary() {
   document.getElementById('summary-body').innerHTML = formatBody(body);
 
   loadArticles(item);
+  renderSources(item);
   updatePaginationUI();
 }
 
@@ -305,6 +306,55 @@ async function loadArticles(item) {
     });
   } catch (err) {
     console.error('Failed to load articles:', err);
+  }
+}
+
+/* ─── Sources renderer ───────────────────────────────────────── */
+async function renderSources(item) {
+  const container = document.getElementById('sources-list');
+  container.innerHTML = '';
+
+  if (!item.sources || item.sources.length === 0) {
+    container.classList.add('empty');
+    container.innerHTML = '<div>No sources linked to this summary</div>';
+    return;
+  }
+
+  try {
+    const sources = await fetchJSON('data/approved_sources.json');
+    const sourceItems = item.sources
+      .map(id => sources.find(s => s.id === id))
+      .filter(Boolean);
+
+    if (sourceItems.length === 0) {
+      container.classList.add('empty');
+      container.innerHTML = '<div>No sources linked to this summary</div>';
+      return;
+    }
+
+    container.classList.remove('empty');
+    sourceItems.forEach(src => {
+      const link = document.createElement('a');
+      link.className = 'source-link';
+      link.href = src.url || '#';
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+
+      const iconLetter = (src.id || '').charAt(0).toUpperCase();
+
+      link.innerHTML = `
+        <div class="source-link-icon">${escapeHtml(iconLetter)}</div>
+        <div class="source-link-content">
+          <div class="source-link-name">${escapeHtml(src.name || '')}</div>
+          <div class="source-link-category">${escapeHtml(src.category || 'Source')}</div>
+        </div>
+      `;
+
+      container.appendChild(link);
+    });
+  } catch (err) {
+    console.error('Failed to render sources:', err);
+    container.innerHTML = '<div class="loading-msg">Error loading sources.</div>';
   }
 }
 
