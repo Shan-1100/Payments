@@ -72,7 +72,7 @@ async function loadAndRenderFeed() {
   container.innerHTML = '';
 
   if (filtered.length === 0) {
-    container.innerHTML = '<p style="text-align: center; color: #999; padding: 2rem;">No items to display</p>';
+    container.innerHTML = '<div class="empty-state">No items to display</div>';
     return;
   }
 
@@ -100,53 +100,40 @@ function createCardElement(item) {
   const card = document.createElement('div');
   card.className = 'card';
 
-  const tierBadge = `<span class="badge badge-tier-${item.sourceTier === 'Tier 1' ? '1' : '2'}">
-    ${item.sourceTier}
-  </span>`;
+  const tierBadge = `<span class="badge badge-tier-${item.sourceTier === 'Tier 1' ? '1' : '2'}">${item.sourceTier}</span>`;
+  const priorityBadge = `<span class="badge badge-${item.priorityBand}">${item.priorityBand}</span>`;
+  const date = item.publishedAt ? new Date(item.publishedAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '';
 
-  const priorityBadge = `<span class="badge badge-${item.priorityBand}">
-    ${item.priorityBand}
-  </span>`;
+  const takeawayItems = [
+    item.technicalTakeaway && `<div class="takeaway"><span class="takeaway-label">Technical</span>${item.technicalTakeaway}</div>`,
+    item.businessTakeaway  && `<div class="takeaway"><span class="takeaway-label">Business</span>${item.businessTakeaway}</div>`,
+    item.treasuryTakeaway  && `<div class="takeaway"><span class="takeaway-label">Treasury</span>${item.treasuryTakeaway}</div>`
+  ].filter(Boolean);
 
-  const date = item.publishedAt ? new Date(item.publishedAt).toLocaleDateString() : 'N/A';
-
-  let takeaways = '';
-  if (item.technicalTakeaway) {
-    takeaways += `<div class="takeaway">
-      <span class="takeaway-label">Technical:</span> ${item.technicalTakeaway}
-    </div>`;
-  }
-  if (item.businessTakeaway) {
-    takeaways += `<div class="takeaway">
-      <span class="takeaway-label">Business:</span> ${item.businessTakeaway}
-    </div>`;
-  }
-  if (item.treasuryTakeaway) {
-    takeaways += `<div class="takeaway">
-      <span class="takeaway-label">Treasury:</span> ${item.treasuryTakeaway}
-    </div>`;
-  }
+  const takeaways = takeawayItems.length
+    ? `<div class="takeaways-grid">${takeawayItems.join('')}</div>`
+    : '';
 
   const tags = item.tags ? item.tags.map(t => `<span class="tag">${t}</span>`).join('') : '';
 
   card.innerHTML = `
     <div class="card-header">
-      <div>
-        <div class="card-title">${item.title}</div>
-        <div class="card-meta">
-          <span>${date}</span>
-          <span>${item.sourceName}</span>
-          <span>${item.rail}</span>
-          ${tierBadge}
-          ${priorityBadge}
-        </div>
+      <div class="card-title">${item.title}</div>
+      <div class="card-meta">
+        ${date ? `<span>${date}</span><span class="sep">·</span>` : ''}
+        <span>${item.sourceName}</span>
+        <span class="sep">·</span>
+        <span>${item.rail}</span>
+        <span class="sep">·</span>
+        ${tierBadge}
+        ${priorityBadge}
       </div>
     </div>
     <p>${item.summary}</p>
     ${takeaways}
     ${tags ? `<div class="tags">${tags}</div>` : ''}
     <a href="${item.sourceUrl}" target="_blank" rel="noopener noreferrer" class="source-link">
-      → Read Full Article
+      Read full article →
     </a>
   `;
 
@@ -223,7 +210,8 @@ async function loadAndRenderSources() {
   Object.entries(tierGroups).forEach(([tier, items]) => {
     if (items.length > 0) {
       const div = document.createElement('div');
-      div.innerHTML = `<h3 style="grid-column: 1/-1; margin-top: 1rem; margin-bottom: 1rem;">${tier}</h3>`;
+      div.className = 'tier-heading';
+      div.textContent = tier;
       container.appendChild(div);
 
       items.forEach(source => {
@@ -261,11 +249,8 @@ async function loadAndRenderQA() {
 
   qa.forEach(item => {
     const div = document.createElement('div');
-    div.style.marginBottom = '1.5rem';
-    div.innerHTML = `
-      <h4 style="color: var(--primary); margin-bottom: 0.5rem;">${item.question}</h4>
-      <p style="color: var(--gray-700);">${item.answer}</p>
-    `;
+    div.className = 'qa-item';
+    div.innerHTML = `<h4>${item.question}</h4><p>${item.answer}</p>`;
     container.appendChild(div);
   });
 }
