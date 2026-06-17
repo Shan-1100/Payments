@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Executive Intelligence Mockup</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; background: #f6f7fb; color: #374151; line-height: 1.6; }
+
+    .container { max-width: 900px; margin: 0 auto; padding: 2rem; }
+
+    header {
+      background: #ffffff;
+      border-bottom: 1px solid #e4e8f0;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(30,58,95,0.06);
+    }
+
+    h1 {
+      font-size: 1.85rem;
+      color: #0f1f35;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(135deg, #0f1f35 0%, #1e3a5f 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .description {
+      font-size: 0.95rem;
+      color: #5a657a;
+      border-left: 3px solid #b8860b;
+      padding-left: 1rem;
+    }
+
+    .summary-tabs {
+      display: flex;
+      gap: 1rem;
+      margin: 2rem 0;
+      border-bottom: 2px solid #e4e8f0;
+    }
+
+    .summary-tabs button {
+      padding: 0.75rem 1.5rem;
+      border: none;
+      background: transparent;
+      font-size: 1rem;
+      font-weight: 600;
+      color: #5a657a;
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      transition: all 0.2s;
+    }
+
+    .summary-tabs button.active {
+      color: #1e3a5f;
+      border-bottom-color: #b8860b;
+    }
+
+    .summary-tabs button:hover {
+      color: #1e3a5f;
+    }
+
+    .summary-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin: 2rem 0;
+      padding: 1.25rem;
+      background: linear-gradient(135deg, #e8eef8 0%, rgba(184,134,11,0.03) 100%);
+      border: 1px solid #e8eef8;
+      border-radius: 8px;
+    }
+
+    .summary-nav button {
+      padding: 0.6rem 1.2rem;
+      background: white;
+      color: #1e3a5f;
+      border: 1.5px solid #e8eef8;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .summary-nav button:hover {
+      background: #1e3a5f;
+      color: white;
+      border-color: #1e3a5f;
+    }
+
+    .summary-date {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #0f1f35;
+      min-width: 200px;
+      text-align: center;
+    }
+
+    .summary-card {
+      background: linear-gradient(135deg, #ffffff 0%, #fefbf5 100%);
+      border: 2px solid #b8860b;
+      border-left: 5px solid #b8860b;
+      border-radius: 8px;
+      padding: 2rem;
+      box-shadow: inset 0 0 20px rgba(184,134,11,0.08), 0 2px 4px rgba(30,58,95,0.06);
+      position: relative;
+      margin-bottom: 3rem;
+    }
+
+    .summary-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #b8860b, transparent);
+      border-radius: 8px 8px 0 0;
+    }
+
+    .summary-headline {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #0f1f35;
+      margin-bottom: 0.5rem;
+      line-height: 1.4;
+    }
+
+    .summary-date-display {
+      font-size: 0.9rem;
+      color: #5a657a;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid #e4e8f0;
+    }
+
+    .summary-body {
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: #374151;
+    }
+
+    .summary-body ul {
+      margin: 1rem 0 1rem 1.5rem;
+    }
+
+    .summary-body li {
+      margin-bottom: 0.75rem;
+    }
+
+    .summary-body strong {
+      color: #0f1f35;
+      font-weight: 700;
+      text-decoration: underline;
+      text-decoration-color: #b8860b;
+      text-decoration-thickness: 2px;
+      text-underline-offset: 3px;
+    }
+
+    .articles-section {
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 2px solid #e4e8f0;
+    }
+
+    .articles-section h3 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #1e3a5f;
+      margin-bottom: 0.3rem;
+    }
+
+    .articles-section p {
+      font-size: 0.85rem;
+      color: #5a657a;
+      margin-bottom: 1.5rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Executive Intelligence</h1>
+      <p class="description">Strategic synthesis of critical market developments</p>
+    </header>
+
+    <div class="summary-tabs">
+      <button class="active">Daily</button>
+      <button>Weekly</button>
+      <button>Monthly</button>
+    </div>
+
+    <div class="summary-nav">
+      <button>← Previous</button>
+      <span class="summary-date">June 17, 2025</span>
+      <button>Next →</button>
+    </div>
+
+    <div class="summary-card">
+      <div class="summary-headline">Three Major Payment Rails Developments — Strategic Implications</div>
+      <div class="summary-date-display">June 17, 2025</div>
+      <div class="summary-body">
+        <p><strong>Key Alerts:</strong></p>
+        <ul>
+          <li><strong>JPMorgan Kinexis Scale</strong> — Tokenized deposit volume reaches $1B daily, signaling institutional adoption of blockchain-based treasury solutions</li>
+          <li><strong>TCH RLN Pilot Progress</strong> — Regulated Liability Network advances interbank tokenized settlement, creating new competitive dynamics</li>
+          <li><strong>Regulatory Clarity</strong> — Federal Reserve issues supervisory guidance on bank stablecoin engagement, de-risking institutional participation</li>
+        </ul>
+        <p style="margin-top: 1.5rem;"><strong>Bottom Line for Treasury:</strong> Tokenization is transitioning from experiment to infrastructure. Banks not actively building equivalent capabilities face client attrition among institutional and mid-market segments within 12-18 months.</p>
+      </div>
+    </div>
+
+    <div class="articles-section">
+      <h3>Source Articles</h3>
+      <p>Full articles behind this summary</p>
+      <p style="color: #999; font-style: italic;">[Search bar and article cards would appear here]</p>
+    </div>
+  </div>
+</body>
+</html>
