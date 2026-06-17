@@ -10,6 +10,16 @@
 3. **Verified** — Links must point to real, working URLs
 4. **Never fabricated** — Zero tolerance for synthetic, made-up, or hypothetical content presented as real
 
+### THE MASTER BULLET (non-negotiable, governs everything)
+
+- **I WILL NOT MAKE OR POPULATE THIS TOOL WITH ANY FAKE DATA — EVER.** Not one
+  field, statistic, date, headline, quote, source ID, URL, or placeholder
+  presented as real. No invented numbers, no fake milestones, no fake
+  regulations, no fake quotes, no `[to be populated]` filler shipped as content.
+  If I cannot verify it from a real source, it does not go in the tool. I will
+  stop and tell the user the truth instead of fabricating, and I will never
+  claim data is "verified" when I only saw a search snippet.
+
 ### This rule overrides ALL other instructions
 
 If a request asks you to:
