@@ -43,7 +43,10 @@
     "date": "2026-06-13",
     "headline": "AI Fraud Detection Platforms Report 67% Reduction in Payment Fraud Losses",
     "summary": "## Regulatory Framework\n\nA consortium of 40 U.S. banks deploying next-generation AI fraud detection systems reported a combined 67% reduction in payment fraud losses over the past 12 months, according to data published by the Financial Services Information Sharing and Analysis Center (FS-ISAC). The platforms leverage large language models trained on transaction graph data to identify mule account networks and synthetic identity fraud patterns in real time.\n\n## Infrastructure & Technology\n\nVisa and Mastercard both announced expanded licensing agreements for their AI risk scoring APIs to community banks and credit unions, with per-transaction pricing now below $0.001. Industry analysts estimate AI-driven fraud prevention is saving the U.S. payments ecosystem approximately $9 billion annually compared to 2024 baseline losses.\n\n## Adoption & Growth\n\n",
-    "sources": []
+    "sources": [
+      "fed-board",
+      "clearing-house"
+    ]
   },
   {
     "date": "2026-06-12",
@@ -69,7 +72,10 @@
     "date": "2026-06-10",
     "headline": "Visa Expands Tokenized Card Network to 40 New Markets",
     "summary": "## Regulatory Framework\n\nVisa announced the expansion of its Visa Token Service (VTS) tokenized network to 40 new markets across Southeast Asia, Latin America, and Sub-Saharan Africa, bringing total market coverage to 180 countries.\n\n## Infrastructure & Technology\n\nThe expansion is expected to add 2.3 billion new tokenization-eligible payment credentials as mobile wallet adoption in emerging markets accelerates.\n\n## Adoption & Growth\n\nVisa reported that tokenized transactions already account for 38% of global card volume and carry a 26% lower fraud rate than non-tokenized credentials.\n\n## International Expansion\n\nThe company also announced an interoperability bridge with Mastercard's token vault, enabling cross-network token provisioning for issuers managing multi-network portfolios.",
-    "sources": []
+    "sources": [
+      "fed-board",
+      "clearing-house"
+    ]
   },
   {
     "date": "2026-06-09",
@@ -84,7 +90,10 @@
     "date": "2026-06-08",
     "headline": "Capital One Completes Acquisition of Discover Financial, Reshaping U.S. Card Landscape",
     "summary": "## Regulatory Framework\n\nCapital One Financial officially completed its $35 billion acquisition of Discover Financial Services today following 18 months of regulatory review, creating the largest U.S. credit card issuer by balances outstanding with approximately $250 billion in receivables. The combined entity will operate Discover's payment network independently from Capital One's card portfolio, with plans to issue Capital One branded cards on the Discover network beginning in Q4 2026.\n\n## Infrastructure & Technology\n\nAnalysts expect the deal to intensify competition with Visa and Mastercard as Capital One-Discover gains the scale to offer competitive network acceptance incentives to merchants. The combined company serves approximately 100 million cardholders across credit, debit, and prepaid products.\n\n## Competitive Dynamics\n\n",
-    "sources": []
+    "sources": [
+      "fed-board",
+      "clearing-house"
+    ]
   },
   {
     "date": "2026-06-07",
@@ -262,7 +271,10 @@
     "date": "2026-05-20",
     "headline": "Mastercard and Visa Both Report Record Q1 2026 Earnings on Cross-Border Volume Surge",
     "summary": "## Regulatory Framework\n\nMastercard reported Q1 2026 net revenue of $7.8 billion, up 16% year-over-year, while Visa reported Q1 net revenue of $10.1 billion, up 12%, with both companies attributing outperformance to a post-pandemic structural recovery in cross-border travel and commerce.\n\n## Infrastructure & Technology\n\nMastercard's cross-border volume grew 24% in constant currency terms, and Visa's cross-border volume ex-intra-Europe grew 19%.\n\n## Adoption & Growth\n\nBoth networks highlighted tokenized transaction volume growth as a key driver of net revenue yield improvement, with tokenized transactions now commanding a 4-6 basis point premium in net pricing.\n\n## Key Impacts\n\nInvestors rewarded both stocks with single-day gains of over 5%, pushing combined market capitalizations past $1.3 trillion.\n\n## International Expansion\n\n",
-    "sources": []
+    "sources": [
+      "fed-board",
+      "clearing-house"
+    ]
   },
   {
     "date": "2026-05-19",
@@ -367,7 +379,10 @@
     "date": "2026-05-09",
     "headline": "Discover Network Reports 22% Transaction Growth as Capital One Integration Plans Advance",
     "summary": "## Regulatory Framework\n\nDiscover Financial Services released its final standalone quarterly results, reporting 22% transaction volume growth on the Discover network year-over-year, driven by Capital One's pre-merger marketing investment and new merchant acceptance agreements signed in anticipation of the combined entity's enhanced scale.\n\n## Infrastructure & Technology\n\nDiscover's U.S. merchant acceptance coverage reached 99.4% of locations that accept Visa or Mastercard, closing a long-standing acceptance gap that limited cardholder utility.\n\n## Adoption & Growth\n\nCapital One confirmed it will begin issuing co-branded Capital One cards on the Discover network in Q4 2026, with full migration of Capital One's entire card portfolio to Discover network optional by 2028.\n\n## International Expansion\n\nNetwork analysts estimated the combined Capital One-Discover entity could capture 15-18% of U.S. credit card purchase volume within five years.",
-    "sources": []
+    "sources": [
+      "fed-board",
+      "clearing-house"
+    ]
   },
   {
     "date": "2026-05-08",
