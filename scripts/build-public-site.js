@@ -18,7 +18,21 @@ files.forEach(file => {
   fs.copyFileSync(src, dst);
 });
 
-const dataFiles = ['content_items.json', 'watchlist.json', 'approved_sources.json', 'deep_dives.json', 'expert_commentary.json', 'weekly_summary.json', 'monthly_summary.json', 'qa.json'];
+const dataFiles = [
+  'content_items.json',
+  'watchlist.json',
+  'approved_sources.json',
+  'deep_dives.json',
+  'expert_commentary.json',
+  'weekly_summary.json',
+  'monthly_summary.json',
+  'daily_summary.json',
+  'daily_summaries_archive.json',
+  'weekly_summaries_archive.json',
+  'monthly_summaries_archive.json',
+  'qa.json',
+  'internal_partners.json'
+];
 dataFiles.forEach(file => {
   const src = path.join(DATA_DIR, file);
   const dst = path.join(DIST_DIR, 'data', file);
