@@ -1,0 +1,22 @@
+[
+  {
+    "question": "What is this intelligence tool?",
+    "answer": "This is a curated intelligence feed focused on instant payments, FedNow, RTP, and adjacent payment rails. It serves strategy, product, and operations teams at banks and fintechs serving corporate treasury clients."
+  },
+  {
+    "question": "What content is included?",
+    "answer": "The feed covers official announcements from operators and regulators, named industry publications, vendor announcements, bank launches, customer wins, regulatory developments, fraud/risk/compliance themes, and strategic analysis."
+  },
+  {
+    "question": "How often is content updated?",
+    "answer": "The daily feed is updated continuously from approved sources. Weekly and monthly recaps are generated based on collected items. Strategic deep dives are published twice per month."
+  },
+  {
+    "question": "What are Tier 1 and Tier 2 sources?",
+    "answer": "Tier 1 sources include official operators, regulators, and company newsrooms (FedNow, The Clearing House, Federal Reserve, etc.). Tier 2 sources are named industry publications and research firms (American Banker, Payments Dive, McKinsey, etc.)."
+  },
+  {
+    "question": "What do the takeaways mean?",
+    "answer": "Technical takeaways focus on system and infrastructure implications. Business takeaways address commercial and strategic impacts. Treasury takeaways highlight implications for treasury teams and workflows."
+  }
+]

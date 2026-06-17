@@ -1,0 +1,13 @@
+{
+  "name": "payments-intelligence",
+  "version": "1.0.0",
+  "description": "Instant Payments Intelligence Aggregator",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "build-public": "node scripts/build-public-site.js"
+  },
+  "keywords": ["payments", "intelligence", "RTP", "FedNow"],
+  "author": "",
+  "license": "MIT"
+}

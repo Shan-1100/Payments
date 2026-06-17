@@ -1,0 +1,121 @@
+[
+  {
+    "id": "clearing-house",
+    "name": "The Clearing House",
+    "url": "https://www.theclearinghouse.org",
+    "tier": "Tier 1",
+    "category": "Official Operator"
+  },
+  {
+    "id": "fednow",
+    "name": "FedNow Service",
+    "url": "https://www.fednow.org",
+    "tier": "Tier 1",
+    "category": "Official Operator"
+  },
+  {
+    "id": "fed-board",
+    "name": "Federal Reserve Board",
+    "url": "https://www.federalreserve.gov",
+    "tier": "Tier 1",
+    "category": "Regulator"
+  },
+  {
+    "id": "occ",
+    "name": "Office of the Comptroller of the Currency",
+    "url": "https://www.occ.treas.gov",
+    "tier": "Tier 1",
+    "category": "Regulator"
+  },
+  {
+    "id": "fdic",
+    "name": "FDIC",
+    "url": "https://www.fdic.gov",
+    "tier": "Tier 1",
+    "category": "Regulator"
+  },
+  {
+    "id": "cfpb",
+    "name": "Consumer Financial Protection Bureau",
+    "url": "https://www.consumerfinance.gov",
+    "tier": "Tier 1",
+    "category": "Regulator"
+  },
+  {
+    "id": "nacha",
+    "name": "NACHA",
+    "url": "https://www.nacha.org",
+    "tier": "Tier 1",
+    "category": "Official Operator"
+  },
+  {
+    "id": "fiserv",
+    "name": "Fiserv",
+    "url": "https://www.fiserv.com",
+    "tier": "Tier 1",
+    "category": "Core Provider"
+  },
+  {
+    "id": "finastra",
+    "name": "Finastra",
+    "url": "https://www.finastra.com",
+    "tier": "Tier 1",
+    "category": "Core Provider"
+  },
+  {
+    "id": "fis",
+    "name": "FIS",
+    "url": "https://www.fis.com",
+    "tier": "Tier 1",
+    "category": "Core Provider"
+  },
+  {
+    "id": "jack-henry",
+    "name": "Jack Henry & Associates",
+    "url": "https://www.jackhenry.com",
+    "tier": "Tier 1",
+    "category": "Core Provider"
+  },
+  {
+    "id": "american-banker",
+    "name": "American Banker",
+    "url": "https://www.americanbanker.com",
+    "tier": "Tier 2",
+    "category": "Industry Publication"
+  },
+  {
+    "id": "payments-dive",
+    "name": "Payments Dive",
+    "url": "https://www.paymentsdive.com",
+    "tier": "Tier 2",
+    "category": "Industry Publication"
+  },
+  {
+    "id": "paypers",
+    "name": "The Paypers",
+    "url": "https://www.thepaypers.com",
+    "tier": "Tier 2",
+    "category": "Industry Publication"
+  },
+  {
+    "id": "tearsheet",
+    "name": "Tearsheet",
+    "url": "https://www.tearsheet.co",
+    "tier": "Tier 2",
+    "category": "Industry Publication"
+  },
+  {
+    "id": "mckinsey",
+    "name": "McKinsey Financial Services",
+    "url": "https://www.mckinsey.com/industries/financial-services",
+    "tier": "Tier 2",
+    "category": "Consulting"
+  },
+  {
+    "id": "pwc",
+    "name": "PwC Financial Services",
+    "url": "https://www.pwc.com/us/en/industries/financial-services.html",
+    "tier": "Tier 2",
+    "category": "Consulting"
+  }
+]

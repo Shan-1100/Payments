@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Instant Payments Intelligence Aggregator</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Instant Payments Intelligence</h1>
+      <p class="tagline">Intelligence for corporate treasury and payments professionals</p>
+      <nav class="tabs">
+        <button class="tab-btn active" data-tab="daily">Daily Feed</button>
+        <button class="tab-btn" data-tab="archive">Archive</button>
+        <button class="tab-btn" data-tab="deep-dives">Deep Dives</button>
+        <button class="tab-btn" data-tab="watchlist">Watchlist</button>
+        <button class="tab-btn" data-tab="sources">Sources</button>
+        <button class="tab-btn" data-tab="expert">Expert Commentary</button>
+        <button class="tab-btn" data-tab="qa">Q&A</button>
+        <button class="tab-btn" data-tab="ops" id="ops-tab" style="display:none;">Operations</button>
+      </nav>
+    </header>
+
+    <main>
+      <!-- Daily Feed -->
+      <section id="daily" class="tab-content active">
+        <div class="filter-bar">
+          <input type="text" id="search" placeholder="Search...">
+          <select id="rail-filter">
+            <option value="">All Rails</option>
+            <option value="RTP">RTP</option>
+            <option value="FedNow">FedNow</option>
+            <option value="Adjacent">Adjacent</option>
+          </select>
+          <select id="priority-filter">
+            <option value="">All Priority</option>
+            <option value="high">High</option>
+            <option value="medium">Medium</option>
+            <option value="monitor">Monitor</option>
+          </select>
+        </div>
+        <div id="feed-container" class="feed"></div>
+      </section>
+
+      <!-- Archive -->
+      <section id="archive" class="tab-content">
+        <h2>Archive</h2>
+        <div class="archive-blocks">
+          <div class="summary-block">
+            <h3>Weekly Recap</h3>
+            <div id="weekly-summary"></div>
+            <button id="view-weekly" style="display:none;">View Full Recap</button>
+          </div>
+          <div class="summary-block">
+            <h3>Monthly Recap</h3>
+            <div id="monthly-summary"></div>
+            <button id="view-monthly" style="display:none;">View Full Recap</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Deep Dives -->
+      <section id="deep-dives" class="tab-content">
+        <h2>Strategic Deep Dives</h2>
+        <div id="deep-dives-container" class="feed"></div>
+      </section>
+
+      <!-- Watchlist -->
+      <section id="watchlist" class="tab-content">
+        <h2>Competitive Watchlist</h2>
+        <div id="watchlist-container"></div>
+      </section>
+
+      <!-- Sources -->
+      <section id="sources" class="tab-content">
+        <h2>Approved Sources</h2>
+        <div id="sources-container"></div>
+      </section>
+
+      <!-- Expert Commentary -->
+      <section id="expert" class="tab-content">
+        <h2>Expert Commentary</h2>
+        <p class="note">Content in this section is expert analysis and opinion, not official announcements.</p>
+        <div id="expert-container" class="feed"></div>
+      </section>
+
+      <!-- Q&A -->
+      <section id="qa" class="tab-content">
+        <h2>Frequently Asked Questions</h2>
+        <div id="qa-container"></div>
+      </section>
+
+      <!-- Operations (hidden in public mode) -->
+      <section id="ops" class="tab-content">
+        <h2>Operations</h2>
+        <div class="ops-section">
+          <h3>Submit Content</h3>
+          <div class="intake-form">
+            <h4>Submit URL</h4>
+            <input type="url" id="submit-url" placeholder="https://example.com">
+            <textarea id="submit-title" placeholder="Title (optional)"></textarea>
+            <textarea id="submit-summary" placeholder="Summary (optional)"></textarea>
+            <button id="submit-btn">Submit</button>
+          </div>
+          <div class="intake-info">
+            <h4>Email Intake</h4>
+            <p>Send .eml files to the maildrop folder or forward articles to integrate via email.</p>
+          </div>
+          <div class="source-review">
+            <h3>Source Monitoring</h3>
+            <button id="run-monitor">Run Source Monitor Now</button>
+            <div id="monitor-status"></div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>&copy; 2025 Instant Payments Intelligence. All rights reserved.</p>
+      <p class="public-note" style="display:none;">This is a read-only public feed.</p>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
