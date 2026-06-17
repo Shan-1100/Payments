@@ -2,7 +2,7 @@ const IS_PUBLIC = !window.location.hostname.includes('localhost');
 
 // ─── Section display names ───────────────────────────────────────────────────
 const SECTION_NAMES = {
-  'daily':      'Daily Intelligence Brief',
+  'daily':      'Executive Intelligence',
   'deep-dives': 'Deep Dives',
   'expert':     'Expert Commentary',
   'reference':  'Reference Library',
