@@ -1,79 +1,602 @@
 [
-  { "id": "clearing-house",     "name": "The Clearing House",         "url": "https://www.theclearinghouse.org/payment-systems/Articles/2026/05/RTP-Network-Marks-May-Day-with-Record-Breaking-Volume-and-Value",                                          "tier": "Tier 1", "category": "Official Operator" },
-  { "id": "fednow",             "name": "FedNow Service",             "url": "https://explore.fednow.org/explore-the-city?id=3&postId=112&postTitle=welcome-to-the-fednow-service-%E2%80%93-q1-2026",                                                                   "tier": "Tier 1", "category": "Official Operator" },
-  { "id": "fed-board",          "name": "Federal Reserve Board",      "url": "https://www.federalreserve.gov/newsevents/pressreleases/other20260408a.htm",  "rssUrl": "https://www.federalreserve.gov/feeds/press_all.xml",         "tier": "Tier 1", "category": "Regulator" },
-  { "id": "occ",                "name": "OCC",                        "url": "https://www.occ.gov/news-issuances/news-releases/2026/nr-occ-2026-9.html",      "tier": "Tier 1", "category": "Regulator" },
-  { "id": "fdic",               "name": "FDIC",                       "url": "https://www.fdic.gov/regulations/applications/fintech.html",                              "tier": "Tier 1", "category": "Regulator" },
-  { "id": "cfpb",               "name": "CFPB",                       "url": "https://www.consumerfinance.gov/consumer-tools/payments/",                                                                            "tier": "Tier 1", "category": "Regulator" },
-  { "id": "nacha",              "name": "NACHA",                      "url": "https://www.nacha.org/news",                                                                                                       "tier": "Tier 1", "category": "Official Operator" },
-  { "id": "bis",                "name": "Bank for International Settlements", "url": "https://www.bis.org/topic/payments.htm",     "rssUrl": "https://www.bis.org/rss/press.rss",                          "tier": "Tier 1", "category": "Regulatory / Research" },
-  { "id": "fsb",                "name": "Financial Stability Board",  "url": "https://www.fsb.org/work-of-the-fsb/financial-innovation-and-structural-change/crypto-assets/", "tier": "Tier 1", "category": "Regulatory / Research" },
-  { "id": "swift",              "name": "SWIFT",                      "url": "https://www.americanbanker.com/payments/news/swift-pushes-new-framework-for-retail-cross-border-payments",                                                  "tier": "Tier 1", "category": "Infrastructure" },
-  { "id": "fiserv",             "name": "Fiserv",                     "url": "https://www.fiserv.com/en/about-fiserv/newsroom.html",                                    "tier": "Tier 1", "category": "Core Provider" },
-  { "id": "finastra",           "name": "Finastra",                   "url": "https://www.finastra.com/news-events/press-releases",                                     "tier": "Tier 1", "category": "Core Provider" },
-  { "id": "fis",                "name": "FIS",                        "url": "https://www.fisglobal.com/en/insights",                                                   "tier": "Tier 1", "category": "Core Provider" },
-  { "id": "jack-henry",         "name": "Jack Henry & Associates",    "url": "https://www.jackhenry.com/news",                                                          "tier": "Tier 1", "category": "Core Provider" },
-  { "id": "temenos",            "name": "Temenos",                    "url": "https://www.temenos.com/en/news-and-events/",                                             "tier": "Tier 1", "category": "Core Provider" },
-  { "id": "ss&c",               "name": "SS&C Technologies",          "url": "https://www.ssctech.com/press-releases",                                                   "tier": "Tier 1", "category": "Core Provider" },
-  { "id": "american-banker",    "name": "American Banker",            "url": "https://www.americanbanker.com/payments/news/swift-the-federal-reserve-push-fixes-for-cross-border-payments",                                                                    "tier": "Tier 2", "category": "Industry Publication" },
-  { "id": "payments-dive",      "name": "Payments Dive",              "url": "https://www.paymentsdive.com/news/fednow-draws-1300-financial-firms/746106/",                       "rssUrl": "https://www.paymentsdive.com/feeds/news/",                   "tier": "Tier 2", "category": "Industry Publication" },
-  { "id": "digital-transactions","name": "Digital Transactions",      "url": "https://www.digitaltransactions.net/rtp-hits-another-banner-real-time-payment-mark/",                "rssUrl": "https://digitaltransactions.net/feed/",                      "tier": "Tier 2", "category": "Industry Publication" },
-  { "id": "pymnts",             "name": "PYMNTS.com",                 "url": "https://www.pymnts.com/real-time-payments/2026/rtp-network-logs-record-single-day-transactions-of-8-6-billion/",                                                              "tier": "Tier 2", "category": "Industry Publication" },
-  { "id": "finextra",           "name": "Finextra",                   "url": "https://www.finextra.com/newsarticle/47664/us-regulatory-clarity-brings-stablecoins-into-the-payments-mainstream",          "rssUrl": "https://www.finextra.com/rss/headlines.aspx",               "tier": "Tier 2", "category": "Industry Publication" },
-  { "id": "payments-journal",   "name": "PaymentsJournal",            "url": "https://www.paymentsjournal.com",                   "rssUrl": "https://www.paymentsjournal.com/feed/",                     "tier": "Tier 2", "category": "Industry Publication" },
-  { "id": "paypers",            "name": "The Paypers",                "url": "https://www.thepaypers.com",                        "rssUrl": "https://thepaypers.com/rss/news",                           "tier": "Tier 2", "category": "Industry Publication" },
-  { "id": "tearsheet",          "name": "Tearsheet",                  "url": "https://www.tearsheet.co",                          "rssUrl": "https://tearsheet.co/feed/",                                "tier": "Tier 2", "category": "Industry Publication" },
-  { "id": "fintech-takes",      "name": "Fintech Takes (Alex Johnson)",    "url": "https://www.fintektakes.com",                          "rssUrl": "https://fintech-takes.substack.com/feed",               "tier": "Tier 1", "category": "Expert Commentary" },
-  { "id": "fintech-brainfood",  "name": "Fintech Brainfood (Simon Taylor)","url": "https://www.fintechbrainfood.com",                     "rssUrl": "https://fintechbrainfood.substack.com/feed",            "tier": "Tier 1", "category": "Expert Commentary" },
-  { "id": "bank-director",      "name": "Bank Director (Kiah Haslett)",    "url": "https://bankdirector.com",                          "rssUrl": "https://bankdirector.com/feed/",                    "tier": "Tier 1", "category": "Expert Commentary" },
-  { "id": "mckinsey",           "name": "McKinsey Financial Services","url": "https://www.mckinsey.com/industries/financial-services", "rssUrl": "https://www.mckinsey.com/rss",                         "tier": "Tier 2", "category": "Consulting / Research" },
-  { "id": "pwc",                "name": "PwC Financial Services",     "url": "https://www.pwc.com/us/en/industries/financial-services.html",                            "tier": "Tier 2", "category": "Consulting / Research" },
-  { "id": "deloitte",           "name": "Deloitte Banking Insights","url": "https://www2.deloitte.com/us/en/insights/industry/financial-services/financial-services-industry-outlooks/banking-industry-outlook.html", "tier": "Tier 2", "category": "Consulting / Research" },
-  { "id": "accenture",          "name": "Accenture Banking",          "url": "https://www.accenture.com/us-en/industries/banking-index",                                "tier": "Tier 2", "category": "Consulting / Research" },
-  { "id": "oliver-wyman",       "name": "Oliver Wyman Financial Services", "url": "https://www.oliverwyman.com/our-expertise/industries/financial-services.html",       "tier": "Tier 2", "category": "Consulting / Research" },
-  { "id": "boston-consulting",  "name": "Boston Consulting Group",    "url": "https://www.bcg.com/industries/financial-institutions",                                   "tier": "Tier 2", "category": "Consulting / Research" },
-  { "id": "bain",               "name": "Bain & Company Financial Services", "url": "https://www.bain.com/industries/financial-services/",                               "tier": "Tier 2", "category": "Consulting / Research" },
-  { "id": "kpmg",               "name": "KPMG Banking & Capital Markets", "url": "https://home.kpmg/xx/en/home/industries/financial-services.html",                      "tier": "Tier 2", "category": "Consulting / Research" },
-  { "id": "capgemini",          "name": "Capgemini Financial Services", "url": "https://www.capgemini.com/us-en/service/financial-services/",                           "tier": "Tier 2", "category": "Consulting / Research" },
-  { "id": "jpmorgan",           "name": "JPMorgan Chase",             "url": "https://www.jpmorganchase.com/news",                                                      "tier": "Tier 1", "category": "Top 10 Bank" },
-  { "id": "bofa",               "name": "Bank of America",            "url": "https://newsroom.bankofamerica.com/",                                                     "tier": "Tier 1", "category": "Top 10 Bank" },
-  { "id": "citi",               "name": "Citigroup",                  "url": "https://www.citigroup.com/news",                                                          "tier": "Tier 1", "category": "Top 10 Bank" },
-  { "id": "wfc",                "name": "Wells Fargo",                "url": "https://www.wellsfargo.com/about/press/",                                                 "tier": "Tier 1", "category": "Top 10 Bank" },
-  { "id": "goldmansachs",       "name": "Goldman Sachs",              "url": "https://www.goldmansachs.com/news-and-insights/",                                         "tier": "Tier 1", "category": "Top 10 Bank" },
-  { "id": "morganstanley",      "name": "Morgan Stanley",             "url": "https://www.morganstanley.com/news-insights/",                                           "tier": "Tier 1", "category": "Top 10 Bank" },
-  { "id": "bny-mellon",         "name": "BNY Mellon",                 "url": "https://www.bnymellon.com/en/us/newsroom/",                                               "tier": "Tier 1", "category": "Top 10 Bank" },
-  { "id": "usbank",             "name": "U.S. Bancorp",               "url": "https://www.usbank.com/about/news.html",                                                  "tier": "Tier 1", "category": "Top 10 Bank" },
-  { "id": "tdbank",             "name": "TD Bank",                    "url": "https://www.tdbank.com/news-and-press.html",                                              "tier": "Tier 1", "category": "Top 10 Bank" },
-  { "id": "pnc",                "name": "PNC Financial Services",     "url": "https://www.pnc.com/en/about-pnc/news.html",                                              "tier": "Tier 1", "category": "Top 20 Bank" },
-  { "id": "capital-one",        "name": "Capital One",                "url": "https://www.capitalone.com/about/newsroom/",                                             "tier": "Tier 1", "category": "Top 20 Bank" },
-  { "id": "bbt",                "name": "BB&T (Truist)",              "url": "https://www.truist.com/about-us/news-and-media",                                          "tier": "Tier 1", "category": "Top 20 Bank" },
-  { "id": "huntington",         "name": "Huntington Bancshares",      "url": "https://www.huntington.com/en/press/",                                                    "tier": "Tier 1", "category": "Top 20 Bank" },
-  { "id": "comerica",           "name": "Comerica",                   "url": "https://www.comerica.com/about/newsroom.html",                                            "tier": "Tier 1", "category": "Top 20 Bank" },
-  { "id": "keycorp",            "name": "KeyCorp",                    "url": "https://www.key.com/business/newsroom.html",                                              "tier": "Tier 1", "category": "Top 20 Bank" },
-  { "id": "m&t",                "name": "M&T Bank",                   "url": "https://www.mtb.com/about/news",                                                          "tier": "Tier 1", "category": "Top 20 Bank" },
-  { "id": "ally",               "name": "Ally Financial",             "url": "https://www.ally.com/about/news/",                                                       "tier": "Tier 1", "category": "Financial Services" },
-  { "id": "square",             "name": "Block (Square)",             "url": "https://square.com/news",                                                                 "tier": "Tier 1", "category": "Payment Service Provider" },
-  { "id": "stripe",             "name": "Stripe",                     "url": "https://stripe.com/newsroom",                                                             "tier": "Tier 1", "category": "Payment Service Provider" },
-  { "id": "paypal",             "name": "PayPal",                     "url": "https://newsroom.paypal-corp.com/",                                                      "tier": "Tier 1", "category": "Payment Service Provider" },
-  { "id": "checkout",           "name": "Checkout.com",              "url": "https://www.checkout.com/blog",                                                           "tier": "Tier 1", "category": "Payment Service Provider" },
-  { "id": "adyen",              "name": "Adyen",                      "url": "https://www.adyen.com/news",                                                              "tier": "Tier 1", "category": "Payment Service Provider" },
-  { "id": "worldpay",           "name": "Worldpay",                   "url": "https://www.worldpay.com/en-gb/news",                                                     "tier": "Tier 1", "category": "Payment Service Provider" },
-  { "id": "flywire",            "name": "Flywire",                    "url": "https://www.flywire.com/company/news",                                                     "tier": "Tier 1", "category": "Payment Service Provider" },
-  { "id": "wise",               "name": "Wise",                       "url": "https://wise.com/company/news",                                                           "tier": "Tier 1", "category": "Payment Service Provider" },
-  { "id": "remitly",            "name": "Remitly",                    "url": "https://www.remitly.com/press",                                                           "tier": "Tier 1", "category": "Payment Service Provider" },
-  { "id": "silvergate",         "name": "Silvergate Bank",            "url": "https://www.silvergate.com/newsroom",                                                     "tier": "Tier 1", "category": "Digital Bank / Crypto" },
-  { "id": "custodia",           "name": "Custodia Bank",              "url": "https://custodiabank.com/news",                                                           "tier": "Tier 1", "category": "Digital Bank / Crypto" },
-  { "id": "kraken-bank",        "name": "Kraken Financial",           "url": "https://www.kraken.com/en-us/learn/press",                                               "tier": "Tier 1", "category": "Crypto / Digital Assets" },
-  { "id": "coinbase",           "name": "Coinbase",                   "url": "https://blog.coinbase.com/",                                                             "tier": "Tier 1", "category": "Crypto / Digital Assets" },
-  { "id": "paxos",              "name": "Paxos",                      "url": "https://paxos.com/news",                                                                  "tier": "Tier 1", "category": "Blockchain / Tokenization" },
-  { "id": "circle",             "name": "Circle",                     "url": "https://www.circle.com/en/news",                                                         "tier": "Tier 1", "category": "Stablecoin / Payments" },
-  { "id": "ripple",             "name": "Ripple",                     "url": "https://ripple.com/news",                                                                 "tier": "Tier 1", "category": "Blockchain / Cross-Border" },
-  { "id": "bancorp-bank",       "name": "Bancorp Bank",               "url": "https://www.bancorpbank.com/about/news",                                                 "tier": "Tier 1", "category": "Fintech-Friendly Bank" },
-  { "id": "silicon-valley-bank","name": "Silicon Valley Bank (SVB)",  "url": "https://www.svb.com/newsroom",                                                            "tier": "Tier 1", "category": "Technology Bank" },
-  { "id": "mercury",            "name": "Mercury Bank",               "url": "https://mercury.com/news",                                                                "tier": "Tier 1", "category": "Fintech Banking" },
-  { "id": "brex",               "name": "Brex",                       "url": "https://www.brex.com/newsroom",                                                           "tier": "Tier 1", "category": "Fintech Services" },
-  { "id": "cell-banking",       "name": "Cell Banking Consortium",    "url": "https://www.cellbanking.io/news",                                                        "tier": "Tier 1", "category": "Industry Initiative" },
-  { "id": "digital-pound",      "name": "Digital Pound Foundation",  "url": "https://www.digitalpoundfoundation.uk/news",                                              "tier": "Tier 1", "category": "CBDC Initiative" },
-  { "id": "project-titan",      "name": "Project TITAN (Payments Canada)", "url": "https://www.paycan.ca/news",                                                    "tier": "Tier 1", "category": "Industry Initiative" },
-  { "id": "dwayne-gefferie",    "name": "Dwayne Gefferie Newsletter",    "url": "https://dwaynegefferie.substack.com/archive", "rssUrl": "https://dwaynegefferie.substack.com/feed", "tier": "Tier 1", "category": "Expert Commentary" }
+  {
+    "id": "clearing-house",
+    "name": "The Clearing House",
+    "url": "https://www.theclearinghouse.org/payment-systems/Articles/2026/05/RTP-Network-Marks-May-Day-with-Record-Breaking-Volume-and-Value",
+    "tier": "Tier 1",
+    "category": "Official Operator"
+  },
+  {
+    "id": "fednow",
+    "name": "FedNow Service",
+    "url": "https://explore.fednow.org/explore-the-city?id=3&postId=112&postTitle=welcome-to-the-fednow-service-%E2%80%93-q1-2026",
+    "tier": "Tier 1",
+    "category": "Official Operator"
+  },
+  {
+    "id": "fed-board",
+    "name": "Federal Reserve Board",
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/other20260408a.htm",
+    "rssUrl": "https://www.federalreserve.gov/feeds/press_all.xml",
+    "tier": "Tier 1",
+    "category": "Regulator"
+  },
+  {
+    "id": "occ",
+    "name": "OCC",
+    "url": "https://www.occ.gov/news-issuances/news-releases/2026/nr-occ-2026-9.html",
+    "tier": "Tier 1",
+    "category": "Regulator"
+  },
+  {
+    "id": "fdic",
+    "name": "FDIC",
+    "url": "https://www.fdic.gov/regulations/applications/fintech.html",
+    "tier": "Tier 1",
+    "category": "Regulator"
+  },
+  {
+    "id": "cfpb",
+    "name": "CFPB",
+    "url": "https://www.consumerfinance.gov/consumer-tools/payments/",
+    "tier": "Tier 1",
+    "category": "Regulator"
+  },
+  {
+    "id": "nacha",
+    "name": "NACHA",
+    "url": "https://www.nacha.org/news",
+    "tier": "Tier 1",
+    "category": "Official Operator"
+  },
+  {
+    "id": "bis",
+    "name": "Bank for International Settlements",
+    "url": "https://www.bis.org/topic/payments.htm",
+    "rssUrl": "https://www.bis.org/rss/press.rss",
+    "tier": "Tier 1",
+    "category": "Regulatory / Research"
+  },
+  {
+    "id": "fsb",
+    "name": "Financial Stability Board",
+    "url": "https://www.fsb.org/work-of-the-fsb/financial-innovation-and-structural-change/crypto-assets/",
+    "tier": "Tier 1",
+    "category": "Regulatory / Research"
+  },
+  {
+    "id": "swift",
+    "name": "SWIFT",
+    "url": "https://www.americanbanker.com/payments/news/swift-pushes-new-framework-for-retail-cross-border-payments",
+    "tier": "Tier 1",
+    "category": "Infrastructure"
+  },
+  {
+    "id": "fiserv",
+    "name": "Fiserv",
+    "url": "https://www.fiserv.com/en/about-fiserv/newsroom.html",
+    "tier": "Tier 1",
+    "category": "Core Provider"
+  },
+  {
+    "id": "finastra",
+    "name": "Finastra",
+    "url": "https://www.finastra.com/news-events/press-releases",
+    "tier": "Tier 1",
+    "category": "Core Provider"
+  },
+  {
+    "id": "fis",
+    "name": "FIS",
+    "url": "https://www.fisglobal.com/en/insights",
+    "tier": "Tier 1",
+    "category": "Core Provider"
+  },
+  {
+    "id": "jack-henry",
+    "name": "Jack Henry & Associates",
+    "url": "https://www.jackhenry.com/news",
+    "tier": "Tier 1",
+    "category": "Core Provider"
+  },
+  {
+    "id": "temenos",
+    "name": "Temenos",
+    "url": "https://www.temenos.com/en/news-and-events/",
+    "tier": "Tier 1",
+    "category": "Core Provider"
+  },
+  {
+    "id": "ss&c",
+    "name": "SS&C Technologies",
+    "url": "https://www.ssctech.com/press-releases",
+    "tier": "Tier 1",
+    "category": "Core Provider"
+  },
+  {
+    "id": "american-banker",
+    "name": "American Banker",
+    "url": "https://www.americanbanker.com/payments/news/swift-the-federal-reserve-push-fixes-for-cross-border-payments",
+    "tier": "Tier 2",
+    "category": "Industry Publication"
+  },
+  {
+    "id": "payments-dive",
+    "name": "Payments Dive",
+    "url": "https://www.paymentsdive.com/news/fednow-draws-1300-financial-firms/746106/",
+    "rssUrl": "https://www.paymentsdive.com/feeds/news/",
+    "tier": "Tier 2",
+    "category": "Industry Publication"
+  },
+  {
+    "id": "digital-transactions",
+    "name": "Digital Transactions",
+    "url": "https://www.digitaltransactions.net/rtp-hits-another-banner-real-time-payment-mark/",
+    "rssUrl": "https://digitaltransactions.net/feed/",
+    "tier": "Tier 2",
+    "category": "Industry Publication"
+  },
+  {
+    "id": "pymnts",
+    "name": "PYMNTS.com",
+    "url": "https://www.pymnts.com/real-time-payments/2026/rtp-network-logs-record-single-day-transactions-of-8-6-billion/",
+    "tier": "Tier 2",
+    "category": "Industry Publication"
+  },
+  {
+    "id": "finextra",
+    "name": "Finextra",
+    "url": "https://www.finextra.com/newsarticle/47664/us-regulatory-clarity-brings-stablecoins-into-the-payments-mainstream",
+    "rssUrl": "https://www.finextra.com/rss/headlines.aspx",
+    "tier": "Tier 2",
+    "category": "Industry Publication"
+  },
+  {
+    "id": "payments-journal",
+    "name": "PaymentsJournal",
+    "url": "https://www.paymentsjournal.com",
+    "rssUrl": "https://www.paymentsjournal.com/feed/",
+    "tier": "Tier 2",
+    "category": "Industry Publication"
+  },
+  {
+    "id": "paypers",
+    "name": "The Paypers",
+    "url": "https://www.thepaypers.com",
+    "rssUrl": "https://thepaypers.com/rss/news",
+    "tier": "Tier 2",
+    "category": "Industry Publication"
+  },
+  {
+    "id": "tearsheet",
+    "name": "Tearsheet",
+    "url": "https://www.tearsheet.co",
+    "rssUrl": "https://tearsheet.co/feed/",
+    "tier": "Tier 2",
+    "category": "Industry Publication"
+  },
+  {
+    "id": "fintech-takes",
+    "name": "Fintech Takes (Alex Johnson)",
+    "url": "https://www.fintektakes.com",
+    "rssUrl": "https://fintech-takes.substack.com/feed",
+    "tier": "Tier 1",
+    "category": "Expert Commentary"
+  },
+  {
+    "id": "fintech-brainfood",
+    "name": "Fintech Brainfood (Simon Taylor)",
+    "url": "https://www.fintechbrainfood.com",
+    "rssUrl": "https://fintechbrainfood.substack.com/feed",
+    "tier": "Tier 1",
+    "category": "Expert Commentary"
+  },
+  {
+    "id": "bank-director",
+    "name": "Bank Director (Kiah Haslett)",
+    "url": "https://bankdirector.com",
+    "rssUrl": "https://bankdirector.com/feed/",
+    "tier": "Tier 1",
+    "category": "Expert Commentary"
+  },
+  {
+    "id": "mckinsey",
+    "name": "McKinsey Financial Services",
+    "url": "https://www.mckinsey.com/industries/financial-services",
+    "rssUrl": "https://www.mckinsey.com/rss",
+    "tier": "Tier 2",
+    "category": "Consulting / Research"
+  },
+  {
+    "id": "pwc",
+    "name": "PwC Financial Services",
+    "url": "https://www.pwc.com/us/en/industries/financial-services.html",
+    "tier": "Tier 2",
+    "category": "Consulting / Research"
+  },
+  {
+    "id": "deloitte",
+    "name": "Deloitte Banking Insights",
+    "url": "https://www2.deloitte.com/us/en/insights/industry/financial-services/financial-services-industry-outlooks/banking-industry-outlook.html",
+    "tier": "Tier 2",
+    "category": "Consulting / Research"
+  },
+  {
+    "id": "accenture",
+    "name": "Accenture Banking",
+    "url": "https://www.accenture.com/us-en/industries/banking-index",
+    "tier": "Tier 2",
+    "category": "Consulting / Research"
+  },
+  {
+    "id": "oliver-wyman",
+    "name": "Oliver Wyman Financial Services",
+    "url": "https://www.oliverwyman.com/our-expertise/industries/financial-services.html",
+    "tier": "Tier 2",
+    "category": "Consulting / Research"
+  },
+  {
+    "id": "boston-consulting",
+    "name": "Boston Consulting Group",
+    "url": "https://www.bcg.com/industries/financial-institutions",
+    "tier": "Tier 2",
+    "category": "Consulting / Research"
+  },
+  {
+    "id": "bain",
+    "name": "Bain & Company Financial Services",
+    "url": "https://www.bain.com/industries/financial-services/",
+    "tier": "Tier 2",
+    "category": "Consulting / Research"
+  },
+  {
+    "id": "kpmg",
+    "name": "KPMG Banking & Capital Markets",
+    "url": "https://home.kpmg/xx/en/home/industries/financial-services.html",
+    "tier": "Tier 2",
+    "category": "Consulting / Research"
+  },
+  {
+    "id": "capgemini",
+    "name": "Capgemini Financial Services",
+    "url": "https://www.capgemini.com/us-en/service/financial-services/",
+    "tier": "Tier 2",
+    "category": "Consulting / Research"
+  },
+  {
+    "id": "jpmorgan",
+    "name": "JPMorgan Chase",
+    "url": "https://www.jpmorganchase.com/news",
+    "tier": "Tier 1",
+    "category": "Top 10 Bank"
+  },
+  {
+    "id": "bofa",
+    "name": "Bank of America",
+    "url": "https://newsroom.bankofamerica.com/",
+    "tier": "Tier 1",
+    "category": "Top 10 Bank"
+  },
+  {
+    "id": "citi",
+    "name": "Citigroup",
+    "url": "https://www.citigroup.com/news",
+    "tier": "Tier 1",
+    "category": "Top 10 Bank"
+  },
+  {
+    "id": "wfc",
+    "name": "Wells Fargo",
+    "url": "https://www.wellsfargo.com/about/press/",
+    "tier": "Tier 1",
+    "category": "Top 10 Bank"
+  },
+  {
+    "id": "goldmansachs",
+    "name": "Goldman Sachs",
+    "url": "https://www.goldmansachs.com/news-and-insights/",
+    "tier": "Tier 1",
+    "category": "Top 10 Bank"
+  },
+  {
+    "id": "morganstanley",
+    "name": "Morgan Stanley",
+    "url": "https://www.morganstanley.com/news-insights/",
+    "tier": "Tier 1",
+    "category": "Top 10 Bank"
+  },
+  {
+    "id": "bny-mellon",
+    "name": "BNY Mellon",
+    "url": "https://www.bnymellon.com/en/us/newsroom/",
+    "tier": "Tier 1",
+    "category": "Top 10 Bank"
+  },
+  {
+    "id": "usbank",
+    "name": "U.S. Bancorp",
+    "url": "https://www.usbank.com/about/news.html",
+    "tier": "Tier 1",
+    "category": "Top 10 Bank"
+  },
+  {
+    "id": "tdbank",
+    "name": "TD Bank",
+    "url": "https://www.tdbank.com/news-and-press.html",
+    "tier": "Tier 1",
+    "category": "Top 10 Bank"
+  },
+  {
+    "id": "pnc",
+    "name": "PNC Financial Services",
+    "url": "https://www.pnc.com/en/about-pnc/news.html",
+    "tier": "Tier 1",
+    "category": "Top 20 Bank"
+  },
+  {
+    "id": "capital-one",
+    "name": "Capital One",
+    "url": "https://www.capitalone.com/about/newsroom/",
+    "tier": "Tier 1",
+    "category": "Top 20 Bank"
+  },
+  {
+    "id": "bbt",
+    "name": "BB&T (Truist)",
+    "url": "https://www.truist.com/about-us/news-and-media",
+    "tier": "Tier 1",
+    "category": "Top 20 Bank"
+  },
+  {
+    "id": "huntington",
+    "name": "Huntington Bancshares",
+    "url": "https://www.huntington.com/en/press/",
+    "tier": "Tier 1",
+    "category": "Top 20 Bank"
+  },
+  {
+    "id": "comerica",
+    "name": "Comerica",
+    "url": "https://www.comerica.com/about/newsroom.html",
+    "tier": "Tier 1",
+    "category": "Top 20 Bank"
+  },
+  {
+    "id": "keycorp",
+    "name": "KeyCorp",
+    "url": "https://www.key.com/business/newsroom.html",
+    "tier": "Tier 1",
+    "category": "Top 20 Bank"
+  },
+  {
+    "id": "m&t",
+    "name": "M&T Bank",
+    "url": "https://www.mtb.com/about/news",
+    "tier": "Tier 1",
+    "category": "Top 20 Bank"
+  },
+  {
+    "id": "ally",
+    "name": "Ally Financial",
+    "url": "https://www.ally.com/about/news/",
+    "tier": "Tier 1",
+    "category": "Financial Services"
+  },
+  {
+    "id": "square",
+    "name": "Block (Square)",
+    "url": "https://square.com/news",
+    "tier": "Tier 1",
+    "category": "Payment Service Provider"
+  },
+  {
+    "id": "stripe",
+    "name": "Stripe",
+    "url": "https://stripe.com/newsroom",
+    "tier": "Tier 1",
+    "category": "Payment Service Provider"
+  },
+  {
+    "id": "paypal",
+    "name": "PayPal",
+    "url": "https://newsroom.paypal-corp.com/",
+    "tier": "Tier 1",
+    "category": "Payment Service Provider"
+  },
+  {
+    "id": "checkout",
+    "name": "Checkout.com",
+    "url": "https://www.checkout.com/blog",
+    "tier": "Tier 1",
+    "category": "Payment Service Provider"
+  },
+  {
+    "id": "adyen",
+    "name": "Adyen",
+    "url": "https://www.adyen.com/news",
+    "tier": "Tier 1",
+    "category": "Payment Service Provider"
+  },
+  {
+    "id": "worldpay",
+    "name": "Worldpay",
+    "url": "https://www.worldpay.com/en-gb/news",
+    "tier": "Tier 1",
+    "category": "Payment Service Provider"
+  },
+  {
+    "id": "flywire",
+    "name": "Flywire",
+    "url": "https://www.flywire.com/company/news",
+    "tier": "Tier 1",
+    "category": "Payment Service Provider"
+  },
+  {
+    "id": "wise",
+    "name": "Wise",
+    "url": "https://wise.com/company/news",
+    "tier": "Tier 1",
+    "category": "Payment Service Provider"
+  },
+  {
+    "id": "remitly",
+    "name": "Remitly",
+    "url": "https://www.remitly.com/press",
+    "tier": "Tier 1",
+    "category": "Payment Service Provider"
+  },
+  {
+    "id": "silvergate",
+    "name": "Silvergate Bank",
+    "url": "https://www.silvergate.com/newsroom",
+    "tier": "Tier 1",
+    "category": "Digital Bank / Crypto"
+  },
+  {
+    "id": "custodia",
+    "name": "Custodia Bank",
+    "url": "https://custodiabank.com/news",
+    "tier": "Tier 1",
+    "category": "Digital Bank / Crypto"
+  },
+  {
+    "id": "kraken-bank",
+    "name": "Kraken Financial",
+    "url": "https://www.kraken.com/en-us/learn/press",
+    "tier": "Tier 1",
+    "category": "Crypto / Digital Assets"
+  },
+  {
+    "id": "coinbase",
+    "name": "Coinbase",
+    "url": "https://blog.coinbase.com/",
+    "tier": "Tier 1",
+    "category": "Crypto / Digital Assets"
+  },
+  {
+    "id": "paxos",
+    "name": "Paxos",
+    "url": "https://paxos.com/news",
+    "tier": "Tier 1",
+    "category": "Blockchain / Tokenization"
+  },
+  {
+    "id": "circle",
+    "name": "Circle",
+    "url": "https://www.circle.com/en/news",
+    "tier": "Tier 1",
+    "category": "Stablecoin / Payments"
+  },
+  {
+    "id": "ripple",
+    "name": "Ripple",
+    "url": "https://ripple.com/news",
+    "tier": "Tier 1",
+    "category": "Blockchain / Cross-Border"
+  },
+  {
+    "id": "bancorp-bank",
+    "name": "Bancorp Bank",
+    "url": "https://www.bancorpbank.com/about/news",
+    "tier": "Tier 1",
+    "category": "Fintech-Friendly Bank"
+  },
+  {
+    "id": "silicon-valley-bank",
+    "name": "Silicon Valley Bank (SVB)",
+    "url": "https://www.svb.com/newsroom",
+    "tier": "Tier 1",
+    "category": "Technology Bank"
+  },
+  {
+    "id": "mercury",
+    "name": "Mercury Bank",
+    "url": "https://mercury.com/news",
+    "tier": "Tier 1",
+    "category": "Fintech Banking"
+  },
+  {
+    "id": "brex",
+    "name": "Brex",
+    "url": "https://www.brex.com/newsroom",
+    "tier": "Tier 1",
+    "category": "Fintech Services"
+  },
+  {
+    "id": "cell-banking",
+    "name": "Cell Banking Consortium",
+    "url": "https://www.cellbanking.io/news",
+    "tier": "Tier 1",
+    "category": "Industry Initiative"
+  },
+  {
+    "id": "digital-pound",
+    "name": "Digital Pound Foundation",
+    "url": "https://www.digitalpoundfoundation.uk/news",
+    "tier": "Tier 1",
+    "category": "CBDC Initiative"
+  },
+  {
+    "id": "project-titan",
+    "name": "Project TITAN (Payments Canada)",
+    "url": "https://www.paycan.ca/news",
+    "tier": "Tier 1",
+    "category": "Industry Initiative"
+  },
+  {
+    "id": "dwayne-gefferie",
+    "name": "Dwayne Gefferie Newsletter",
+    "url": "https://dwaynegefferie.substack.com/archive",
+    "rssUrl": "https://dwaynegefferie.substack.com/feed",
+    "tier": "Tier 1",
+    "category": "Expert Commentary"
+  },
+  {
+    "id": "jpmorgan-press",
+    "name": "JPMorgan Chase Press",
+    "url": "https://www.jpmorganchase.com/news",
+    "rssUrl": "https://www.jpmorganchase.com/news/feed.xml",
+    "tier": "Tier 1",
+    "category": "Top 10 Bank"
+  },
+  {
+    "id": "bofa-newsroom",
+    "name": "Bank of America Newsroom",
+    "url": "https://newsroom.bankofamerica.com/",
+    "rssUrl": "https://newsroom.bankofamerica.com/feed.xml",
+    "tier": "Tier 1",
+    "category": "Top 10 Bank"
+  },
+  {
+    "id": "stripe-press",
+    "name": "Stripe Press",
+    "url": "https://stripe.com/newsroom",
+    "rssUrl": "https://stripe.com/newsroom/feed.xml",
+    "tier": "Tier 1",
+    "category": "Payment Service Provider"
+  },
+  {
+    "id": "paypal-newsroom",
+    "name": "PayPal Newsroom",
+    "url": "https://newsroom.paypal-corp.com/",
+    "rssUrl": "https://newsroom.paypal-corp.com/feed.xml",
+    "tier": "Tier 1",
+    "category": "Payment Service Provider"
+  },
+  {
+    "id": "square-press",
+    "name": "Block Press",
+    "url": "https://square.com/news",
+    "rssUrl": "https://square.com/news/feed.xml",
+    "tier": "Tier 1",
+    "category": "Payment Service Provider"
+  },
+  {
+    "id": "occ-press",
+    "name": "OCC Press Releases",
+    "url": "https://www.occ.gov/news-issuances/news-releases/",
+    "rssUrl": "https://www.occ.gov/news-issuances/news-releases/feed.xml",
+    "tier": "Tier 1",
+    "category": "Regulator"
+  }
 ]
