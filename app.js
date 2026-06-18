@@ -101,7 +101,7 @@ function renderIntelFeed() {
   let items = state.data.contentItems.filter(i =>
     !i.suppressed &&
     (i.relevanceScore || 0) >= 4 &&
-    new Date(i.publishedAt) >= fourteenDaysAgo
+    new Date(i.scoredAt || i.publishedAt) >= fourteenDaysAgo
   );
 
   // Apply filters
