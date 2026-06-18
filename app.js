@@ -288,6 +288,22 @@ async function renderSources(item) {
   const container = document.getElementById('sources-list');
   container.innerHTML = '';
 
+  // Prefer rich sourceLinks array; fall back to legacy sources ID array
+  const links = item.sourceLinks;
+
+  if (links && links.length > 0) {
+    container.classList.remove('empty');
+    container.innerHTML = '<ul class="source-inline-list">' +
+      links.map(s => {
+        const label = s.title
+          ? `${escapeHtml(s.name)} — ${escapeHtml(s.title)}`
+          : escapeHtml(s.name);
+        return `<li><a href="${escapeHtml(s.url || '#')}" target="_blank" rel="noopener noreferrer">${label}</a></li>`;
+      }).join('') +
+      '</ul>';
+    return;
+  }
+
   if (!item.sources || item.sources.length === 0) {
     container.classList.add('empty');
     container.innerHTML = '<div>No sources linked to this summary</div>';
@@ -307,25 +323,11 @@ async function renderSources(item) {
     }
 
     container.classList.remove('empty');
-    sourceItems.forEach(src => {
-      const link = document.createElement('a');
-      link.className = 'source-link';
-      link.href = src.url || '#';
-      link.target = '_blank';
-      link.rel = 'noopener noreferrer';
-
-      const iconLetter = (src.id || '').charAt(0).toUpperCase();
-
-      link.innerHTML = `
-        <div class="source-link-icon">${escapeHtml(iconLetter)}</div>
-        <div class="source-link-content">
-          <div class="source-link-name">${escapeHtml(src.name || '')}</div>
-          <div class="source-link-category">${escapeHtml(src.category || 'Source')}</div>
-        </div>
-      `;
-
-      container.appendChild(link);
-    });
+    container.innerHTML = '<ul class="source-inline-list">' +
+      sourceItems.map(src =>
+        `<li><a href="${escapeHtml(src.url || '#')}" target="_blank" rel="noopener noreferrer">${escapeHtml(src.name || '')}</a></li>`
+      ).join('') +
+      '</ul>';
   } catch (err) {
     console.error('Failed to render sources:', err);
     container.innerHTML = '<div class="loading-msg">Error loading sources.</div>';
