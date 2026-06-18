@@ -1,74 +1,5 @@
 [
   {
-    "date": "2026-06-13",
-    "period": "Week of Jun 6",
-    "source": "pipeline",
-    "headline": "Weekly Brief: Week of Jun 6",
-    "summary": "3 major topics this week: Traditional Rails, RTP, Market Developments. See daily briefs for full coverage.",
-    "topics": {
-      "Traditional Rails": [
-        "Traditional banking incumbents are diversifying revenue streams and customer acquisition through youth-focused acquisitions (Barclays/GoHenry) and monetizing open banking APIs, while simultaneously facing stricter AML enforcement that raises compliance costs and consolidates the processor landscape. This creates a two-tier competitive dynamic: established banks leverage scale to integrate fintech capabilities and API monetization, while smaller payment processors face regulatory exit pressure, reducing fragmentation but potentially slowing innovation in traditional rail infrastructure. The net effect favors consolidated players who can absorb compliance costs while building direct youth pipelines—a shift away from open-architecture competition toward walled-garden ecosystem capture in UK/EU markets.",
-        "AI-assisted commerce is accelerating as ChatGPT integrates with Visa to enable direct in-chat purchases, shifting the user experience from product comparison to automated checkout—a significant competitive advantage for embedded payments platforms over traditional card networks. This development highlights the growing intersection of conversational AI and frictionless transaction execution in B2C commerce, while simultaneously raising fraud and compliance challenges that require robust verification controls, as evidenced by industry debate around biometric authentication and AI governance in banking systems."
-      ],
-      "RTP": [
-        "Zelle is expanding internationally to India in 2026, leveraging a stablecoin to navigate local payment infrastructure and compete with established rails like UPI. This marks Zelle's first cross-border move and signals a strategic shift toward global B2C payments, potentially establishing a template for US-based payment networks to challenge entrenched regional players in high-volume emerging markets."
-      ],
-      "Market Developments": [
-        "AI-driven personalization is reshaping consumer payment expectations—users now expect instant, individualized payment experiences similar to other digital services, pressuring card networks and fintech players to move beyond static offerings. This shift favors platforms investing in real-time, context-aware payment customization (RTP, FedNow, and embedded finance solutions) over traditional card-centric models, creating competitive advantage for providers who can deliver hyper-personalized B2C payment journeys at scale."
-      ]
-    },
-    "sourceLinks": [
-      {
-        "name": "PaymentsJournal",
-        "title": "Barclays Targets Future Customers Through GoHenry UK Acquisition",
-        "url": "https://www.paymentsjournal.com/barclays-targets-future-customers-through-gohenry-uk-acquisition/",
-        "publishedAt": "2026-06-12T18:30:00.000Z"
-      },
-      {
-        "name": "PaymentsJournal",
-        "title": "AML Crackdown Continues with Closing of UK Payment Processor",
-        "url": "https://www.paymentsjournal.com/aml-crackdown-continues-with-closing-of-uk-payment-processor/",
-        "publishedAt": "2026-06-12T17:06:41.000Z"
-      },
-      {
-        "name": "PaymentsJournal",
-        "title": "Open Banking Has Made Payment APIs a Burgeoning Revenue Stream",
-        "url": "https://www.paymentsjournal.com/open-banking-has-made-payment-apis-a-burgeoning-revenue-stream/",
-        "publishedAt": "2026-06-12T13:00:00.000Z"
-      },
-      {
-        "name": "Finextra",
-        "title": "Fingerprints for a Fee: How Fraud Is Creating a Headache for Verification",
-        "url": "https://www.finextra.com/videoarticle/3526/fingerprints-for-a-fee-how-fraud-is-creating-a-headache-for-verification?utm_medium=rssfinextra&utm_source=finextrafeed",
-        "publishedAt": "2026-06-11T15:00:00.000Z"
-      },
-      {
-        "name": "Finextra",
-        "title": "Key Non-Negotiables for a Controllable AI Adoption in Banking",
-        "url": "https://www.finextra.com/videoarticle/3523/key-non-negotiables-for-a-controllable-ai-adoption-in-banking?utm_medium=rssfinextra&utm_source=finextrafeed",
-        "publishedAt": "2026-06-11T11:00:00.000Z"
-      },
-      {
-        "name": "PaymentsJournal",
-        "title": "ChatGPT Adds Visa Integration for AI-Assisted Purchases",
-        "url": "https://www.paymentsjournal.com/chatgpt-adds-visa-integration-for-ai-assisted-purchases/",
-        "publishedAt": "2026-06-11T18:30:00.000Z"
-      },
-      {
-        "name": "PaymentsJournal",
-        "title": "Zelle Plans Expansion Into India, with a Stablecoin in Tow",
-        "url": "https://www.paymentsjournal.com/zelle-plans-expansion-into-india-with-a-stablecoin-in-tow/",
-        "publishedAt": "2026-06-11T16:47:22.000Z"
-      },
-      {
-        "name": "PaymentsJournal",
-        "title": "Serving a Segment of One: The Race to Stay Top of Wallet",
-        "url": "https://www.paymentsjournal.com/serving-a-segment-of-one-the-race-to-stay-top-of-wallet/",
-        "publishedAt": "2026-06-11T13:00:00.000Z"
-      }
-    ]
-  },
-  {
     "date": "2026-06-20",
     "period": "Week of Jun 13",
     "source": "pipeline",
@@ -223,6 +154,75 @@
         "title": "What Klarna, Coinbase, and Chase are building next",
         "url": "https://tearsheet.co/10-q/what-klarna-coinbase-and-chase-are-building-next/?utm_source=rss&utm_medium=rss&utm_campaign=what-klarna-coinbase-and-chase-are-building-next",
         "publishedAt": "2026-06-15T11:30:00.000Z"
+      }
+    ]
+  },
+  {
+    "date": "2026-06-13",
+    "period": "Week of Jun 6",
+    "source": "pipeline",
+    "headline": "Weekly Brief: Week of Jun 6",
+    "summary": "3 major topics this week: Traditional Rails, RTP, Market Developments. See daily briefs for full coverage.",
+    "topics": {
+      "Traditional Rails": [
+        "Traditional banking incumbents are diversifying revenue streams and customer acquisition through youth-focused acquisitions (Barclays/GoHenry) and monetizing open banking APIs, while simultaneously facing stricter AML enforcement that raises compliance costs and consolidates the processor landscape. This creates a two-tier competitive dynamic: established banks leverage scale to integrate fintech capabilities and API monetization, while smaller payment processors face regulatory exit pressure, reducing fragmentation but potentially slowing innovation in traditional rail infrastructure. The net effect favors consolidated players who can absorb compliance costs while building direct youth pipelines—a shift away from open-architecture competition toward walled-garden ecosystem capture in UK/EU markets.",
+        "AI-assisted commerce is accelerating as ChatGPT integrates with Visa to enable direct in-chat purchases, shifting the user experience from product comparison to automated checkout—a significant competitive advantage for embedded payments platforms over traditional card networks. This development highlights the growing intersection of conversational AI and frictionless transaction execution in B2C commerce, while simultaneously raising fraud and compliance challenges that require robust verification controls, as evidenced by industry debate around biometric authentication and AI governance in banking systems."
+      ],
+      "RTP": [
+        "Zelle is expanding internationally to India in 2026, leveraging a stablecoin to navigate local payment infrastructure and compete with established rails like UPI. This marks Zelle's first cross-border move and signals a strategic shift toward global B2C payments, potentially establishing a template for US-based payment networks to challenge entrenched regional players in high-volume emerging markets."
+      ],
+      "Market Developments": [
+        "AI-driven personalization is reshaping consumer payment expectations—users now expect instant, individualized payment experiences similar to other digital services, pressuring card networks and fintech players to move beyond static offerings. This shift favors platforms investing in real-time, context-aware payment customization (RTP, FedNow, and embedded finance solutions) over traditional card-centric models, creating competitive advantage for providers who can deliver hyper-personalized B2C payment journeys at scale."
+      ]
+    },
+    "sourceLinks": [
+      {
+        "name": "PaymentsJournal",
+        "title": "Barclays Targets Future Customers Through GoHenry UK Acquisition",
+        "url": "https://www.paymentsjournal.com/barclays-targets-future-customers-through-gohenry-uk-acquisition/",
+        "publishedAt": "2026-06-12T18:30:00.000Z"
+      },
+      {
+        "name": "PaymentsJournal",
+        "title": "AML Crackdown Continues with Closing of UK Payment Processor",
+        "url": "https://www.paymentsjournal.com/aml-crackdown-continues-with-closing-of-uk-payment-processor/",
+        "publishedAt": "2026-06-12T17:06:41.000Z"
+      },
+      {
+        "name": "PaymentsJournal",
+        "title": "Open Banking Has Made Payment APIs a Burgeoning Revenue Stream",
+        "url": "https://www.paymentsjournal.com/open-banking-has-made-payment-apis-a-burgeoning-revenue-stream/",
+        "publishedAt": "2026-06-12T13:00:00.000Z"
+      },
+      {
+        "name": "Finextra",
+        "title": "Fingerprints for a Fee: How Fraud Is Creating a Headache for Verification",
+        "url": "https://www.finextra.com/videoarticle/3526/fingerprints-for-a-fee-how-fraud-is-creating-a-headache-for-verification?utm_medium=rssfinextra&utm_source=finextrafeed",
+        "publishedAt": "2026-06-11T15:00:00.000Z"
+      },
+      {
+        "name": "Finextra",
+        "title": "Key Non-Negotiables for a Controllable AI Adoption in Banking",
+        "url": "https://www.finextra.com/videoarticle/3523/key-non-negotiables-for-a-controllable-ai-adoption-in-banking?utm_medium=rssfinextra&utm_source=finextrafeed",
+        "publishedAt": "2026-06-11T11:00:00.000Z"
+      },
+      {
+        "name": "PaymentsJournal",
+        "title": "ChatGPT Adds Visa Integration for AI-Assisted Purchases",
+        "url": "https://www.paymentsjournal.com/chatgpt-adds-visa-integration-for-ai-assisted-purchases/",
+        "publishedAt": "2026-06-11T18:30:00.000Z"
+      },
+      {
+        "name": "PaymentsJournal",
+        "title": "Zelle Plans Expansion Into India, with a Stablecoin in Tow",
+        "url": "https://www.paymentsjournal.com/zelle-plans-expansion-into-india-with-a-stablecoin-in-tow/",
+        "publishedAt": "2026-06-11T16:47:22.000Z"
+      },
+      {
+        "name": "PaymentsJournal",
+        "title": "Serving a Segment of One: The Race to Stay Top of Wallet",
+        "url": "https://www.paymentsjournal.com/serving-a-segment-of-one-the-race-to-stay-top-of-wallet/",
+        "publishedAt": "2026-06-11T13:00:00.000Z"
       }
     ]
   }

@@ -377,7 +377,38 @@ function renderDeepDives() {
     container.innerHTML = '<div class="loading-msg">No deep dives available.</div>';
     return;
   }
-  container.innerHTML = state.data.deepDives.map(item => contentCard(item)).join('');
+
+  container.innerHTML = state.data.deepDives.map(dive => {
+    const briefsHTML = (dive.relatedBriefs || []).slice(0, 8).map(brief => `
+      <div class="brief-item">
+        <div class="brief-topic">${escapeHtml(brief.topic || 'Development')}</div>
+        <div class="brief-text">${escapeHtml(brief.brief?.slice(0, 300) || '')}</div>
+        ${brief.links ? `
+          <div class="brief-sources">
+            ${brief.links.slice(0, 3).map(link => `
+              <a href="${link.url}" target="_blank" class="source-link">
+                ${escapeHtml(link.title || link.name)} →
+              </a>
+            `).join('')}
+          </div>
+        ` : ''}
+      </div>
+    `).join('');
+
+    return `
+      <div class="content-card deep-dive-card">
+        <div class="card-title">${escapeHtml(dive.title || '')}</div>
+        <div class="card-summary">${escapeHtml(dive.summary || '')}</div>
+        <div class="deep-dive-briefs">
+          <div class="briefs-label">Key Developments (${dive.relatedBriefs?.length || 0} tracked)</div>
+          ${briefsHTML}
+        </div>
+        ${dive.sourceList ? `
+          <div class="dive-sources">Sources: ${escapeHtml(dive.sourceList.join(', '))}</div>
+        ` : ''}
+      </div>
+    `;
+  }).join('');
 }
 
 /* ─── Expert Commentary renderer ─────────────────────────────── */
