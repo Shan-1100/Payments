@@ -2,6 +2,8 @@
 
 A curated intelligence tool for banks and fintechs serving corporate treasury clients. Monitors RTP, FedNow, adjacent payment rails, regulatory developments, vendor announcements, and market activity.
 
+**[→ See Success Criteria & Scope](SUCCESS_CRITERIA.md)** — Define mission, primary US focus (RTP/FedNow), secondary global scope, and repeatable monitoring cadence.
+
 ## Quick Start
 
 ### Local Development
