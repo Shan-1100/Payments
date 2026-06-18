@@ -178,6 +178,24 @@ function recordManualInput(url, reason) {
 }
 
 /**
+ * Save scraped article content to disk
+ */
+function saveArticleContent(source, url, content) {
+  const articlesDir = path.join(DATA_DIR, 'raw_articles');
+  if (!fs.existsSync(articlesDir)) {
+    fs.mkdirSync(articlesDir, { recursive: true });
+  }
+
+  const timestamp = Date.now();
+  const filename = `${source.id}_${timestamp}.html`;
+  const filepath = path.join(articlesDir, filename);
+
+  fs.writeFileSync(filepath, content);
+  console.log(`[SAVED] Content saved to: raw_articles/${filename}`);
+  return filepath;
+}
+
+/**
  * Multi-method fallback chain for a single article
  */
 async function gatherArticleContent(url, source) {
@@ -186,6 +204,7 @@ async function gatherArticleContent(url, source) {
   // Method 1: Try web scraping
   const scrapeResult = await scrapeArticle(url);
   if (scrapeResult.success && scrapeResult.content.length > 500) {
+    scrapeResult.savedPath = saveArticleContent(source, url, scrapeResult.content);
     return scrapeResult;
   }
 
@@ -233,7 +252,12 @@ async function gatherNews() {
       const result = await gatherArticleContent(url, source);
 
       if (result.success) {
-        results.successful.push({ source: source.name, url, method: result.method });
+        results.successful.push({
+          source: source.name,
+          url,
+          method: result.method,
+          savedPath: result.savedPath
+        });
       } else if (result.method === "newsletter") {
         results.newsletters.push({ source: source.name, action: "subscribe_to_newsletter" });
       } else if (result.method === "manual") {
