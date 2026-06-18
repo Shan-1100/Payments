@@ -1,0 +1,65 @@
+[
+  {
+    "url": "https://www.pymnts.com/real-time-payments/2026/rtp-network-logs-record-single-day-transactions-of-8-6-billion/",
+    "source": "PYMNTS.com",
+    "sourceId": "pymnts",
+    "method": "scrape",
+    "filePath": "articles/pymnts-e812b0908ee8.html",
+    "fetchedAt": "2026-06-18T01:30:09.552Z",
+    "byteSize": 129887
+  },
+  {
+    "url": "https://www.pymnts.com/news/faster-payments/2026/fednow-service-fortifies-security-for-instant-payments/",
+    "source": "PYMNTS.com",
+    "sourceId": "pymnts",
+    "method": "scrape",
+    "filePath": "articles/pymnts-0983efa0b995.html",
+    "fetchedAt": "2026-06-18T01:30:10.040Z",
+    "byteSize": 129042
+  },
+  {
+    "url": "https://www.paymentsdive.com/news/clearing-house-rtp-real-time-payments-network/721105/",
+    "source": "Payments Dive",
+    "sourceId": "payments-dive",
+    "method": "scrape",
+    "filePath": "articles/payments-dive-262f2f57cb5d.html",
+    "fetchedAt": "2026-06-18T01:30:10.229Z",
+    "byteSize": 294627
+  },
+  {
+    "url": "https://www.americanbanker.com/payments/news/swift-pushes-new-framework-for-retail-cross-border-payments",
+    "source": "American Banker",
+    "sourceId": "american-banker",
+    "method": "scrape",
+    "filePath": "articles/american-banker-edf922fddcb1.html",
+    "fetchedAt": "2026-06-18T01:30:10.862Z",
+    "byteSize": 278460
+  },
+  {
+    "url": "https://explore.fednow.org/explore-the-city?id=3&postId=112&postTitle=welcome-to-the-fednow-service-%E2%80%93-q1-2026",
+    "source": "FedNow Service",
+    "sourceId": "fednow",
+    "method": "scrape",
+    "filePath": "articles/fednow-70e4decdefa0.html",
+    "fetchedAt": "2026-06-18T01:30:21.331Z",
+    "byteSize": 33322
+  },
+  {
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/other20260408a.htm",
+    "source": "Federal Reserve Board",
+    "sourceId": "fed-board",
+    "method": "scrape",
+    "filePath": "articles/fed-board-51be65ff8a42.html",
+    "fetchedAt": "2026-06-18T01:30:21.515Z",
+    "byteSize": 83279
+  },
+  {
+    "url": "https://www.occ.gov/news-issuances/news-releases/2026/nr-occ-2026-9.html",
+    "source": "OCC",
+    "sourceId": "occ",
+    "method": "scrape",
+    "filePath": "articles/occ-84464fb69747.html",
+    "fetchedAt": "2026-06-18T01:30:21.696Z",
+    "byteSize": 57428
+  }
+]

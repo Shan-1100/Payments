@@ -49,7 +49,11 @@ async function fetchAllFeeds() {
   const existingUrls = new Set(existing.map(i => i.sourceUrl).filter(Boolean));
   const existingIds  = new Set(existing.map(i => i.id));
 
+  const now          = new Date();
   const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
+
+  // URL patterns that indicate event/webinar promotions rather than news articles
+  const EVENT_URL_PATTERNS = ['/event-info/', '/events/', '/webinar/', '/conference/'];
 
   const feeds = [
     ...approved.filter(s => s.rssUrl).map(s => ({ name: s.name, rssUrl: s.rssUrl, tier: s.tier })),
@@ -69,6 +73,10 @@ async function fetchAllFeeds() {
 
         const pubDate = item.pubDate || item.isoDate ? new Date(item.pubDate || item.isoDate) : new Date();
         if (pubDate < sevenDaysAgo) continue;
+        if (pubDate > now) continue; // exclude future-dated event announcements
+
+        // Skip event/webinar promotion pages
+        if (EVENT_URL_PATTERNS.some(p => link.includes(p))) continue;
 
         if (!isRelevant(item)) continue;
 

@@ -112,4 +112,32 @@ Return ONLY valid JSON:
   return parseJSON(msg.content[0].text);
 }
 
-module.exports = { synthesizeArticle, generateWeeklySummary, generateMonthlySummary };
+async function generateDailySummary(items, dateStr) {
+  const client = getClient();
+  const digest = items
+    .slice(0, 15)
+    .map(i => `[${i.rail || 'Payments'}] ${i.title} (${i.sourceName}): ${(i.businessImpact || i.summary || '').slice(0, 200)}`)
+    .join('\n');
+
+  const msg = await client.messages.create({
+    model: 'claude-haiku-4-5-20251001',
+    max_tokens: 1000,
+    system: SYSTEM,
+    messages: [{
+      role: 'user',
+      content: `Write a daily intelligence brief for a bank's treasury team based on these payment industry articles published on ${dateStr}:
+
+${digest}
+
+Return ONLY valid JSON:
+{
+  "headline": "Punchy headline capturing the most important development (max 15 words)",
+  "summary": "3-4 paragraph daily brief. Lead with the most significant development and its direct business implications. Use **bold** for key terms and figures. Cover implications for treasury product teams. End with one forward-looking implication."
+}`
+    }]
+  });
+
+  return parseJSON(msg.content[0].text);
+}
+
+module.exports = { synthesizeArticle, generateWeeklySummary, generateMonthlySummary, generateDailySummary };
