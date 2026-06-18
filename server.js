@@ -250,12 +250,73 @@ function readBody(req) {
   });
 }
 
+// ── Daily pipeline scheduler ──────────────────────────────────────────────────
+const PIPELINE_STATE_FILE = path.join(DATA_DIR, 'pipeline_state.json');
+const TWENTY_FOUR_HOURS   = 24 * 60 * 60 * 1000;
+const CHECK_INTERVAL      = 60 * 60 * 1000; // check every hour
+
+function getPipelineState() {
+  try { return JSON.parse(fs.readFileSync(PIPELINE_STATE_FILE, 'utf8')); }
+  catch { return {}; }
+}
+
+function savePipelineState(state) {
+  fs.writeFileSync(PIPELINE_STATE_FILE, JSON.stringify(state, null, 2));
+}
+
+function runScheduledPipeline() {
+  if (!process.env.ANTHROPIC_API_KEY) {
+    console.log('[Scheduler] Skipping — ANTHROPIC_API_KEY not set');
+    return;
+  }
+  console.log('[Scheduler] Starting daily pipeline...');
+  savePipelineState({ lastRunAt: new Date().toISOString(), status: 'running' });
+
+  exec('node scripts/run-pipeline.js', { cwd: __dirname, env: process.env }, (err, stdout, stderr) => {
+    if (stdout) console.log(stdout);
+    if (stderr) console.error(stderr);
+    if (err) {
+      console.error('[Scheduler] Pipeline failed:', err.message);
+      savePipelineState({ lastRunAt: new Date().toISOString(), status: 'error', error: err.message });
+    } else {
+      console.log('[Scheduler] Daily pipeline complete.');
+      savePipelineState({ lastRunAt: new Date().toISOString(), status: 'ok' });
+    }
+  });
+}
+
+function startScheduler() {
+  const state   = getPipelineState();
+  const lastRun = state.lastRunAt ? new Date(state.lastRunAt) : null;
+  const due     = !lastRun || (Date.now() - lastRun.getTime()) >= TWENTY_FOUR_HOURS;
+
+  if (due) {
+    const reason = lastRun
+      ? `last run ${Math.round((Date.now() - lastRun.getTime()) / 3600000)}h ago`
+      : 'no previous run';
+    console.log(`[Scheduler] Running now (${reason})`);
+    runScheduledPipeline();
+  } else {
+    const next = new Date(lastRun.getTime() + TWENTY_FOUR_HOURS);
+    console.log(`[Scheduler] Next run at ${next.toLocaleString()}`);
+  }
+
+  setInterval(() => {
+    const s = getPipelineState();
+    const last = s.lastRunAt ? new Date(s.lastRunAt) : null;
+    if (!last || (Date.now() - last.getTime()) >= TWENTY_FOUR_HOURS) {
+      runScheduledPipeline();
+    }
+  }, CHECK_INTERVAL);
+}
+
 server.listen(PORT, () => {
   console.log(`Server: http://localhost:${PORT}`);
   if (!process.env.ANTHROPIC_API_KEY) {
-    console.warn('  ⚠ ANTHROPIC_API_KEY not set — synthesis disabled. Set it to enable auto-synthesis on submission.');
+    console.warn('  ⚠ ANTHROPIC_API_KEY not set — synthesis and auto-pipeline disabled.');
   }
   if (!synthesize) {
     console.warn('  ⚠ Pipeline modules not loaded — run: npm install');
   }
+  startScheduler();
 });

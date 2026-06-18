@@ -22,7 +22,12 @@ function getClient() {
 
 function parseJSON(text) {
   const cleaned = text.replace(/^```(?:json)?\n?/m, '').replace(/\n?```$/m, '').trim();
-  return JSON.parse(cleaned);
+  try { return JSON.parse(cleaned); } catch (e) {}
+  // Fall back to extracting the first {...} block
+  const start = cleaned.indexOf('{');
+  const end = cleaned.lastIndexOf('}');
+  if (start !== -1 && end !== -1) return JSON.parse(cleaned.slice(start, end + 1));
+  throw new Error('No valid JSON found in response');
 }
 
 // Classify article into a topic group based on keywords
@@ -172,6 +177,40 @@ Return ONLY valid JSON:
 {
   "headline": "Punchy headline capturing the most important development (max 15 words)",
   "summary": "3-4 paragraph daily brief. Lead with the most significant development and its direct business implications. Use **bold** for key terms and figures. Cover implications for treasury product teams. End with one forward-looking implication."
+}`
+    }]
+  });
+
+  return parseJSON(msg.content[0].text);
+}
+
+async function synthesizeArticle(title, rawContent, sourceUrl, sourceName) {
+  const client = getClient();
+
+  const msg = await client.messages.create({
+    model: 'claude-haiku-4-5-20251001',
+    max_tokens: 600,
+    system: SYSTEM,
+    messages: [{
+      role: 'user',
+      content: `Analyze this payment industry article and return ONLY valid JSON.
+
+Title: ${title}
+Source: ${sourceName}
+Content: ${(rawContent || '').slice(0, 800)}
+
+Return ONLY valid JSON with these exact fields:
+{
+  "summary": "2-3 sentence factual summary of what happened",
+  "intelligenceType": "one of: product_launch | partnership | regulatory | market_data | technology | competitive | general",
+  "businessImpact": "1 sentence on direct business impact",
+  "technicalTakeaway": "1 sentence technical implication",
+  "businessTakeaway": "1 sentence business/commercial implication",
+  "treasuryTakeaway": "1 sentence implication for bank treasury teams",
+  "primaryTopic": "one of: RTP | FedNow | Visa Direct | Mastercard Send | ACH | Stablecoins | CBDC | Cross-Border | Regulatory | Market",
+  "rail": "one of: RTP | FedNow | Traditional Rails | Digital Assets | Global Payments | Adjacent",
+  "tags": ["2-4 relevant keyword strings"],
+  "priorityBand": "one of: high | medium | monitor"
 }`
     }]
   });
