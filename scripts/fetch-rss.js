@@ -13,14 +13,65 @@ const parser = new RSSParser({
   customFields: { item: ['content:encoded', 'description'] }
 });
 
-const RELEVANCE_KEYWORDS = [
-  'payment', 'rtp', 'real-time', 'real time', 'fednow', 'fed now', 'ach', 'nacha',
-  'treasury', 'banking', 'bank', 'fintech', 'stablecoin', 'tokenized', 'tokenization',
-  'swift', 'settlement', 'fraud', 'cfpb', 'clearing', 'b2b', 'correspondent',
-  'wire transfer', 'instant payment', 'digital payment', 'iso 20022',
-  'cross-border', 'cross border', 'remittance', 'liquidity', 'defi', 'cbdc',
-  'open banking', 'embedded finance', 'merchant', 'interchange', 'acquiring'
+// PRIMARY FOCUS: US instant payments (RTP, FedNow) + adjacent rails
+// SECONDARY: Global developments with direct US instant payment relevance only
+const PRIMARY_KEYWORDS = [
+  'rtp', 'real-time payment', 'real time payment',
+  'fednow', 'fed now', 'federal reserve instant payment',
+  'visa direct', 'mastercard send',
+  'stablecoin', 'usdc', 'usdt',
+  'instant payment', 'real-time banking'
 ];
+
+// Adjacent keywords: only include if paired with US/instant payment context
+const ADJACENT_KEYWORDS = [
+  'clearing house', 'the clearing house',
+  'fed payment', 'federal reserve payment',
+  'acq rails', 'payment rail',
+  'correspondent bank', 'interbank settlement',
+  'b2b payment', 'b2c payment',
+  'treasury payment', 'corporate payment'
+];
+
+// EXCLUDE patterns: noise that pollutes results
+const EXCLUDE_PATTERNS = [
+  /islamic|sharia|halal/i,           // Islamic banking (out of scope)
+  /mena|gcc|middle east|uae/i,       // Regional fintech (out of scope unless US-relevant)
+  /uk|emea|europe|asean/i,           // Regional unless RTP/FedNow mentioned
+  /cryptography|cybersecurity/i,     // Security unrelated to payment systems
+  /robotics|ai model|mlops/i,        // Unrelated tech
+  /retail|ecommerce|shopping/i,      // Consumer retail unless payment-specific
+  /lending|loan|credit|mortgage/i,   // Lending/credit (not payments focus)
+];
+
+function isRelevant(item) {
+  const text = `${item.title || ''} ${item.contentSnippet || ''} ${item.content || ''}`.toLowerCase();
+
+  // HARD EXCLUDE: if matches exclude patterns, reject immediately
+  if (EXCLUDE_PATTERNS.some(p => p.test(text))) {
+    return false;
+  }
+
+  // PRIMARY (RTP, FedNow): accept if any primary keyword found
+  if (PRIMARY_KEYWORDS.some(kw => text.includes(kw))) {
+    return true;
+  }
+
+  // ADJACENT: only accept if paired with payment rail/instant context
+  // e.g., "treasury payment" or "payment rail" combined with secondary context
+  const hasAdjacent = ADJACENT_KEYWORDS.some(kw => text.includes(kw));
+  const hasPaymentContext = /payment|settle|clear/i.test(text);
+
+  if (hasAdjacent && hasPaymentContext) {
+    // But reject if it's obvious noise (regional or unrelated domain)
+    if (/^(uk|emea|asean|mena|middle east|uae|gcc)/i.test(text.slice(0, 100))) {
+      return false;
+    }
+    return true;
+  }
+
+  return false;
+}
 
 function readJSON(file) {
   try { return JSON.parse(fs.readFileSync(path.join(DATA_DIR, file), 'utf8')); }

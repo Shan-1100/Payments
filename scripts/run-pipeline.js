@@ -172,12 +172,133 @@ async function main() {
   writeJSON('daily_summaries_archive.json', updatedDaily);
   console.log(`  Daily archive: ${updatedDaily.length} entries (${newDailySummaries.length} new/updated)`);
 
-  // ── 5. Weekly summary archive ─────────────────────────────────────────────
+  // ── 5. Weekly summary archive — backfill all weeks from daily archive ──────
+  console.log('\n[5] Generating weekly summaries...');
+
+  // Build weekly summaries from daily summaries (not just Fridays — all weeks)
+  const dailyArchive  = readJSON('daily_summaries_archive.json') || [];
+  const weeklyArchive = readJSON('weekly_summaries_archive.json') || [];
+  const weeklySet     = new Set(weeklyArchive.map(w => w.date));
+
+  // Group daily summaries by week (week ending date)
+  const byWeek = {};
+  for (const daily of dailyArchive) {
+    const d = new Date(daily.date);
+    const weekEnd = new Date(d);
+    weekEnd.setDate(d.getDate() + (5 - d.getDay())); // Friday of that week
+    const weekEndStr = weekEnd.toISOString().slice(0, 10);
+
+    if (!byWeek[weekEndStr]) byWeek[weekEndStr] = [];
+    byWeek[weekEndStr].push(daily);
+  }
+
+  const newWeeklySummaries = [];
+
+  for (const [weekEndDate, dailies] of Object.entries(byWeek).sort()) {
+    if (weeklySet.has(weekEndDate)) {
+      console.log(`  Skipping week of ${weekEndDate} — already exists`);
+      continue;
+    }
+
+    // Collect all items from this week's daily summaries
+    const weekItems = [];
+    for (const daily of dailies) {
+      for (const [topic, briefData] of Object.entries(daily.briefs || {})) {
+        if (briefData.sourceLinks) {
+          weekItems.push(...briefData.sourceLinks);
+        }
+      }
+    }
+
+    if (!weekItems.length) continue;
+
+    console.log(`  Generating weekly summary for week ending ${weekEndDate} (${dailies.length} daily summaries)...`);
+    try {
+      const ws = await generateWeeklySummary(merged.filter(i => {
+        const itemWeekEnd = new Date(new Date(i.publishedAt).getTime() + (5 - new Date(i.publishedAt).getDay()) * 24 * 60 * 60 * 1000);
+        return itemWeekEnd.toISOString().slice(0, 10) === weekEndDate;
+      }));
+
+      newWeeklySummaries.push({
+        date: weekEndDate,
+        period: `Week ending ${weekEndDate}`,
+        source: 'pipeline',
+        headline: ws.headline || 'Weekly Instant Payments Summary',
+        summary: ws.summary || '',
+        sourceLinks: weekItems.slice(0, 15),
+        authorNote: ws.authorNote || ''
+      });
+    } catch (err) {
+      console.warn(`  ✗ Week ${weekEndDate}: ${err.message}`);
+    }
+  }
+
+  const updatedWeekly = [...newWeeklySummaries, ...weeklyArchive]
+    .sort((a, b) => b.date.localeCompare(a.date));
+  writeJSON('weekly_summaries_archive.json', updatedWeekly);
+  console.log(`  Weekly archive: ${updatedWeekly.length} entries (${newWeeklySummaries.length} new)`);
+
+  // ── 6. Monthly summary archive — backfill all months from weekly archive ──
+  console.log('\n[6] Generating monthly summaries...');
+
+  const monthlyArchive = readJSON('monthly_summaries_archive.json') || [];
+  const monthlySet     = new Set(monthlyArchive.map(m => m.month));
+
+  // Group weekly summaries by month
+  const byMonth = {};
+  for (const weekly of updatedWeekly) {
+    const month = weekly.date.slice(0, 7); // YYYY-MM
+    if (!byMonth[month]) byMonth[month] = [];
+    byMonth[month].push(weekly);
+  }
+
+  const newMonthlySummaries = [];
+
+  for (const [month, weeklies] of Object.entries(byMonth).sort().reverse()) {
+    if (monthlySet.has(month)) {
+      console.log(`  Skipping ${month} — already exists`);
+      continue;
+    }
+
+    const monthItems = [];
+    for (const weekly of weeklies) {
+      if (weekly.sourceLinks) {
+        monthItems.push(...weekly.sourceLinks);
+      }
+    }
+
+    console.log(`  Generating monthly summary for ${month} (${weeklies.length} weeks)...`);
+    try {
+      const ms = await generateMonthlySummary(merged.filter(i => {
+        const itemMonth = i.publishedAt.slice(0, 7);
+        return itemMonth === month;
+      }));
+
+      newMonthlySummaries.push({
+        month,
+        period: new Date(month + '-01').toLocaleDateString('en-US', { month: 'long', year: 'numeric' }),
+        source: 'pipeline',
+        headline: ms.headline || `${month} Instant Payments Monthly Review`,
+        summary: ms.summary || '',
+        themes: ms.themes || [],
+        sourceLinks: monthItems.slice(0, 20),
+        authorNote: ms.authorNote || ''
+      });
+    } catch (err) {
+      console.warn(`  ✗ Month ${month}: ${err.message}`);
+    }
+  }
+
+  const updatedMonthly = [...newMonthlySummaries, ...monthlyArchive]
+    .sort((a, b) => b.month.localeCompare(a.month));
+  writeJSON('monthly_summaries_archive.json', updatedMonthly);
+  console.log(`  Monthly archive: ${updatedMonthly.length} entries (${newMonthlySummaries.length} new)`);
+
   const today     = new Date();
   const isFriday  = today.getDay() === 5;
   const isFirst   = today.getDate() === 1;
 
-  if (isFriday || forceWeekly) {
+  if (false) { // Disabled — weekly/monthly now auto-generated from archives
     console.log('\n[5a] Generating weekly summary...');
     const cutoff    = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
     const weekItems = merged.filter(i => new Date(i.publishedAt) >= cutoff);
