@@ -24,7 +24,7 @@
     "period": "Week of Jun 13",
     "source": "pipeline",
     "headline": "US Instant Payments Brief: Week of Jun 13",
-    "summary": "5 topics: Traditional Rails, RTP, FedNow, Market Developments, Regulatory. US RTP, FedNow, and instant payment developments.",
+    "summary": "3 topics: Traditional Rails, RTP, FedNow. US RTP, FedNow, and instant payment developments.",
     "topics": {
       "Traditional Rails": [
         "ACH balance validation practices that assume a 120% deposit cushion are insufficient risk mitigation, causing financial institutions to lose deposits when actual fraud exceeds expected thresholds—highlighting that traditional rail safeguards rely on flawed assumptions rather than real-time verification, creating competitive opportunity for real-time rails (RTP, FedNow) that eliminate settlement delays and reduce fraud exposure through immediate fund confirmation.",
@@ -36,12 +36,6 @@
       ],
       "FedNow": [
         "FedNow participation continues expanding with focus on risk mitigation tools. The Federal Reserve has launched new network intelligence capabilities to help participants assess account-level risk in real-time, addressing a key concern for adoption among smaller financial institutions."
-      ],
-      "Market Developments": [
-        "I don't have the complete articles to synthesize. The content provided appears truncated—the PaymentsJournal article cuts off mid-sentence, and no additional articles are included despite the request mentioning multiple sources.\n\nTo deliver an accurate, factual brief as requested, I need:\n1. The complete text of each article\n2. All article titles and sources referenced\n3. Specific data points, quotes, or announcements relevant to RTP, FedNow, Visa Direct, Mastercard Send, or stablecoins\n\nPlease resubmit with full article text, and I'll provide the concise 2-3 sentence synthesis focused on what changed, competitive implications, and affected payment rails."
-      ],
-      "Regulatory": [
-        "I don't have access to the complete article text you've referenced—the excerpt cuts off mid-sentence. To provide an accurate, factual brief on the crypto security flaw and its implications for instant payments, I'd need the full article content or additional details about:\n\n1. Which cryptocurrency/protocol was affected\n2. The specific nature of the flaw (encryption, consensus, smart contract vulnerability, etc.)\n3. Whether it has direct relevance to B2B/B2C payment stablecoins (USDC, USDT, etc.) or only speculative crypto\n\nCould you provide the complete article text or additional sources? I want to ensure the brief is precise rather than speculative."
       ]
     },
     "sourceLinks": [
