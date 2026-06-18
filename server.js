@@ -128,6 +128,19 @@ const server = http.createServer(async (req, res) => {
       res.writeHead(200);
       res.end(JSON.stringify(readJSON('discovered_sources.json') || []));
     }
+    else if (pathname === '/api/scored-items' && method === 'GET') {
+      const scored = readJSON('scored_items.json') || { executiveItems: [], analystItems: [], suppressedItems: [] };
+      res.writeHead(200);
+      res.end(JSON.stringify({
+        executiveItems: scored.executiveItems || [],
+        analystItems: scored.analystItems || [],
+        suppressedItems: scored.suppressedItems || []
+      }));
+    }
+    else if (pathname === '/api/pending-scoring' && method === 'GET') {
+      res.writeHead(200);
+      res.end(JSON.stringify(readJSON('pending_scoring.json') || []));
+    }
 
     // ── POST /api/submissions — synthesize + persist + discover RSS ──────────
     else if (pathname === '/api/submissions' && method === 'POST') {

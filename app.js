@@ -1,30 +1,31 @@
 /**
- * Payments Intelligence — app.js
- * Vanilla JS, no frameworks. Single-page with section switching,
- * daily/weekly/monthly tabs, and paginated summary cards.
+ * Payments Intelligence Dashboard — app.js
+ * Executive Intelligence Feed + Summaries + Analyst View
  */
 
 /* ─── State ─────────────────────────────────────────────────── */
 const state = {
-  activeSection: 'executive',
+  activeSection: 'intel-feed',
   currentTab: 'daily',
+  currentAnalystTab: 'all-items',
   indices: { daily: 0, weekly: 0, monthly: 0 },
   data: {
     daily: [],
     weekly: [],
     monthly: [],
     deepDives: [],
-    expert: [],
     sources: [],
     watchlist: [],
-    partners: [],
+    contentItems: [],
+    suppressedItems: [],
+    sourceHealth: [],
   },
   loaded: {
+    'intel-feed': false,
     executive: false,
     deepdives: false,
-    expert: false,
     reference: false,
-    partners: false,
+    analyst: false,
   },
 };
 
@@ -33,11 +34,11 @@ document.addEventListener('DOMContentLoaded', async () => {
   initNav();
   initSummaryTabs();
   initPagination();
+  initAnalystTabs();
+  initIntelFilters();
 
-  // Start loading executive data immediately (default section)
-  await loadExecutiveData();
-  renderSummary();
-  state.loaded.executive = true;
+  await loadIntelFeed();
+  state.loaded['intel-feed'] = true;
 });
 
 /* ─── Section navigation ─────────────────────────────────────── */
@@ -52,14 +53,12 @@ function initNav() {
 }
 
 async function switchSection(name) {
-  // Update nav pills
   document.querySelectorAll('.nav-pill').forEach(btn => {
     const active = btn.dataset.section === name;
     btn.classList.toggle('active', active);
     btn.setAttribute('aria-selected', String(active));
   });
 
-  // Update section visibility
   document.querySelectorAll('.section').forEach(sec => {
     const match = sec.id === `section-${name}`;
     sec.hidden = !match;
@@ -68,14 +67,177 @@ async function switchSection(name) {
 
   state.activeSection = name;
 
-  // Lazy-load section data
   if (!state.loaded[name]) {
     await loadSection(name);
     state.loaded[name] = true;
   }
 }
 
-/* ─── Load executive (summary) data ─────────────────────────── */
+/* ─── Load intelligence feed (primary executive view) ─────────── */
+async function loadIntelFeed() {
+  try {
+    const scored = (await fetchJSON('/api/scored-items').catch(() => ({ executiveItems: [], analystItems: [], suppressedItems: [] }))) || { executiveItems: [], analystItems: [], suppressedItems: [] };
+    state.data.contentItems = [
+      ...scored.executiveItems,
+      ...scored.analystItems,
+      ...scored.suppressedItems
+    ];
+  } catch {
+    state.data.contentItems = [];
+  }
+  renderIntelFeed();
+}
+
+/* ─── Render intelligence feed ───────────────────────────────── */
+function renderIntelFeed() {
+  const container = document.getElementById('intel-feed-container');
+  const fourteenDaysAgo = new Date(Date.now() - 14 * 24 * 60 * 60 * 1000);
+
+  const railFilter    = document.getElementById('filter-rail')?.value    || 'all';
+  const segmentFilter = document.getElementById('filter-segment')?.value || 'all';
+  const impactFilter  = document.getElementById('filter-impact')?.value  || 'all';
+
+  // Executive tier: non-suppressed, relevanceScore >= 4, last 14 days
+  let items = state.data.contentItems.filter(i =>
+    !i.suppressed &&
+    (i.relevanceScore || 0) >= 4 &&
+    new Date(i.publishedAt) >= fourteenDaysAgo
+  );
+
+  // Apply filters
+  if (railFilter !== 'all')    items = items.filter(i => i.railRelevance === railFilter);
+  if (segmentFilter !== 'all') items = items.filter(i => i.segment === segmentFilter || i.segment === 'Both');
+  if (impactFilter !== 'all')  items = items.filter(i => i.strategicImpact === impactFilter);
+
+  const countEl = document.getElementById('intel-item-count');
+  if (countEl) countEl.textContent = `${items.length} item${items.length !== 1 ? 's' : ''}`;
+
+  if (!items.length) {
+    container.innerHTML = `
+      <div class="intel-empty">
+        <p>No items match the current filters.</p>
+        <p class="intel-empty-hint">The pipeline must run to populate this view. Run <code>npm run pipeline</code> to fetch and score articles.</p>
+      </div>`;
+    return;
+  }
+
+  // Group by strategicImpact → rail
+  const grouped = {};
+  for (const item of items) {
+    const impact = item.strategicImpact || 'market signal';
+    const rail   = item.railRelevance   || 'Other';
+    const key    = impact;
+    if (!grouped[key]) grouped[key] = { impact, items: [] };
+    grouped[key].items.push(item);
+  }
+
+  // Sort groups by max relevanceScore descending
+  const sortedGroups = Object.values(grouped).sort((a, b) => {
+    const maxA = Math.max(...a.items.map(i => i.relevanceScore || 0));
+    const maxB = Math.max(...b.items.map(i => i.relevanceScore || 0));
+    return maxB - maxA;
+  });
+
+  container.innerHTML = sortedGroups.map(group => `
+    <div class="intel-group">
+      <div class="intel-group-label">${escapeHtml(humanizeImpact(group.impact))}</div>
+      ${group.items
+        .sort((a, b) => (b.relevanceScore || 0) - (a.relevanceScore || 0))
+        .map(item => intelCard(item))
+        .join('')}
+    </div>
+  `).join('');
+}
+
+function humanizeImpact(impact) {
+  const labels = {
+    'competitor launch':         'Competitor Launches',
+    'rail adoption':             'Rail Adoption',
+    'product expansion':         'Product Expansions',
+    'regulatory shift':          'Regulatory Developments',
+    'partnership':               'Partnerships',
+    'pricing / economics':       'Pricing & Economics',
+    'risk / fraud / compliance': 'Risk, Fraud & Compliance',
+    'operational change':        'Operational Changes',
+    'market signal':             'Market Signals',
+    'expert analysis':           'Expert Analysis',
+  };
+  return labels[impact] || impact.replace(/\b\w/g, c => c.toUpperCase());
+}
+
+function intelCard(item) {
+  const score   = item.relevanceScore || 0;
+  const geo     = item.geography || '';
+  const rail    = item.railRelevance || item.rail || '';
+  const segment = item.segment || '';
+  const conf    = item.confidence || '';
+  const srcClass = item.sourceClass || '';
+  const publisher = item.publisher || item.sourceName || item.monitoredSourceName || '';
+  const url    = item.evidenceUrl || item.articleUrl || item.sourceUrl || '#';
+  const date   = item.publishedAt ? formatDate(item.publishedAt, 'daily') : '';
+  const actors = (item.mentionedActors || []).slice(0, 4);
+
+  const scoreColor = score >= 5 ? '#0f6640' : score >= 4 ? '#1a7a52' : '#526883';
+  const geoTag = geo === 'Global but US-relevant' ? 'Global→US' :
+                 geo === 'US adjacent' ? 'US Adjacent' :
+                 geo === 'US direct' ? 'US' : geo;
+
+  return `
+    <div class="intel-card">
+      <div class="intel-card-eyebrow">
+        <span class="intel-score" style="background:${scoreColor}" title="Relevance score: ${score}/5">${score}/5</span>
+        ${rail ? `<span class="intel-tag intel-tag-rail">${escapeHtml(rail)}</span>` : ''}
+        ${segment ? `<span class="intel-tag intel-tag-segment">${escapeHtml(segment)}</span>` : ''}
+        ${geoTag ? `<span class="intel-tag intel-tag-geo">${escapeHtml(geoTag)}</span>` : ''}
+        ${conf ? `<span class="intel-tag intel-tag-conf" title="Evidence confidence">${escapeHtml(conf)}</span>` : ''}
+        ${srcClass ? `<span class="intel-tag intel-tag-srcclass">${escapeHtml(srcClass)}</span>` : ''}
+      </div>
+      <a href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer" class="intel-card-title">
+        ${escapeHtml(item.title || 'Untitled')}
+      </a>
+      <div class="intel-card-meta">
+        <span class="intel-publisher">${escapeHtml(publisher)}</span>
+        ${date ? `<span class="intel-date">${escapeHtml(date)}</span>` : ''}
+      </div>
+      ${item.whyItMatters ? `
+        <div class="intel-why">
+          <span class="intel-why-label">Why it matters</span>
+          ${escapeHtml(item.whyItMatters)}
+        </div>` : ''}
+      ${actors.length ? `
+        <div class="intel-actors">
+          ${actors.map(a => `<span class="intel-actor-tag">${escapeHtml(a)}</span>`).join('')}
+        </div>` : ''}
+    </div>
+  `;
+}
+
+/* ─── Intel filter event listeners ──────────────────────────── */
+function initIntelFilters() {
+  ['filter-rail', 'filter-segment', 'filter-impact'].forEach(id => {
+    document.getElementById(id)?.addEventListener('change', renderIntelFeed);
+  });
+}
+
+/* ─── Section lazy-loaders ───────────────────────────────────── */
+async function loadSection(name) {
+  switch (name) {
+    case 'executive':
+      await loadExecutiveData();
+      renderSummary();
+      break;
+    case 'deepdives':
+      await loadDeepDives();
+      break;
+    case 'reference':
+      await loadReference();
+      break;
+    case 'analyst':
+      await loadAnalystView();
+      break;
+  }
+}
+
 async function loadExecutiveData() {
   try {
     const [daily, weekly, monthly] = await Promise.all([
@@ -83,30 +245,11 @@ async function loadExecutiveData() {
       fetchJSON('data/weekly_summaries_archive.json'),
       fetchJSON('data/monthly_summaries_archive.json'),
     ]);
-
-    // Store newest-first (JSON is already newest-first but normalise)
-    state.data.daily = Array.isArray(daily) ? daily : [];
-    state.data.weekly = Array.isArray(weekly) ? weekly : [];
+    state.data.daily   = Array.isArray(daily)   ? daily   : [];
+    state.data.weekly  = Array.isArray(weekly)  ? weekly  : [];
     state.data.monthly = Array.isArray(monthly) ? monthly : [];
   } catch (err) {
     console.error('Failed to load summary data:', err);
-  }
-}
-
-/* ─── Lazy section loaders ───────────────────────────────────── */
-async function loadSection(name) {
-  switch (name) {
-    case 'deepdives':
-      await loadDeepDives();
-      break;
-    case 'expert':
-      break;
-    case 'reference':
-      await loadReference();
-      break;
-    case 'partners':
-      await loadPartners();
-      break;
   }
 }
 
@@ -116,7 +259,6 @@ async function loadDeepDives() {
     state.data.deepDives = Array.isArray(data) ? data : [];
     renderDeepDives();
   } catch (err) {
-    console.error('Failed to load deep dives:', err);
     document.getElementById('deepdives-container').innerHTML =
       '<div class="loading-msg">Unable to load deep dives.</div>';
   }
@@ -128,7 +270,7 @@ async function loadReference() {
       fetchJSON('data/approved_sources.json'),
       fetchJSON('data/watchlist.json'),
     ]);
-    state.data.sources = Array.isArray(sources) ? sources : [];
+    state.data.sources   = Array.isArray(sources)   ? sources   : [];
     state.data.watchlist = Array.isArray(watchlist) ? watchlist : [];
     renderReference();
   } catch (err) {
@@ -136,25 +278,193 @@ async function loadReference() {
   }
 }
 
-async function loadPartners() {
+async function loadAnalystView() {
   try {
-    const data = await fetchJSON('data/internal_partners.json');
-    // internal_partners.json may be an object {groups:[]} or a flat array
-    state.data.partners = data;
-    renderPartners();
+    const [items, suppressed, health] = await Promise.all([
+      fetchJSON('data/content_items.json').catch(() => []),
+      fetchJSON('data/suppressed_items.json').catch(() => []),
+      fetchJSON('data/source_health.json').catch(() => []),
+    ]);
+    state.data.contentItems    = Array.isArray(items)     ? items     : [];
+    state.data.suppressedItems = Array.isArray(suppressed)? suppressed: [];
+    state.data.sourceHealth    = Array.isArray(health)    ? health    : [];
   } catch (err) {
-    console.error('Failed to load partner data:', err);
-    document.getElementById('partners-container').innerHTML =
-      '<div class="loading-msg">Unable to load partner data.</div>';
+    console.error('Failed to load analyst data:', err);
   }
+  renderAnalystTab(state.currentAnalystTab);
 }
 
-/* ─── Summary tabs ───────────────────────────────────────────── */
+/* ─── Analyst tabs ───────────────────────────────────────────── */
+function initAnalystTabs() {
+  document.querySelectorAll('.analyst-tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const tab = btn.dataset.analystTab;
+      if (tab === state.currentAnalystTab) return;
+
+      document.querySelectorAll('.analyst-tab-btn').forEach(b => {
+        b.classList.remove('active');
+        b.setAttribute('aria-selected', 'false');
+      });
+      btn.classList.add('active');
+      btn.setAttribute('aria-selected', 'true');
+
+      document.querySelectorAll('.analyst-panel').forEach(p => { p.hidden = true; });
+      const panel = document.getElementById(`analyst-${tab}`);
+      if (panel) panel.hidden = false;
+
+      state.currentAnalystTab = tab;
+      if (state.loaded.analyst) renderAnalystTab(tab);
+    });
+  });
+}
+
+function renderAnalystTab(tab) {
+  if (tab === 'all-items')     renderAnalystAllItems();
+  if (tab === 'suppressed')    renderAnalystSuppressed();
+  if (tab === 'source-health') renderAnalystSourceHealth();
+}
+
+function renderAnalystAllItems() {
+  const container = document.getElementById('analyst-all-items');
+  const items = state.data.contentItems;
+
+  if (!items.length) {
+    container.innerHTML = '<div class="loading-msg">No scored items yet. Run <code>npm run pipeline</code>.</div>';
+    return;
+  }
+
+  container.innerHTML = `
+    <div class="analyst-summary-bar">
+      <span>${items.length} total items</span>
+      <span>${items.filter(i => (i.relevanceScore||0) >= 4).length} executive-tier (score ≥4)</span>
+      <span>${items.filter(i => (i.relevanceScore||0) < 4).length} analyst-only (score &lt;4)</span>
+    </div>
+    ${items.map(item => analystItemRow(item)).join('')}
+  `;
+}
+
+function renderAnalystSuppressed() {
+  const container = document.getElementById('analyst-suppressed');
+  const items = state.data.suppressedItems;
+
+  if (!items.length) {
+    container.innerHTML = '<div class="loading-msg">No suppressed items.</div>';
+    return;
+  }
+
+  const reasonCounts = {};
+  items.forEach(i => {
+    const r = i.suppressionReason || 'unknown';
+    reasonCounts[r] = (reasonCounts[r] || 0) + 1;
+  });
+
+  container.innerHTML = `
+    <div class="analyst-summary-bar">
+      <span>${items.length} suppressed items</span>
+      ${Object.entries(reasonCounts).map(([r, c]) => `<span>${c}× ${escapeHtml(r)}</span>`).join('')}
+    </div>
+    ${items.map(item => analystItemRow(item, true)).join('')}
+  `;
+}
+
+function analystItemRow(item, showSuppression = false) {
+  const score   = item.relevanceScore || 0;
+  const rail    = item.railRelevance || item.rail || '—';
+  const segment = item.segment || '—';
+  const geo     = item.geography || '—';
+  const conf    = item.confidence || '—';
+  const impact  = item.strategicImpact || '—';
+  const url     = item.evidenceUrl || item.articleUrl || item.sourceUrl || '#';
+  const date    = item.publishedAt ? formatDate(item.publishedAt, 'daily') : '—';
+  const publisher = item.publisher || item.sourceName || item.monitoredSourceName || '—';
+
+  return `
+    <div class="analyst-row ${score >= 4 ? 'analyst-row-exec' : ''}">
+      <div class="analyst-row-header">
+        <span class="analyst-score" title="Relevance score">${score}/5</span>
+        <a href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer" class="analyst-title">${escapeHtml(item.title || 'Untitled')}</a>
+        <span class="analyst-date">${escapeHtml(date)}</span>
+      </div>
+      <div class="analyst-row-meta">
+        <span>${escapeHtml(publisher)}</span>
+        <span>${escapeHtml(rail)}</span>
+        <span>${escapeHtml(segment)}</span>
+        <span>${escapeHtml(geo)}</span>
+        <span>${escapeHtml(impact)}</span>
+        <span>Conf: ${escapeHtml(conf)}</span>
+      </div>
+      ${item.whyItMatters ? `<div class="analyst-why">${escapeHtml(item.whyItMatters)}</div>` : ''}
+      ${showSuppression && item.suppressionReason ? `
+        <div class="analyst-suppressed-reason">Suppressed: ${escapeHtml(item.suppressionReason)}</div>` : ''}
+    </div>
+  `;
+}
+
+function renderAnalystSourceHealth() {
+  const container = document.getElementById('analyst-source-health');
+  const health = state.data.sourceHealth;
+
+  if (!health.length) {
+    container.innerHTML = '<div class="loading-msg">Source health data not yet available. Run <code>npm run pipeline</code>.</div>';
+    return;
+  }
+
+  const working = health.filter(h => h.collectionStatus === 'Working');
+  const failed  = health.filter(h => h.collectionStatus === 'Failed');
+  const manual  = health.filter(h => h.collectionStatus === 'Manual Required');
+  const untested = health.filter(h => h.collectionStatus === 'Untested');
+
+  const statusColor = {
+    'Working': '#0f6640',
+    'Partial': '#7a5500',
+    'Failed': '#c0392b',
+    'Manual Required': '#526883',
+    'Untested': '#888',
+  };
+
+  container.innerHTML = `
+    <div class="analyst-summary-bar">
+      <span class="health-stat health-working">${working.length} Working</span>
+      <span class="health-stat health-failed">${failed.length} Failed</span>
+      <span class="health-stat health-manual">${manual.length} Manual Required</span>
+      <span class="health-stat health-untested">${untested.length} Untested</span>
+    </div>
+    <table class="source-health-table">
+      <thead>
+        <tr>
+          <th>Source</th>
+          <th>Class</th>
+          <th>Method</th>
+          <th>Status</th>
+          <th>Last Checked</th>
+          <th>Latest Article</th>
+          <th>Failure Reason</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${health.map(h => `
+          <tr class="health-row health-row-${(h.collectionStatus || '').toLowerCase().replace(/\s+/g, '-')}">
+            <td class="health-source-name">${escapeHtml(h.sourceName || '')}</td>
+            <td><span class="health-class-tag">${escapeHtml(h.sourceClass || '')}</span></td>
+            <td>${escapeHtml(h.collectionMethod || '')}</td>
+            <td><span class="health-status-badge" style="color:${statusColor[h.collectionStatus] || '#888'}">${escapeHtml(h.collectionStatus || '')}</span></td>
+            <td class="health-date">${h.lastCheckedAt ? formatDate(h.lastCheckedAt, 'daily') : '—'}</td>
+            <td class="health-latest">${h.latestRetrievedUrl
+              ? `<a href="${escapeHtml(h.latestRetrievedUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml((h.latestRetrievedTitle || '').slice(0, 60))}</a>`
+              : '—'}</td>
+            <td class="health-failure">${escapeHtml(h.failureReason || '')}</td>
+          </tr>`).join('')}
+      </tbody>
+    </table>
+  `;
+}
+
+/* ─── Summary tabs (Summaries section) ──────────────────────── */
 function initSummaryTabs() {
   document.querySelectorAll('.tab-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       const tab = btn.dataset.tab;
-      if (tab === state.currentTab) return;
+      if (!tab || tab === state.currentTab) return;
 
       document.querySelectorAll('.tab-btn').forEach(b => {
         b.classList.remove('active');
@@ -171,16 +481,16 @@ function initSummaryTabs() {
 
 /* ─── Pagination ─────────────────────────────────────────────── */
 function initPagination() {
-  document.getElementById('prev-btn').addEventListener('click', () => {
+  document.getElementById('prev-btn')?.addEventListener('click', () => {
     const key = state.currentTab;
-    const len = state.data[key].length;
+    const len = state.data[key]?.length || 0;
     if (state.indices[key] < len - 1) {
       state.indices[key]++;
       renderSummary();
     }
   });
 
-  document.getElementById('next-btn').addEventListener('click', () => {
+  document.getElementById('next-btn')?.addEventListener('click', () => {
     const key = state.currentTab;
     if (state.indices[key] > 0) {
       state.indices[key]--;
@@ -191,51 +501,51 @@ function initPagination() {
 
 /* ─── Render summary ─────────────────────────────────────────── */
 function renderSummary() {
-  const tab = state.currentTab;
+  const tab      = state.currentTab;
   const summaries = state.data[tab];
-  const index = state.indices[tab];
+  const index    = state.indices[tab];
 
-  // Update period label
   const labels = { daily: 'Daily Summary', weekly: 'Weekly Summary', monthly: 'Monthly Review' };
   document.getElementById('period-label').textContent = labels[tab] || 'Summary';
 
   if (!summaries || summaries.length === 0) {
     document.getElementById('summary-headline').textContent = 'No summaries available';
     document.getElementById('summary-date').textContent = '—';
-    document.getElementById('summary-body').innerHTML =
-      '<p>Summary data is loading or unavailable.</p>';
+    document.getElementById('summary-body').innerHTML = '<p>Navigate to Intelligence Feed above, or run the pipeline to populate summaries.</p>';
     document.getElementById('current-date').textContent = 'N/A';
     updatePaginationUI();
     return;
   }
 
-  const item = summaries[index];
-  const dateStr = item.date || item.publishedAt || '';
+  const item     = summaries[index];
+  const dateStr  = item.date || item.publishedAt || '';
   const formatted = formatDate(dateStr, tab);
 
-  // Support both old format (headline/summary) and new format (briefs)
   if (item.briefs && typeof item.briefs === 'object') {
-    // New format: topic-grouped briefs
     document.getElementById('summary-headline').textContent = formatted;
     document.getElementById('summary-date').textContent = '';
     document.getElementById('current-date').textContent = formatted;
 
     let html = '';
     for (const [topic, content] of Object.entries(item.briefs)) {
+      const links = content.sourceLinks || [];
       html += `<div class="brief-section">
         <h3 class="brief-topic">${escapeHtml(topic)}</h3>
         <p class="brief-text">${escapeHtml(content.brief)}</p>
+        ${content.segments?.length ? `
+          <div class="brief-segments">
+            ${content.segments.map(s => `<span class="segment-tag segment-${s.toLowerCase()}">${s}</span>`).join('')}
+          </div>` : ''}
         <div class="brief-sources">
-          ${content.sourceLinks.map(s => `<a href="${escapeHtml(s.url)}" target="_blank" rel="noopener noreferrer" class="brief-source-link">${escapeHtml(s.name)} — ${escapeHtml(s.title)}</a>`).join('')}
+          ${links.map(s => `<a href="${escapeHtml(s.url)}" target="_blank" rel="noopener noreferrer" class="brief-source-link">${escapeHtml(s.name)} — ${escapeHtml(s.title)}</a>`).join('')}
         </div>
       </div>`;
     }
     document.getElementById('summary-body').innerHTML = html;
     document.getElementById('sources-container').style.display = 'none';
   } else {
-    // Legacy format: headline + summary
     const headline = item.headline || item.title || 'Summary';
-    const body = item.summary || item.body || '';
+    const body     = item.summary  || item.body  || '';
 
     document.getElementById('summary-headline').textContent = headline;
     document.getElementById('summary-date').textContent = formatted;
@@ -247,114 +557,6 @@ function renderSummary() {
   }
 
   updatePaginationUI();
-}
-
-/* ─── Render helpers ─────────────────────────────────────────── */
-function formatDate(dateStr, period) {
-  if (!dateStr) return '—';
-  try {
-    const d = new Date(dateStr + (dateStr.length === 10 ? 'T00:00:00' : ''));
-    const opts = { year: 'numeric', month: 'long', day: 'numeric' };
-    if (period === 'monthly') {
-      return d.toLocaleDateString('en-US', { year: 'numeric', month: 'long' });
-    }
-    return d.toLocaleDateString('en-US', opts);
-  } catch {
-    return dateStr;
-  }
-}
-
-function formatBody(text) {
-  if (!text) return '<p>No content available.</p>';
-  const lines = text.split('\n\n');
-  return lines.map(block => {
-    const trimmed = block.trim();
-    if (!trimmed) return '';
-    if (trimmed.startsWith('## ')) {
-      return `<h3>${escapeHtml(trimmed.slice(3))}</h3>`;
-    }
-    if (trimmed.startsWith('- ')) {
-      const items = trimmed.split('\n')
-        .filter(l => l.startsWith('- '))
-        .map(l => `<li>${escapeHtml(l.slice(2))}</li>`)
-        .join('');
-      return `<ul>${items}</ul>`;
-    }
-    return `<p>${escapeHtml(trimmed)}</p>`;
-  }).join('');
-}
-
-function escapeHtml(str) {
-  return String(str)
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#39;');
-}
-
-/* ─── Sources renderer ───────────────────────────────────────── */
-async function renderSources(item) {
-  const container = document.getElementById('sources-list');
-  container.innerHTML = '';
-
-  // Prefer rich sourceLinks array; fall back to legacy sources ID array
-  const links = item.sourceLinks;
-
-  if (links && links.length > 0) {
-    container.classList.remove('empty');
-    container.innerHTML = '<ul class="source-inline-list">' +
-      links.map(s => {
-        const label = s.title
-          ? `${escapeHtml(s.name)} — ${escapeHtml(s.title)}`
-          : escapeHtml(s.name);
-        return `<li><a href="${escapeHtml(s.url || '#')}" target="_blank" rel="noopener noreferrer">${label}</a></li>`;
-      }).join('') +
-      '</ul>';
-    return;
-  }
-
-  if (!item.sources || item.sources.length === 0) {
-    container.classList.add('empty');
-    container.innerHTML = '<div>No sources linked to this summary</div>';
-    return;
-  }
-
-  try {
-    const sources = await fetchJSON('data/approved_sources.json');
-    const sourceItems = item.sources
-      .map(id => sources.find(s => s.id === id))
-      .filter(Boolean);
-
-    if (sourceItems.length === 0) {
-      container.classList.add('empty');
-      container.innerHTML = '<div>No sources linked to this summary</div>';
-      return;
-    }
-
-    container.classList.remove('empty');
-    container.innerHTML = '<ul class="source-inline-list">' +
-      sourceItems.map(src =>
-        `<li><a href="${escapeHtml(src.url || '#')}" target="_blank" rel="noopener noreferrer">${escapeHtml(src.name || '')}</a></li>`
-      ).join('') +
-      '</ul>';
-  } catch (err) {
-    console.error('Failed to render sources:', err);
-    container.innerHTML = '<div class="loading-msg">Error loading sources.</div>';
-  }
-}
-
-/* ─── Pagination UI state ────────────────────────────────────── */
-function updatePaginationUI() {
-  const tab = state.currentTab;
-  const len = state.data[tab].length;
-  const idx = state.indices[tab];
-
-  const prevBtn = document.getElementById('prev-btn');
-  const nextBtn = document.getElementById('next-btn');
-
-  prevBtn.disabled = idx >= len - 1;
-  nextBtn.disabled = idx <= 0;
 }
 
 /* ─── Deep Dives renderer ────────────────────────────────────── */
@@ -370,87 +572,43 @@ function renderDeepDives() {
       <div class="brief-item">
         <div class="brief-header">
           <div class="brief-topic">${escapeHtml(brief.topic || 'Development')}</div>
-          ${brief.segments ? `
-            <div class="brief-segments">
-              ${brief.segments.map(seg => `<span class="segment-tag segment-${seg.toLowerCase()}">${seg}</span>`).join('')}
-            </div>
-          ` : ''}
+          ${brief.segments ? `<div class="brief-segments">${brief.segments.map(s => `<span class="segment-tag segment-${s.toLowerCase()}">${s}</span>`).join('')}</div>` : ''}
         </div>
         <div class="brief-text">${escapeHtml(brief.brief?.slice(0, 300) || '')}</div>
-        ${brief.links ? `
-          <div class="brief-sources">
-            ${brief.links.slice(0, 3).map(link => `
-              <a href="${link.url}" target="_blank" class="source-link">
-                ${escapeHtml(link.title || link.name)} →
-              </a>
-            `).join('')}
-          </div>
-        ` : ''}
-      </div>
-    `).join('');
+        ${brief.links ? `<div class="brief-sources">${brief.links.slice(0, 3).map(l => `<a href="${escapeHtml(l.url)}" target="_blank" class="source-link">${escapeHtml(l.title || l.name)} →</a>`).join('')}</div>` : ''}
+      </div>`).join('');
 
-    return `
-      <div class="content-card deep-dive-card">
-        <div class="card-title">${escapeHtml(dive.title || '')}</div>
-        <div class="card-summary">${escapeHtml(dive.summary || '')}</div>
-        <div class="deep-dive-briefs">
-          <div class="briefs-label">Key Developments (${dive.relatedBriefs?.length || 0} tracked)</div>
-          ${briefsHTML}
-        </div>
-        ${dive.sourceList ? `
-          <div class="dive-sources">Sources: ${escapeHtml(dive.sourceList.join(', '))}</div>
-        ` : ''}
+    return `<div class="content-card deep-dive-card">
+      <div class="card-title">${escapeHtml(dive.title || '')}</div>
+      <div class="card-summary">${escapeHtml(dive.summary || '')}</div>
+      <div class="deep-dive-briefs">
+        <div class="briefs-label">Key Developments (${dive.relatedBriefs?.length || 0} tracked)</div>
+        ${briefsHTML}
       </div>
-    `;
+      ${dive.sourceList ? `<div class="dive-sources">Sources: ${escapeHtml(dive.sourceList.join(', '))}</div>` : ''}
+    </div>`;
   }).join('');
-}
-
-/* ─── Shared content card template ──────────────────────────── */
-function contentCard(item) {
-  const tier = escapeHtml(item.sourceTier || '');
-  const type = escapeHtml(item.intelligenceType || '');
-  const band = item.priorityBand || 'medium';
-  const bandLabel = band === 'high' ? 'High Priority' : band === 'medium' ? 'Medium' : band;
-  const date = item.publishedAt || item.collectedAt || '';
-
-  const takeaway = item.businessImpact || item.businessTakeaway || '';
-
-  return `
-    <div class="content-card">
-      <div class="card-eyebrow">
-        ${tier ? `<span class="card-tag card-tag-tier1">${tier}</span>` : ''}
-        ${type ? `<span class="card-tag card-tag-type">${type}</span>` : ''}
-        <span class="card-tag card-tag-band-${band}">${bandLabel}</span>
-      </div>
-      <div class="card-title">${escapeHtml(item.title || '')}</div>
-      <div class="card-source">${escapeHtml(item.sourceName || '')}</div>
-      <div class="card-summary">${escapeHtml(item.summary || '')}</div>
-      ${takeaway ? `
-        <div class="card-impact">
-          <div class="card-impact-label">Business Impact</div>
-          ${escapeHtml(takeaway)}
-        </div>
-      ` : ''}
-      ${date ? `<div class="card-date">${formatDate(date, 'daily')}</div>` : ''}
-    </div>
-  `;
 }
 
 /* ─── Reference library renderer ────────────────────────────── */
 function renderReference() {
-  const sourcesEl = document.getElementById('ref-sources-container');
+  const sourcesEl   = document.getElementById('ref-sources-container');
   const watchlistEl = document.getElementById('watchlist-container');
+
+  const statusColor = { Working: '#0f6640', Failed: '#c0392b', 'Manual Required': '#526883', Untested: '#888' };
 
   if (state.data.sources.length) {
     sourcesEl.innerHTML = state.data.sources.map(s => `
       <div class="ref-item">
         <div class="ref-item-name">
-          ${escapeHtml(s.name || s.institution || s.sourceName || '')}
+          ${escapeHtml(s.name || '')}
           ${s.tier ? `<span class="ref-item-tier">${escapeHtml(s.tier)}</span>` : ''}
+          ${s.sourceClass ? `<span class="ref-item-tier" style="background:#e8f4f0">${escapeHtml(s.sourceClass)}</span>` : ''}
         </div>
-        <div class="ref-item-meta">${escapeHtml(s.category || s.type || '')}</div>
-      </div>
-    `).join('');
+        <div class="ref-item-meta">${escapeHtml(s.category || '')}
+          ${s.collectionStatus ? ` · <span style="color:${statusColor[s.collectionStatus]||'#888'}">${escapeHtml(s.collectionStatus)}</span>` : ''}
+        </div>
+      </div>`).join('');
   } else {
     sourcesEl.innerHTML = '<div class="loading-msg">No sources available.</div>';
   }
@@ -460,58 +618,98 @@ function renderReference() {
       <div class="ref-item">
         <div class="ref-item-name">${escapeHtml(w.name || w.company || w.entity || '')}</div>
         <div class="ref-item-meta">${escapeHtml(w.category || w.reason || w.type || '')}</div>
-      </div>
-    `).join('');
+      </div>`).join('');
   } else {
     watchlistEl.innerHTML = '<div class="loading-msg">No watchlist entries.</div>';
   }
 }
 
-/* ─── Partner inputs renderer ────────────────────────────────── */
-function renderPartners() {
-  const container = document.getElementById('partners-container');
-  // internal_partners.json is an object with a `groups` array
-  const raw = state.data.partners;
-  const groups = Array.isArray(raw) ? raw : (raw && raw.groups ? raw.groups : []);
+/* ─── Sources renderer (summary section) ─────────────────────── */
+async function renderSources(item) {
+  const container = document.getElementById('sources-list');
+  container.innerHTML = '';
 
-  if (!groups.length) {
-    container.innerHTML = '<div class="loading-msg">No partner data available.</div>';
+  const links = item.sourceLinks;
+  if (links && links.length > 0) {
+    container.classList.remove('empty');
+    container.innerHTML = '<ul class="source-inline-list">' +
+      links.map(s => {
+        const label = s.title ? `${escapeHtml(s.name)} — ${escapeHtml(s.title)}` : escapeHtml(s.name);
+        return `<li><a href="${escapeHtml(s.url || '#')}" target="_blank" rel="noopener noreferrer">${label}</a></li>`;
+      }).join('') + '</ul>';
     return;
   }
 
-  const statusLabel = { pending: 'Pending', 'not-connected': 'Not Connected', active: 'Active' };
-  const statusColor = { pending: '#7a5500', 'not-connected': '#526883', active: '#0f6640' };
+  if (!item.sources || item.sources.length === 0) {
+    container.classList.add('empty');
+    container.innerHTML = '<div>No sources linked to this summary</div>';
+    return;
+  }
 
-  container.innerHTML = groups.map(p => {
-    const status = p.status || 'pending';
-    const color = statusColor[status] || '#526883';
-    const label = statusLabel[status] || status;
-    return `
-      <div class="content-card">
-        <div class="card-eyebrow">
-          <span class="card-tag card-tag-type">${escapeHtml(p.format || 'Input Feed')}</span>
-          <span class="card-tag" style="background:rgba(0,0,0,0.05);color:${color}">${label}</span>
-        </div>
-        <div class="card-title">${escapeHtml(p.name || '')}</div>
-        <div class="card-source">${escapeHtml(p.frequency || '')}</div>
-        <div class="card-summary">${escapeHtml(p.description || '')}</div>
-        ${p.statusNote ? `
-          <div class="card-impact">
-            <div class="card-impact-label">Status Note</div>
-            ${escapeHtml(p.statusNote)}
-          </div>
-        ` : ''}
-      </div>
-    `;
+  try {
+    const sources = await fetchJSON('data/approved_sources.json');
+    const sourceItems = item.sources.map(id => sources.find(s => s.id === id)).filter(Boolean);
+    container.classList.remove('empty');
+    container.innerHTML = '<ul class="source-inline-list">' +
+      sourceItems.map(src =>
+        `<li><a href="${escapeHtml(src.homepageUrl || src.url || '#')}" target="_blank" rel="noopener noreferrer">${escapeHtml(src.name || '')}</a></li>`
+      ).join('') + '</ul>';
+  } catch {
+    container.innerHTML = '<div class="loading-msg">Error loading sources.</div>';
+  }
+}
+
+/* ─── Pagination UI ──────────────────────────────────────────── */
+function updatePaginationUI() {
+  const tab = state.currentTab;
+  const len = state.data[tab]?.length || 0;
+  const idx = state.indices[tab];
+  const prevBtn = document.getElementById('prev-btn');
+  const nextBtn = document.getElementById('next-btn');
+  if (prevBtn) prevBtn.disabled = idx >= len - 1;
+  if (nextBtn) nextBtn.disabled = idx <= 0;
+}
+
+/* ─── Helpers ────────────────────────────────────────────────── */
+function formatDate(dateStr, period) {
+  if (!dateStr) return '—';
+  try {
+    const d = new Date(dateStr + (dateStr.length === 10 ? 'T00:00:00' : ''));
+    if (period === 'monthly') return d.toLocaleDateString('en-US', { year: 'numeric', month: 'long' });
+    return d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+  } catch { return dateStr; }
+}
+
+function formatBody(text) {
+  if (!text) return '<p>No content available.</p>';
+  return text.split('\n\n').map(block => {
+    const t = block.trim();
+    if (!t) return '';
+    if (t.startsWith('## ')) return `<h3>${escapeHtml(t.slice(3))}</h3>`;
+    if (t.startsWith('- ')) {
+      const items = t.split('\n').filter(l => l.startsWith('- '))
+        .map(l => `<li>${escapeHtml(l.slice(2))}</li>`).join('');
+      return `<ul>${items}</ul>`;
+    }
+    // Render **bold** markdown
+    const withBold = escapeHtml(t).replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+    return `<p>${withBold}</p>`;
   }).join('');
 }
 
-/* ─── Fetch utility ──────────────────────────────────────────── */
+function escapeHtml(str) {
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
 async function fetchJSON(url) {
-  // Cache-bust data files so GitHub Pages always serves fresh content
-  const sep = url.includes('?') ? '&' : '?';
+  const sep     = url.includes('?') ? '&' : '?';
   const bustUrl = url.includes('data/') ? `${url}${sep}v=${Date.now()}` : url;
-  const res = await fetch(bustUrl);
+  const res     = await fetch(bustUrl);
   if (!res.ok) throw new Error(`HTTP ${res.status} for ${url}`);
   return res.json();
 }

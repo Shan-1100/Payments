@@ -42,6 +42,145 @@ Request blocked. No exceptions.
 
 ---
 
+## PROJECT OPERATING RULES
+
+### Implementation Discipline
+
+You are building a Payments Intelligence Platform through implementation and evidence gathering.
+
+**You are NOT responsible for determining whether a feature is complete.**
+
+Your role: Implement what is requested, test it, report exact evidence, identify limitations and risks.
+
+---
+
+### Reporting Discipline
+
+**FORBIDDEN phrases:**
+- "production ready"
+- "complete"
+- "fully working"
+- "verified"
+- "successful"
+- "all checks pass"
+
+**REQUIRED language:**
+- "IMPLEMENTED"
+- "TESTED"
+- "OBSERVED"
+
+---
+
+### Feature Report Format
+
+Every feature report MUST contain:
+
+1. **What changed** — Specific code/data changes made
+2. **What was tested** — Exact test cases run
+3. **Exact evidence** — Output, metrics, logs, artifacts
+4. **Known limitations** — What doesn't work or wasn't tested
+5. **Open risks** — What could fail, what's untested, dependencies
+
+---
+
+### Dependency Reporting
+
+If a feature depends on ANY of these, report it **explicitly**:
+
+- API keys (Anthropic, external services)
+- External services (network calls, third-party APIs)
+- Authenticated websites (login required to fetch)
+- Rate limits (will fail under load)
+- Network access (won't work offline)
+- Specific file format or structure assumptions
+
+**Example (GOOD):**
+```
+IMPLEMENTED: Content retrieval from 7 RSS sources
+
+TESTED:
+- Dry-run mode: 33 items fetched
+- Live run 1: 33 items fetched
+- Live run 2: 33 duplicates detected, 0 new items
+
+OBSERVED:
+- Deduplication via SHA256 hash working
+- Monitoring state correctly tracks 33 seen URLs
+- Per-source metrics accurate
+
+KNOWN LIMITATIONS:
+- Scoring not tested (ANTHROPIC_API_KEY not set)
+- Only tested with 20 sources (not full registry)
+- OCC RSS returns 406 (not implemented)
+
+OPEN RISKS:
+- Items queued to pending_scoring; no retry mechanism tested
+- Health file updates untested under concurrent load
+- Rate limits not tested on any RSS source
+```
+
+---
+
+### Stage Independence
+
+**CRITICAL:** Never infer success across stages.
+
+- Discovery success ≠ Retrieval success
+- Retrieval success ≠ Scoring success
+- Scoring success ≠ Dashboard success
+
+Each stage is independent. Test and report each separately.
+
+**Example (WRONG):**
+"Retrieval works because discovery found sources" ❌
+
+**Example (RIGHT):**
+```
+IMPLEMENTED: Source discovery
+TESTED: Registry.json scan
+OBSERVED: 36 sources found with strategies
+
+IMPLEMENTED: Content retrieval
+TESTED: Actual fetch from 7 sources  
+OBSERVED: 33 items returned
+DEPENDENCY: Requires working network and RSS endpoints
+```
+
+---
+
+### Discovery Before Asking
+
+**If the requested information should be discoverable by the platform being built, attempt discovery before asking the user to provide it.**
+
+The Payments Intelligence Platform should capture real payment industry developments. When asked to validate against specific announcement types (JPMorgan milestones, FedNow announcements, stablecoin infrastructure updates, etc.), use available discovery methods:
+
+- Search public company newsrooms and press releases
+- Check regulatory announcements (Federal Reserve, OCC, CFPB)
+- Query industry publications (Payments Dive, Finextra, PaymentsJournal)
+- Review analyst newsletters (Fintech Takes, Tearsheet, Dwayne Gefferie)
+- Search for official infrastructure announcements (SWIFT, RTP, The Clearing House)
+
+Only ask the user to provide examples if:
+1. Discovery attempts fail
+2. Information requires authentication/subscription
+3. Access is rate-limited or blocked
+4. The data is genuinely not publicly available
+
+Report what you attempted and why discovery failed, not just "I can't find it."
+
+### Scope Management
+
+When implementing:
+1. **Fix only the requested problem**
+2. **If you encounter a new issue, stop and report it**
+3. **Do not continue building adjacent systems**
+4. **Do not redesign architecture**
+5. **Do not add enhancements**
+
+Report all blockers, all gaps, all dependencies. Let the user decide next steps.
+
+---
+
 ## PROJECT STRUCTURE
 
 **Data Files Requiring Real Content:**
