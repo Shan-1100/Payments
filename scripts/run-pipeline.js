@@ -176,7 +176,6 @@ async function main() {
   console.log('\n[5] Generating weekly summaries...');
 
   // Build weekly summaries from daily summaries (not just Fridays — all weeks)
-  const dailyArchive  = readJSON('daily_summaries_archive.json') || [];
   const weeklyArchive = readJSON('weekly_summaries_archive.json') || [];
   const weeklySet     = new Set(weeklyArchive.map(w => w.date));
 

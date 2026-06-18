@@ -82,11 +82,6 @@ function urlHash(u) {
   return crypto.createHash('md5').update(u).digest('hex').slice(0, 12);
 }
 
-function isRelevant(item) {
-  const text = `${item.title || ''} ${item.contentSnippet || ''} ${item.content || ''}`.toLowerCase();
-  return RELEVANCE_KEYWORDS.some(kw => text.includes(kw));
-}
-
 function extractContent(item) {
   const raw = item['content:encoded'] || item.content || item.contentSnippet || item.summary || '';
   return raw.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 4000);
