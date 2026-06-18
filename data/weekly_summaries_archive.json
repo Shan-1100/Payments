@@ -1,5 +1,25 @@
 [
   {
+    "date": "2026-06-13",
+    "period": "Week of Jun 6",
+    "source": "pipeline",
+    "headline": "US Instant Payments Brief: Week of Jun 6",
+    "summary": "1 topics: Market Developments. US RTP, FedNow, and instant payment developments.",
+    "topics": {
+      "Market Developments": [
+        "AI-driven personalization is reshaping consumer payment expectations—users now expect instant, individualized payment experiences similar to other digital services, pressuring card networks and fintech players to move beyond static offerings. This shift favors platforms investing in real-time, context-aware payment customization (RTP, FedNow, and embedded finance solutions) over traditional card-centric models, creating competitive advantage for providers who can deliver hyper-personalized B2C payment journeys at scale."
+      ]
+    },
+    "sourceLinks": [
+      {
+        "name": "PaymentsJournal",
+        "title": "Serving a Segment of One: The Race to Stay Top of Wallet",
+        "url": "https://www.paymentsjournal.com/serving-a-segment-of-one-the-race-to-stay-top-of-wallet/",
+        "publishedAt": "2026-06-11T13:00:00.000Z"
+      }
+    ]
+  },
+  {
     "date": "2026-06-20",
     "period": "Week of Jun 13",
     "source": "pipeline",
@@ -12,7 +32,7 @@
       ],
       "RTP": [
         "The RTP network continues to see strong transaction growth with financial institutions expanding use cases beyond traditional transfers. Recent developments show increased adoption for earned wage access and tax refunds, positioning RTP as a viable alternative to batch-based payment processing for time-sensitive transactions.",
-        "I notice the article text provided is incomplete (cuts off mid-sentence), so I cannot synthesize a reliable brief from this source alone. To provide an accurate 2-3 sentence brief on RTP, Same Day ACH, and virtual cards developments, I would need the full article content or additional complete sources.\n\nPlease provide the full article text or additional articles so I can deliver a factual, actionable brief."
+        "Real-Time Payments (RTP) network showing continued development. The Future of Same Day ACH, RTP, and Virtual Cards. Strategic implication: RTP adoption accelerates as financial institutions expand use cases and integration capabilities."
       ],
       "FedNow": [
         "FedNow participation continues expanding with focus on risk mitigation tools. The Federal Reserve has launched new network intelligence capabilities to help participants assess account-level risk in real-time, addressing a key concern for adoption among smaller financial institutions."
@@ -79,53 +99,6 @@
         "url": "https://www.paymentsjournal.com/the-future-of-same-day-ach-rtp-and-virtual-cards/",
         "publishedAt": "2026-06-15T13:00:00.000Z"
       }
-    ],
-    "topicSegments": {
-      "Traditional Rails": [
-        "B2B",
-        "B2C"
-      ],
-      "RTP": [
-        "B2B",
-        "B2C"
-      ],
-      "FedNow": [
-        "B2B",
-        "B2C"
-      ],
-      "Market Developments": [
-        "B2B",
-        "B2C"
-      ],
-      "Regulatory": [
-        "B2B",
-        "B2C"
-      ]
-    }
-  },
-  {
-    "date": "2026-06-13",
-    "period": "Week of Jun 6",
-    "source": "pipeline",
-    "headline": "US Instant Payments Brief: Week of Jun 6",
-    "summary": "1 topics: Market Developments. US RTP, FedNow, and instant payment developments.",
-    "topics": {
-      "Market Developments": [
-        "AI-driven personalization is reshaping consumer payment expectations—users now expect instant, individualized payment experiences similar to other digital services, pressuring card networks and fintech players to move beyond static offerings. This shift favors platforms investing in real-time, context-aware payment customization (RTP, FedNow, and embedded finance solutions) over traditional card-centric models, creating competitive advantage for providers who can deliver hyper-personalized B2C payment journeys at scale."
-      ]
-    },
-    "sourceLinks": [
-      {
-        "name": "PaymentsJournal",
-        "title": "Serving a Segment of One: The Race to Stay Top of Wallet",
-        "url": "https://www.paymentsjournal.com/serving-a-segment-of-one-the-race-to-stay-top-of-wallet/",
-        "publishedAt": "2026-06-11T13:00:00.000Z"
-      }
-    ],
-    "topicSegments": {
-      "Market Developments": [
-        "B2C"
-      ]
-    }
+    ]
   }
 ]

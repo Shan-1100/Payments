@@ -73,28 +73,6 @@
         "url": "https://www.paymentsjournal.com/the-future-of-same-day-ach-rtp-and-virtual-cards/",
         "publishedAt": "2026-06-15T13:00:00.000Z"
       }
-    ],
-    "themeSegments": {
-      "Market Developments": [
-        "B2B",
-        "B2C"
-      ],
-      "Traditional Rails": [
-        "B2B",
-        "B2C"
-      ],
-      "RTP": [
-        "B2B",
-        "B2C"
-      ],
-      "FedNow": [
-        "B2B",
-        "B2C"
-      ],
-      "Regulatory": [
-        "B2B",
-        "B2C"
-      ]
-    }
+    ]
   }
 ]
