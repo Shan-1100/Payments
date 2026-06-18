@@ -13,64 +13,60 @@ const parser = new RSSParser({
   customFields: { item: ['content:encoded', 'description'] }
 });
 
-// PRIMARY FOCUS: US instant payments (RTP, FedNow) + adjacent rails
-// SECONDARY: Global developments with direct US instant payment relevance only
-const PRIMARY_KEYWORDS = [
+// FOCUS: US Instant Payments ONLY
+// No global/international content at this time
+const US_KEYWORDS = [
   'rtp', 'real-time payment', 'real time payment',
-  'fednow', 'fed now', 'federal reserve instant payment',
+  'fednow', 'fed now', 'federal reserve',
   'visa direct', 'mastercard send',
-  'stablecoin', 'usdc', 'usdt',
-  'instant payment', 'real-time banking'
-];
-
-// Adjacent keywords: only include if paired with US/instant payment context
-const ADJACENT_KEYWORDS = [
   'clearing house', 'the clearing house',
-  'fed payment', 'federal reserve payment',
-  'acq rails', 'payment rail',
-  'correspondent bank', 'interbank settlement',
-  'b2b payment', 'b2c payment',
-  'treasury payment', 'corporate payment'
+  'us bank', 'american bank', 'united states payment'
 ];
 
-// EXCLUDE patterns: noise that pollutes results
+// US-specific payment context
+const US_CONTEXT_KEYWORDS = [
+  'stablecoin', 'usdc', 'usdt',
+  'instant payment', 'real-time',
+  'b2b payment', 'b2c payment',
+  'treasury', 'corporate payment',
+  'ach', 'nacha', 'fedwire'
+];
+
+// HARD EXCLUDE: Non-US and irrelevant content
 const EXCLUDE_PATTERNS = [
-  /islamic|sharia|halal/i,           // Islamic banking (out of scope)
-  /mena|gcc|middle east|uae/i,       // Regional fintech (out of scope unless US-relevant)
-  /uk|emea|europe|asean/i,           // Regional unless RTP/FedNow mentioned
-  /cryptography|cybersecurity/i,     // Security unrelated to payment systems
-  /robotics|ai model|mlops/i,        // Unrelated tech
-  /retail|ecommerce|shopping/i,      // Consumer retail unless payment-specific
-  /lending|loan|credit|mortgage/i,   // Lending/credit (not payments focus)
+  /global|international|cross.?border|worldwide/i,  // Global content
+  /uk|europe|emea|asia|mena|gcc|middle east|uae|asean|apac/i,  // Non-US regions
+  /islamic|sharia|halal/i,           // Religious banking
+  /cryptography|blockchain|crypto|defi|nft/i,       // Unrelated crypto
+  /robotics|ai model|mlops|machine learning/i,      // Unrelated tech
+  /retail|ecommerce|shopping|consumer goods/i,      // Consumer retail
+  /lending|loan|mortgage|credit card/i,             // Lending products
+  /insurance|wealth|brokerage/i,                    // Unrelated financial services
+  /cybersecurity|ransomware|breach|hack/i,          // Security incidents
 ];
 
 function isRelevant(item) {
   const text = `${item.title || ''} ${item.contentSnippet || ''} ${item.content || ''}`.toLowerCase();
 
-  // HARD EXCLUDE: if matches exclude patterns, reject immediately
+  // HARD EXCLUDE: reject non-US and irrelevant content immediately
   if (EXCLUDE_PATTERNS.some(p => p.test(text))) {
     return false;
   }
 
-  // PRIMARY (RTP, FedNow): accept if any primary keyword found
-  if (PRIMARY_KEYWORDS.some(kw => text.includes(kw))) {
+  // ACCEPT: Must have US instant payment keywords
+  const hasUSKeyword = US_KEYWORDS.some(kw => text.includes(kw));
+  if (!hasUSKeyword) {
+    return false;
+  }
+
+  // ACCEPT: If has US keyword + payment context, include it
+  const hasPaymentContext = US_CONTEXT_KEYWORDS.some(kw => text.includes(kw));
+  if (hasPaymentContext) {
     return true;
   }
 
-  // ADJACENT: only accept if paired with payment rail/instant context
-  // e.g., "treasury payment" or "payment rail" combined with secondary context
-  const hasAdjacent = ADJACENT_KEYWORDS.some(kw => text.includes(kw));
-  const hasPaymentContext = /payment|settle|clear/i.test(text);
-
-  if (hasAdjacent && hasPaymentContext) {
-    // But reject if it's obvious noise (regional or unrelated domain)
-    if (/^(uk|emea|asean|mena|middle east|uae|gcc)/i.test(text.slice(0, 100))) {
-      return false;
-    }
-    return true;
-  }
-
-  return false;
+  // ACCEPT: If has US keyword alone (RTP, FedNow, etc.), include it
+  return true;
 }
 
 function readJSON(file) {

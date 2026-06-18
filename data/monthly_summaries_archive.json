@@ -3,101 +3,21 @@
     "month": "2026-06",
     "period": "May 2026",
     "source": "pipeline",
-    "headline": "May 2026 Instant Payments Review",
-    "summary": "2 weeks, 7 topics. Key developments tracked across RTP, FedNow, and digital asset infrastructure.",
+    "headline": "May 2026: US Instant Payments Review",
+    "summary": "2 weeks of US payment rail developments. Focus: RTP adoption, FedNow deployment, instant payment infrastructure.",
     "themes": [
+      "Market Developments",
       "Traditional Rails",
       "RTP",
-      "Market Developments",
-      "Global Payments",
       "FedNow",
-      "Digital Assets",
       "Regulatory"
     ],
     "sourceLinks": [
       {
         "name": "PaymentsJournal",
-        "title": "Barclays Targets Future Customers Through GoHenry UK Acquisition",
-        "url": "https://www.paymentsjournal.com/barclays-targets-future-customers-through-gohenry-uk-acquisition/",
-        "publishedAt": "2026-06-12T18:30:00.000Z"
-      },
-      {
-        "name": "PaymentsJournal",
-        "title": "AML Crackdown Continues with Closing of UK Payment Processor",
-        "url": "https://www.paymentsjournal.com/aml-crackdown-continues-with-closing-of-uk-payment-processor/",
-        "publishedAt": "2026-06-12T17:06:41.000Z"
-      },
-      {
-        "name": "PaymentsJournal",
-        "title": "Open Banking Has Made Payment APIs a Burgeoning Revenue Stream",
-        "url": "https://www.paymentsjournal.com/open-banking-has-made-payment-apis-a-burgeoning-revenue-stream/",
-        "publishedAt": "2026-06-12T13:00:00.000Z"
-      },
-      {
-        "name": "Finextra",
-        "title": "Fingerprints for a Fee: How Fraud Is Creating a Headache for Verification",
-        "url": "https://www.finextra.com/videoarticle/3526/fingerprints-for-a-fee-how-fraud-is-creating-a-headache-for-verification?utm_medium=rssfinextra&utm_source=finextrafeed",
-        "publishedAt": "2026-06-11T15:00:00.000Z"
-      },
-      {
-        "name": "Finextra",
-        "title": "Key Non-Negotiables for a Controllable AI Adoption in Banking",
-        "url": "https://www.finextra.com/videoarticle/3523/key-non-negotiables-for-a-controllable-ai-adoption-in-banking?utm_medium=rssfinextra&utm_source=finextrafeed",
-        "publishedAt": "2026-06-11T11:00:00.000Z"
-      },
-      {
-        "name": "PaymentsJournal",
-        "title": "ChatGPT Adds Visa Integration for AI-Assisted Purchases",
-        "url": "https://www.paymentsjournal.com/chatgpt-adds-visa-integration-for-ai-assisted-purchases/",
-        "publishedAt": "2026-06-11T18:30:00.000Z"
-      },
-      {
-        "name": "PaymentsJournal",
-        "title": "Zelle Plans Expansion Into India, with a Stablecoin in Tow",
-        "url": "https://www.paymentsjournal.com/zelle-plans-expansion-into-india-with-a-stablecoin-in-tow/",
-        "publishedAt": "2026-06-11T16:47:22.000Z"
-      },
-      {
-        "name": "PaymentsJournal",
         "title": "Serving a Segment of One: The Race to Stay Top of Wallet",
         "url": "https://www.paymentsjournal.com/serving-a-segment-of-one-the-race-to-stay-top-of-wallet/",
         "publishedAt": "2026-06-11T13:00:00.000Z"
-      },
-      {
-        "name": "Finextra",
-        "title": "NymCard launches nCore FullStack",
-        "url": "https://www.finextra.com/pressarticle/110180/nymcard-launches-ncore-fullstack?utm_medium=rssfinextra&utm_source=finextrafeed",
-        "publishedAt": "2026-06-18T09:14:00.000Z"
-      },
-      {
-        "name": "Finextra",
-        "title": "OakNorth eyes speciality finance with Fintex Capital",
-        "url": "https://www.finextra.com/pressarticle/110179/oaknorth-eyes-speciality-finance-with-fintex-capital?utm_medium=rssfinextra&utm_source=finextrafeed",
-        "publishedAt": "2026-06-18T09:04:00.000Z"
-      },
-      {
-        "name": "Finextra",
-        "title": "Aurionpro selected to validate Ajman bank's Islamic treasury management system",
-        "url": "https://www.finextra.com/pressarticle/110178/aurionpro-selected-to-validate-ajman-banks-islamic-treasury-management-system?utm_medium=rssfinextra&utm_source=finextrafeed",
-        "publishedAt": "2026-06-18T09:02:00.000Z"
-      },
-      {
-        "name": "Finextra",
-        "title": "Microsoft picks Checkout.com for Emea Xbox digital payments",
-        "url": "https://www.finextra.com/pressarticle/110175/microsoft-picks-checkoutcom-for-emea-xbox-digital-payments?utm_medium=rssfinextra&utm_source=finextrafeed",
-        "publishedAt": "2026-06-18T09:00:00.000Z"
-      },
-      {
-        "name": "Finextra",
-        "title": "European Fintech Association elects new board of directors",
-        "url": "https://www.finextra.com/pressarticle/110176/european-fintech-association-elects-new-board-of-directors?utm_medium=rssfinextra&utm_source=finextrafeed",
-        "publishedAt": "2026-06-18T08:50:00.000Z"
-      },
-      {
-        "name": "Finextra",
-        "title": "Payfuture and APA partner to expand cross-border payments into emerging markets",
-        "url": "https://www.finextra.com/pressarticle/110177/payfuture-and-apa-partner-to-expand-cross-border-payments-into-emerging-markets?utm_medium=rssfinextra&utm_source=finextrafeed",
-        "publishedAt": "2026-06-18T08:53:00.000Z"
       },
       {
         "name": "Finextra",
@@ -124,12 +44,6 @@
         "publishedAt": "2026-06-17T11:30:00.000Z"
       },
       {
-        "name": "Finextra",
-        "title": "EBAday 2026: ISO 20022 and the evolving global payments ecosystem",
-        "url": "https://www.finextra.com/newsarticle/47943/ebaday-2026-iso-20022-and-the-evolving-global-payments-ecosystem?utm_medium=rssfinextra&utm_source=finextrafeed",
-        "publishedAt": "2026-06-17T14:00:00.000Z"
-      },
-      {
         "name": "PaymentsJournal",
         "title": "SoftBank and OpenAI Team Up on AI-Fueled Enterprise Cybersecurity",
         "url": "https://www.paymentsjournal.com/softbank-and-openai-team-up-on-ai-fueled-enterprise-cybersecurity/",
@@ -143,27 +57,9 @@
       },
       {
         "name": "PaymentsJournal",
-        "title": "Many EU Crypto Firms Aren’t Prepared for Looming MiCA Deadline",
-        "url": "https://www.paymentsjournal.com/many-eu-crypto-firms-arent-prepared-for-looming-mica-deadline/",
-        "publishedAt": "2026-06-16T16:46:57.000Z"
-      },
-      {
-        "name": "PaymentsJournal",
         "title": "The Post-Password Era: Rethinking Authentication in Financial Services",
         "url": "https://www.paymentsjournal.com/the-post-password-era-rethinking-authentication-in-financial-services/",
         "publishedAt": "2026-06-16T13:00:00.000Z"
-      },
-      {
-        "name": "Finextra",
-        "title": "Can AI Create a Positive Cultural Shift in the Workplace?",
-        "url": "https://www.finextra.com/videoarticle/3525/can-ai-create-a-positive-cultural-shift-in-the-workplace?utm_medium=rssfinextra&utm_source=finextrafeed",
-        "publishedAt": "2026-06-15T11:00:00.000Z"
-      },
-      {
-        "name": "PaymentsJournal",
-        "title": "Digital Yuan Will Be Centerpiece of China’s Cross-Border System",
-        "url": "https://www.paymentsjournal.com/digital-yuan-will-be-centerpiece-of-chinas-cross-border-system/",
-        "publishedAt": "2026-06-15T18:30:00.000Z"
       },
       {
         "name": "PaymentsJournal",
@@ -176,12 +72,6 @@
         "title": "The Future of Same Day ACH, RTP, and Virtual Cards",
         "url": "https://www.paymentsjournal.com/the-future-of-same-day-ach-rtp-and-virtual-cards/",
         "publishedAt": "2026-06-15T13:00:00.000Z"
-      },
-      {
-        "name": "Tearsheet",
-        "title": "What Klarna, Coinbase, and Chase are building next",
-        "url": "https://tearsheet.co/10-q/what-klarna-coinbase-and-chase-are-building-next/?utm_source=rss&utm_medium=rss&utm_campaign=what-klarna-coinbase-and-chase-are-building-next",
-        "publishedAt": "2026-06-15T11:30:00.000Z"
       }
     ]
   }
