@@ -76,7 +76,7 @@ async function switchSection(name) {
 /* ─── Load intelligence feed (primary executive view) ─────────── */
 async function loadIntelFeed() {
   try {
-    const scored = (await fetchJSON('/api/scored-items').catch(() => ({ executiveItems: [], analystItems: [], suppressedItems: [] }))) || { executiveItems: [], analystItems: [], suppressedItems: [] };
+    const scored = (await fetchJSON('data/scored_items.json').catch(() => ({ executiveItems: [], analystItems: [], suppressedItems: [] }))) || { executiveItems: [], analystItems: [], suppressedItems: [] };
     state.data.contentItems = [
       ...scored.executiveItems,
       ...scored.analystItems,
