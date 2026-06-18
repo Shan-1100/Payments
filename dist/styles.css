@@ -848,3 +848,41 @@ body {
   padding-top: 12px;
   border-top: 1px solid var(--surface-muted);
 }
+
+/* ─── B2B/B2C Segment Tags ─────────────────────────────────── */
+.brief-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 6px;
+}
+
+.brief-segments {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.segment-tag {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+.segment-b2b {
+  background: rgba(44, 116, 201, 0.15);
+  color: #0b3d91;
+  border: 1px solid rgba(44, 116, 201, 0.3);
+}
+
+.segment-b2c {
+  background: rgba(30, 120, 80, 0.15);
+  color: #0f6640;
+  border: 1px solid rgba(30, 120, 80, 0.3);
+}

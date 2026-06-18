@@ -12,6 +12,10 @@
             "url": "https://www.finextra.com/blogposting/32040/the-120-rule-cost-us-real-deposits--and-taught-us-to-stop-borrowing-other-peoples-risk-assumption?utm_medium=rssfinextra&utm_source=finextrafeed",
             "publishedAt": "2026-06-18T05:55:00.000Z"
           }
+        ],
+        "segments": [
+          "B2B",
+          "B2C"
         ]
       }
     }
@@ -35,6 +39,9 @@
             "url": "https://www.paymentsdive.com/news/tracking-digital-payments-skids/823194/",
             "publishedAt": "2026-06-17T19:47:00.000Z"
           }
+        ],
+        "segments": [
+          "B2C"
         ]
       },
       "FedNow": {
@@ -46,6 +53,10 @@
             "url": "https://tearsheet.co/blockchain-crypto/the-3-min-read-the-two-systems-coinbase-is-building-for-an-agent-driven-financial-ecosystem/?utm_source=rss&utm_medium=rss&utm_campaign=the-3-min-read-the-two-systems-coinbase-is-building-for-an-agent-driven-financial-ecosystem",
             "publishedAt": "2026-06-17T11:30:00.000Z"
           }
+        ],
+        "segments": [
+          "B2B",
+          "B2C"
         ]
       }
     }
@@ -69,6 +80,10 @@
             "url": "https://tearsheet.co/artificial-intelligence/j-p-morgan-payments-michael-lozanoff-on-why-agentic-commerce-cant-scale-without-governance/?utm_source=rss&utm_medium=rss&utm_campaign=j-p-morgan-payments-michael-lozanoff-on-why-agentic-commerce-cant-scale-without-governance",
             "publishedAt": "2026-06-16T11:30:00.000Z"
           }
+        ],
+        "segments": [
+          "B2B",
+          "B2C"
         ]
       },
       "Market Developments": {
@@ -80,6 +95,10 @@
             "url": "https://www.paymentsjournal.com/the-post-password-era-rethinking-authentication-in-financial-services/",
             "publishedAt": "2026-06-16T13:00:00.000Z"
           }
+        ],
+        "segments": [
+          "B2B",
+          "B2C"
         ]
       }
     }
@@ -97,6 +116,10 @@
             "url": "https://www.paymentsjournal.com/ai-uncovered-critical-flaw-in-crypto-built-for-security/",
             "publishedAt": "2026-06-15T16:31:25.000Z"
           }
+        ],
+        "segments": [
+          "B2B",
+          "B2C"
         ]
       },
       "RTP": {
@@ -108,6 +131,10 @@
             "url": "https://www.paymentsjournal.com/the-future-of-same-day-ach-rtp-and-virtual-cards/",
             "publishedAt": "2026-06-15T13:00:00.000Z"
           }
+        ],
+        "segments": [
+          "B2B",
+          "B2C"
         ]
       }
     }
@@ -125,6 +152,9 @@
             "url": "https://www.paymentsjournal.com/serving-a-segment-of-one-the-race-to-stay-top-of-wallet/",
             "publishedAt": "2026-06-11T13:00:00.000Z"
           }
+        ],
+        "segments": [
+          "B2C"
         ]
       }
     }

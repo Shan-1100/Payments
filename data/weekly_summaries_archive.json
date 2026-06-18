@@ -1,25 +1,5 @@
 [
   {
-    "date": "2026-06-13",
-    "period": "Week of Jun 6",
-    "source": "pipeline",
-    "headline": "US Instant Payments Brief: Week of Jun 6",
-    "summary": "1 topics: Market Developments. US RTP, FedNow, and instant payment developments.",
-    "topics": {
-      "Market Developments": [
-        "AI-driven personalization is reshaping consumer payment expectations—users now expect instant, individualized payment experiences similar to other digital services, pressuring card networks and fintech players to move beyond static offerings. This shift favors platforms investing in real-time, context-aware payment customization (RTP, FedNow, and embedded finance solutions) over traditional card-centric models, creating competitive advantage for providers who can deliver hyper-personalized B2C payment journeys at scale."
-      ]
-    },
-    "sourceLinks": [
-      {
-        "name": "PaymentsJournal",
-        "title": "Serving a Segment of One: The Race to Stay Top of Wallet",
-        "url": "https://www.paymentsjournal.com/serving-a-segment-of-one-the-race-to-stay-top-of-wallet/",
-        "publishedAt": "2026-06-11T13:00:00.000Z"
-      }
-    ]
-  },
-  {
     "date": "2026-06-20",
     "period": "Week of Jun 13",
     "source": "pipeline",
@@ -99,6 +79,53 @@
         "url": "https://www.paymentsjournal.com/the-future-of-same-day-ach-rtp-and-virtual-cards/",
         "publishedAt": "2026-06-15T13:00:00.000Z"
       }
-    ]
+    ],
+    "topicSegments": {
+      "Traditional Rails": [
+        "B2B",
+        "B2C"
+      ],
+      "RTP": [
+        "B2B",
+        "B2C"
+      ],
+      "FedNow": [
+        "B2B",
+        "B2C"
+      ],
+      "Market Developments": [
+        "B2B",
+        "B2C"
+      ],
+      "Regulatory": [
+        "B2B",
+        "B2C"
+      ]
+    }
+  },
+  {
+    "date": "2026-06-13",
+    "period": "Week of Jun 6",
+    "source": "pipeline",
+    "headline": "US Instant Payments Brief: Week of Jun 6",
+    "summary": "1 topics: Market Developments. US RTP, FedNow, and instant payment developments.",
+    "topics": {
+      "Market Developments": [
+        "AI-driven personalization is reshaping consumer payment expectations—users now expect instant, individualized payment experiences similar to other digital services, pressuring card networks and fintech players to move beyond static offerings. This shift favors platforms investing in real-time, context-aware payment customization (RTP, FedNow, and embedded finance solutions) over traditional card-centric models, creating competitive advantage for providers who can deliver hyper-personalized B2C payment journeys at scale."
+      ]
+    },
+    "sourceLinks": [
+      {
+        "name": "PaymentsJournal",
+        "title": "Serving a Segment of One: The Race to Stay Top of Wallet",
+        "url": "https://www.paymentsjournal.com/serving-a-segment-of-one-the-race-to-stay-top-of-wallet/",
+        "publishedAt": "2026-06-11T13:00:00.000Z"
+      }
+    ],
+    "topicSegments": {
+      "Market Developments": [
+        "B2C"
+      ]
+    }
   }
 ]

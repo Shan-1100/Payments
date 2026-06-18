@@ -100,7 +100,6 @@ async function loadSection(name) {
       await loadDeepDives();
       break;
     case 'expert':
-      await loadExpert();
       break;
     case 'reference':
       await loadReference();
@@ -120,18 +119,6 @@ async function loadDeepDives() {
     console.error('Failed to load deep dives:', err);
     document.getElementById('deepdives-container').innerHTML =
       '<div class="loading-msg">Unable to load deep dives.</div>';
-  }
-}
-
-async function loadExpert() {
-  try {
-    const data = await fetchJSON('data/expert_commentary.json');
-    state.data.expert = Array.isArray(data) ? data : [];
-    renderExpert();
-  } catch (err) {
-    console.error('Failed to load expert commentary:', err);
-    document.getElementById('expert-container').innerHTML =
-      '<div class="loading-msg">Unable to load expert commentary.</div>';
   }
 }
 
@@ -381,7 +368,14 @@ function renderDeepDives() {
   container.innerHTML = state.data.deepDives.map(dive => {
     const briefsHTML = (dive.relatedBriefs || []).slice(0, 8).map(brief => `
       <div class="brief-item">
-        <div class="brief-topic">${escapeHtml(brief.topic || 'Development')}</div>
+        <div class="brief-header">
+          <div class="brief-topic">${escapeHtml(brief.topic || 'Development')}</div>
+          ${brief.segments ? `
+            <div class="brief-segments">
+              ${brief.segments.map(seg => `<span class="segment-tag segment-${seg.toLowerCase()}">${seg}</span>`).join('')}
+            </div>
+          ` : ''}
+        </div>
         <div class="brief-text">${escapeHtml(brief.brief?.slice(0, 300) || '')}</div>
         ${brief.links ? `
           <div class="brief-sources">
@@ -409,16 +403,6 @@ function renderDeepDives() {
       </div>
     `;
   }).join('');
-}
-
-/* ─── Expert Commentary renderer ─────────────────────────────── */
-function renderExpert() {
-  const container = document.getElementById('expert-container');
-  if (!state.data.expert.length) {
-    container.innerHTML = '<div class="loading-msg">No expert commentary available.</div>';
-    return;
-  }
-  container.innerHTML = state.data.expert.map(item => contentCard(item)).join('');
 }
 
 /* ─── Shared content card template ──────────────────────────── */
