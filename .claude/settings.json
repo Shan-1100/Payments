@@ -1,0 +1,37 @@
+{
+  "sandbox": {
+    "network": {
+      "allowedDomains": [
+        "pymnts.com",
+        "www.pymnts.com",
+        "paymentsdive.com",
+        "www.paymentsdive.com",
+        "americanbanker.com",
+        "www.americanbanker.com",
+        "federalreserve.gov",
+        "www.federalreserve.gov",
+        "swift.com",
+        "www.swift.com",
+        "theclearinghouse.org",
+        "www.theclearinghouse.org",
+        "finextra.com",
+        "www.finextra.com",
+        "digitaltransactions.net",
+        "www.digitaltransactions.net",
+        "occ.gov",
+        "www.occ.gov",
+        "fdic.gov",
+        "www.fdic.gov",
+        "paypal.com",
+        "www.paypal.com",
+        "stripe.com",
+        "www.stripe.com",
+        "fintech.com",
+        "www.fintech.com",
+        "fiserv.com",
+        "www.fiserv.com",
+        "explore.fednow.org"
+      ]
+    }
+  }
+}
