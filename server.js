@@ -102,11 +102,11 @@ const server = http.createServer(async (req, res) => {
     }
     else if (pathname === '/api/summary/weekly' && method === 'GET') {
       res.writeHead(200);
-      res.end(JSON.stringify(readJSON('weekly_summary.json') || { summary: 'No summary available' }));
+      res.end(JSON.stringify(readJSON('weekly_summaries_archive.json') || []));
     }
     else if (pathname === '/api/summary/monthly' && method === 'GET') {
       res.writeHead(200);
-      res.end(JSON.stringify(readJSON('monthly_summary.json') || { summary: 'No summary available' }));
+      res.end(JSON.stringify(readJSON('monthly_summaries_archive.json') || []));
     }
     else if (pathname === '/api/approved-sources' && method === 'GET') {
       res.writeHead(200);
