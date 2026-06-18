@@ -3,7 +3,7 @@
 const fs   = require('fs');
 const path = require('path');
 const { fetchAllFeeds }                                                          = require('./fetch-rss');
-const { synthesizeArticle, generateDailySummary, generateWeeklySummary, generateMonthlySummary } = require('./synthesize');
+const { synthesizeArticle, generateTopicBriefs, generateWeeklySummary, generateMonthlySummary } = require('./synthesize');
 
 const DATA_DIR   = path.join(__dirname, '../data');
 const MAX_SYNTH  = 25;
@@ -121,54 +121,49 @@ async function main() {
   writeJSON('content_items.json', merged);
   console.log(`  Total stored: ${merged.length} items`);
 
-  // ── 4. Generate daily summaries — article-first approach ─────────────────
+  // ── 4. Generate daily topic briefs from raw RSS articles ─────────────────
   //
-  // Each daily summary is generated from the articles published on that date.
-  // sourceLinks is populated mechanically from those exact articles — no manual
-  // curation, no static approved_sources lookup. Attribution is structurally
-  // correct: the link goes to the article that was actually read.
+  // Group raw articles by publish date, synthesize into topic-grouped briefs.
+  // Each brief: 2-3 sentences focused on success criteria (RTP/FedNow/Stablecoins).
+  // sourceLinks show which articles informed each brief.
   //
-  console.log('\n[4/4] Generating daily summaries from article groups...');
+  console.log('\n[4/4] Generating daily topic briefs...');
 
-  // Group synthesized items by their publish date (YYYY-MM-DD)
+  // Group raw articles by their publish date (YYYY-MM-DD)
   const byDate = {};
-  for (const item of synthesized) {
+  for (const item of rawItems) {
     const date = item.publishedAt.slice(0, 10);
     if (!byDate[date]) byDate[date] = [];
     byDate[date].push(item);
   }
 
   const dailyArchive    = readJSON('daily_summaries_archive.json') || [];
-  const existingDates   = new Set(dailyArchive.map(s => s.date));
   const newDailySummaries = [];
 
   for (const [date, items] of Object.entries(byDate).sort()) {
-    // Overwrite any non-pipeline entry so pipeline-generated (article-first)
-    // summaries replace manually curated ones as soon as real articles exist.
+    // Overwrite any non-pipeline entry; keep existing pipeline entries as-is.
     const existingEntry = dailyArchive.find(e => e.date === date);
     if (existingEntry && existingEntry.source === 'pipeline') {
       console.log(`  Skipping ${date} — pipeline entry already exists`);
       continue;
     }
 
-    console.log(`  Generating summary for ${date} (${items.length} article${items.length !== 1 ? 's' : ''})...`);
+    console.log(`  Generating topic briefs for ${date} (${items.length} article${items.length !== 1 ? 's' : ''})...`);
     try {
-      const ds = await generateDailySummary(items, date);
+      const briefs = await generateTopicBriefs(items, date);
       newDailySummaries.push({
         date,
-        source:      'pipeline',
-        headline:    ds.headline,
-        summary:     ds.summary,
-        sourceLinks: toSourceLinks(items)
+        source: 'pipeline',
+        briefs: briefs  // { 'RTP': { brief: '...', sourceLinks: [...] }, ... }
       });
-      console.log(`  ✓ ${date}: ${ds.headline.slice(0, 70)}`);
+      const topicCount = Object.keys(briefs).length;
+      console.log(`  ✓ ${date}: ${topicCount} topic brief${topicCount !== 1 ? 's' : ''}`);
     } catch (err) {
       console.warn(`  ✗ ${date}: ${err.message}`);
     }
   }
 
-  // Merge: pipeline entries replace same-date manual entries; keep manual
-  // entries for dates the pipeline has no articles for.
+  // Merge: pipeline entries replace same-date entries; keep older manual entries.
   const pipelineDates = new Set(newDailySummaries.map(s => s.date));
   const keptManual    = dailyArchive.filter(e => !pipelineDates.has(e.date));
   const updatedDaily  = [...newDailySummaries, ...keptManual]

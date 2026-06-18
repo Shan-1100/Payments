@@ -69,173 +69,48 @@
   },
   {
     "date": "2026-06-17",
-    "source": "rss-attributed",
-    "headline": "How Cards Are Exploiting Niche Payments Opportunities",
-    "summary": "**Digital Transactions** — How Cards Are Exploiting Niche Payments Opportunities\nCard programs for specialized payments often get lost in the shuffle, but a pair of developments this week indicate the market for card-driven payments remains\n\n**Digital Transactions** — AI Takes the Stage in Shopify’s Latest POS Platform Update\nShopify Inc.’s latest update to its point-of-sale and e-commerce platform makes artificial intelligence commerce uses central, enabling its merchants to more ea\n\n**Digital Transactions** — PayIt Taps AI for Gov. App and other Digital Transactions News briefs from 6/17/26\nPayIt , a payments provider for state and local governments, launched PayIt Smart Works, a slate of AI-enabled functions for back-office operations, including c\n\n**Finextra** — EBAday 2026: ISO 20022 and the evolving global payments ecosystem\nThe second day of EBAday 2026 in Copenhagen kicked off with a discussion on ISO 20022 regulation and its implications for PSPs.\n\n**Tearsheet** — The 3-Min Read: The two systems Coinbase is building for an agent-driven financial ecosystem\nThe two announcements Coinbase made this month reflect the firm’s expanding ambitions. The company introduced a stablecoin-backed credit card that allows users\n\n**McKinsey Financial Services** — The turning point for real-world robotics\nDaniela Rus, director of MIT’s Computer Science and Artificial Intelligence Laboratory, shares a vision for robots that learn faster, respond in real time, and\n\n**Finextra** — EBAday 2026: How can Europe achieve both innovation and sovereignty in payments?\nThe strategic roundtable: ‘Rethinking innovation and sovereignty in European payments’, moderated by Olivier Denecker, executive advisor, included speakers Carl\n\n**Finextra** — EBAday 2026: Rebuilding the payments landscape\nThe three afternoon expert panels on day one of EBAday 2026 explored cross-border payments, changes in customer behaviour, and embedded finance.\n\n**Finextra** — Sabre Global Technologies fined £1 million for circumventing Russian sancctions\nThe United Kingdom has imposed its largest ever penalty for a breach of Russian financial sanctions since the 2022 invasion of Ukraine.\n\n**Finextra** — The Rise of Microfinance and Inclusion in African Payments\nIn Copenhagen at the Temenos Community Forum, Santhosh Rao, Managing Director, MEA, Temenos and Mitchell Elegbe, Group CEO, Interswitch joined FinextraTV to sha\n\n**McKinsey Financial Services** — The future of Ohio: Playing to win in the next economy\nOhio has a proud legacy as a strong builder economy, but playing to win in the new arenas of competition requires a fresh and more diverse approach.\n\n**Payments Dive** — Tracking digital payments skids\n&ldquo;We often talk about digitization as if the hard part is getting money to move electronically,&rdquo; writes an industry lawyer. &ldquo;But the hard part\n\n**Finextra** — EBAday 2026: Regulation and consumer experience are driving Europe’s future of payments\nWhat does the European rulebook for the future of payments look like? And who will be driving the change? These questions were discussed in two panels at EBAday\n\n**Finextra** — EBAday 2026: Salv wins the Fintech Zone\nThe Fintech Zone at EBAday provides a dedicated platform for early-stage companies with working products or proof-of-concept solutions to showcase how their tec\n\n**Finextra** — 'Bank in a Box' technology vendor Monument raises £18 million\nBritish Banking-Platform-as-a-Service vendor Monument Technology has raised £18 million, beating its initial £10 million target due to strong investor interest.\n\n**Finextra** — Access PaySuite acquires Ordo's open banking technology infrastructure\nAccess Paysuite has agreed to acquire the Open Banking infrastructure of Ordo, a UK fintech which was shut down by Norwegian firm Neonomics eight months after i\n\n**Finextra** — First American Bank and Trust signs for Jack Henry digital platform\nJack Henry (Nasdaq: JKHY) announced today that First American Bank and Trust has selected Jack Henry's technology solutions to strengthen operations, enhance it\n\n**Finextra** — UAE grants Revolut two full payments licences\nRevolut, the global fintech with over 75 million customers worldwide, today announced that it has received its Stored Value Facilities (SVF) licence and Retail\n\n**Finextra** — Chetwood Bank launches wholesale banking division\nChetwood Bank has announced the launch of its Wholesale Banking division with the appointment of Alex Grove as Managing Director of Wholesale Banking, Toby Shar\n\n**Finextra** — Zilch appoints Microsoft Emea chief Clare Barclay to board\nZilch, the intelligent payments platform with nearly six million customers, has today announced the appointment of Dame Clare Barclay DBE to its Board of Direct\n\n**Finextra** — The Real Bottleneck in Banking Transformation Isn’t Technology. It’s Execution.\nOver the past two decades working in large-scale financial services transformation across technology...\n\n**Finextra** — The AI Premium: How Artificial Intelligence Is Rewriting Fintech's Funding Playbook\nThe numbers tell a stark story. Fintech startups that credibly embed artificial intelligence into th...\n\n**PaymentsJournal** — Wyndham Enters the Premium Credit Card Market\nA $395 annual fee isn’t what most travelers expect from a hotel company best known for brands like Days Inn and Super 8. But that’s the price Wyndham Hotels is\n\n**PaymentsJournal** — Preparing for Quantum Day and the Risks to Modern Cryptography\nQuantum computing may still be years away from breaking cryptography, but powerful quantum computers are rapidly advancing, and their impact on cybersecurity is\n\n**McKinsey Financial Services** — Wee Ee Cheong: Calm steward playing the long game for UOB\nAs the second-generation leader of UOB, Wee Ee Cheong has devoted his career to the bank, guiding it steadily through change to safeguard the institution’s futu\n\n**Payments Dive** — Banks bring BNPL rivalry\nBuy now, pay later players, including Klarna and Affirm, are facing more competition as financial institutions begin offering installment payment options.\n\n**Payments Dive** — Illinois action may curb fraud\nA new law expected to be enacted by the state would force social media companies to better protect minors online, including from financial harm.",
-    "sourceLinks": [
-      {
-        "name": "Digital Transactions",
-        "title": "How Cards Are Exploiting Niche Payments Opportunities",
-        "url": "https://www.digitaltransactions.net/how-cards-are-exploiting-niche-payments-opportunities/",
-        "publishedAt": "2026-06-17T14:58:02.000Z"
+    "source": "pipeline",
+    "briefs": {
+      "RTP": {
+        "brief": "The RTP network continues to see strong transaction growth with financial institutions expanding use cases beyond traditional transfers. Recent developments show increased adoption for earned wage access and tax refunds, positioning RTP as a viable alternative to batch-based payment processing for time-sensitive transactions.",
+        "sourceLinks": [
+          {
+            "name": "Digital Transactions",
+            "title": "How Cards Are Exploiting Niche Payments Opportunities",
+            "url": "https://www.digitaltransactions.net/how-cards-are-exploiting-niche-payments-opportunities/",
+            "publishedAt": "2026-06-17T14:58:02.000Z"
+          },
+          {
+            "name": "Payments Dive",
+            "title": "Tracking digital payments skids",
+            "url": "https://www.paymentsdive.com/news/tracking-digital-payments-skids/823194/",
+            "publishedAt": "2026-06-17T19:47:00.000Z"
+          }
+        ]
       },
-      {
-        "name": "Digital Transactions",
-        "title": "AI Takes the Stage in Shopify’s Latest POS Platform Update",
-        "url": "https://www.digitaltransactions.net/ai-takes-the-stage-in-shopifys-latest-pos-platform-update/",
-        "publishedAt": "2026-06-17T19:50:01.000Z"
+      "FedNow": {
+        "brief": "FedNow participation continues expanding with focus on risk mitigation tools. The Federal Reserve has launched new network intelligence capabilities to help participants assess account-level risk in real-time, addressing a key concern for adoption among smaller financial institutions.",
+        "sourceLinks": [
+          {
+            "name": "Tearsheet",
+            "title": "The 3-Min Read: The two systems Coinbase is building for an agent-driven financial ecosystem",
+            "url": "https://tearsheet.co/blockchain-crypto/the-3-min-read-the-two-systems-coinbase-is-building-for-an-agent-driven-financial-ecosystem/?utm_source=rss&utm_medium=rss&utm_campaign=the-3-min-read-the-two-systems-coinbase-is-building-for-an-agent-driven-financial-ecosystem",
+            "publishedAt": "2026-06-17T11:30:00.000Z"
+          }
+        ]
       },
-      {
-        "name": "Digital Transactions",
-        "title": "PayIt Taps AI for Gov. App and other Digital Transactions News briefs from 6/17/26",
-        "url": "https://www.digitaltransactions.net/payit-taps-ai-for-gov-app-and-other-digital-transactions-news-briefs-from-6-17-26/",
-        "publishedAt": "2026-06-17T13:00:00.000Z"
-      },
-      {
-        "name": "Finextra",
-        "title": "EBAday 2026: ISO 20022 and the evolving global payments ecosystem",
-        "url": "https://www.finextra.com/newsarticle/47943/ebaday-2026-iso-20022-and-the-evolving-global-payments-ecosystem?utm_medium=rssfinextra&utm_source=finextrafeed",
-        "publishedAt": "2026-06-17T14:00:00.000Z"
-      },
-      {
-        "name": "Tearsheet",
-        "title": "The 3-Min Read: The two systems Coinbase is building for an agent-driven financial ecosystem",
-        "url": "https://tearsheet.co/blockchain-crypto/the-3-min-read-the-two-systems-coinbase-is-building-for-an-agent-driven-financial-ecosystem/?utm_source=rss&utm_medium=rss&utm_campaign=the-3-min-read-the-two-systems-coinbase-is-building-for-an-agent-driven-financial-ecosystem",
-        "publishedAt": "2026-06-17T11:30:00.000Z"
-      },
-      {
-        "name": "McKinsey Financial Services",
-        "title": "The turning point for real-world robotics",
-        "url": "https://www.mckinsey.com/industries/industrials/our-insights/the-turning-point-for-real-world-robotics",
-        "publishedAt": "2026-06-17T04:00:00.000Z"
-      },
-      {
-        "name": "Finextra",
-        "title": "EBAday 2026: How can Europe achieve both innovation and sovereignty in payments?",
-        "url": "https://www.finextra.com/newsarticle/47946/ebaday-2026-how-can-europe-achieve-both-innovation-and-sovereignty-in-payments?utm_medium=rssfinextra&utm_source=finextrafeed",
-        "publishedAt": "2026-06-17T14:41:00.000Z"
-      },
-      {
-        "name": "Finextra",
-        "title": "EBAday 2026: Rebuilding the payments landscape",
-        "url": "https://www.finextra.com/newsarticle/47942/ebaday-2026-rebuilding-the-payments-landscape?utm_medium=rssfinextra&utm_source=finextrafeed",
-        "publishedAt": "2026-06-17T11:18:00.000Z"
-      },
-      {
-        "name": "Finextra",
-        "title": "Sabre Global Technologies fined £1 million for circumventing Russian sancctions",
-        "url": "https://www.finextra.com/pressarticle/110170/sabre-global-technologies-fined-1-million-for-circumventing-russian-sancctions?utm_medium=rssfinextra&utm_source=finextrafeed",
-        "publishedAt": "2026-06-17T12:24:00.000Z"
-      },
-      {
-        "name": "Finextra",
-        "title": "The Rise of Microfinance and Inclusion in African Payments",
-        "url": "https://www.finextra.com/videoarticle/3527/the-rise-of-microfinance-and-inclusion-in-african-payments?utm_medium=rssfinextra&utm_source=finextrafeed",
-        "publishedAt": "2026-06-17T11:00:00.000Z"
-      },
-      {
-        "name": "McKinsey Financial Services",
-        "title": "The future of Ohio: Playing to win in the next economy",
-        "url": "https://www.mckinsey.com/industries/social-sector/our-insights/the-future-of-ohio-playing-to-win-in-the-next-economy",
-        "publishedAt": "2026-06-17T04:00:00.000Z"
-      },
-      {
-        "name": "Payments Dive",
-        "title": "Tracking digital payments skids",
-        "url": "https://www.paymentsdive.com/news/tracking-digital-payments-skids/823194/",
-        "publishedAt": "2026-06-17T19:47:00.000Z"
-      },
-      {
-        "name": "Finextra",
-        "title": "EBAday 2026: Regulation and consumer experience are driving Europe’s future of payments",
-        "url": "https://www.finextra.com/newsarticle/47947/ebaday-2026-regulation-and-consumer-experience-are-driving-europes-future-of-payments?utm_medium=rssfinextra&utm_source=finextrafeed",
-        "publishedAt": "2026-06-17T15:37:00.000Z"
-      },
-      {
-        "name": "Finextra",
-        "title": "EBAday 2026: Salv wins the Fintech Zone",
-        "url": "https://www.finextra.com/newsarticle/47944/ebaday-2026-salv-wins-the-fintech-zone?utm_medium=rssfinextra&utm_source=finextrafeed",
-        "publishedAt": "2026-06-17T14:30:00.000Z"
-      },
-      {
-        "name": "Finextra",
-        "title": "'Bank in a Box' technology vendor Monument raises £18 million",
-        "url": "https://www.finextra.com/newsarticle/47939/bank-in-a-box-technology-vendor-monument-raises-18-million?utm_medium=rssfinextra&utm_source=finextrafeed",
-        "publishedAt": "2026-06-17T09:58:00.000Z"
-      },
-      {
-        "name": "Finextra",
-        "title": "Access PaySuite acquires Ordo's open banking technology infrastructure",
-        "url": "https://www.finextra.com/newsarticle/47938/access-paysuite-acquires-ordos-open-banking-technology-infrastructure?utm_medium=rssfinextra&utm_source=finextrafeed",
-        "publishedAt": "2026-06-17T09:37:00.000Z"
-      },
-      {
-        "name": "Finextra",
-        "title": "First American Bank and Trust signs for Jack Henry digital platform",
-        "url": "https://www.finextra.com/pressarticle/110174/first-american-bank-and-trust-signs-for-jack-henry-digital-platform?utm_medium=rssfinextra&utm_source=finextrafeed",
-        "publishedAt": "2026-06-17T15:46:00.000Z"
-      },
-      {
-        "name": "Finextra",
-        "title": "UAE grants Revolut two full payments licences",
-        "url": "https://www.finextra.com/pressarticle/110172/uae-grants-revolut-two-full-payments-licences?utm_medium=rssfinextra&utm_source=finextrafeed",
-        "publishedAt": "2026-06-17T14:32:00.000Z"
-      },
-      {
-        "name": "Finextra",
-        "title": "Chetwood Bank launches wholesale banking division",
-        "url": "https://www.finextra.com/pressarticle/110171/chetwood-bank-launches-wholesale-banking-division?utm_medium=rssfinextra&utm_source=finextrafeed",
-        "publishedAt": "2026-06-17T12:26:00.000Z"
-      },
-      {
-        "name": "Finextra",
-        "title": "Zilch appoints Microsoft Emea chief Clare Barclay to board",
-        "url": "https://www.finextra.com/pressarticle/110169/zilch-appoints-microsoft-emea-chief-clare-barclay-to-board?utm_medium=rssfinextra&utm_source=finextrafeed",
-        "publishedAt": "2026-06-17T12:18:00.000Z"
-      },
-      {
-        "name": "Finextra",
-        "title": "The Real Bottleneck in Banking Transformation Isn’t Technology. It’s Execution.",
-        "url": "https://www.finextra.com/blogposting/32038/the-real-bottleneck-in-banking-transformation-isnt-technology-its-execution?utm_medium=rssfinextra&utm_source=finextrafeed",
-        "publishedAt": "2026-06-17T15:15:32.000Z"
-      },
-      {
-        "name": "Finextra",
-        "title": "The AI Premium: How Artificial Intelligence Is Rewriting Fintech's Funding Playbook",
-        "url": "https://www.finextra.com/blogposting/32036/the-ai-premium-how-artificial-intelligence-is-rewriting-fintechs-funding-playbook?utm_medium=rssfinextra&utm_source=finextrafeed",
-        "publishedAt": "2026-06-17T14:28:48.000Z"
-      },
-      {
-        "name": "PaymentsJournal",
-        "title": "Wyndham Enters the Premium Credit Card Market",
-        "url": "https://www.paymentsjournal.com/wyndham-enters-the-premium-credit-card-market/",
-        "publishedAt": "2026-06-17T17:23:33.000Z"
-      },
-      {
-        "name": "PaymentsJournal",
-        "title": "Preparing for Quantum Day and the Risks to Modern Cryptography",
-        "url": "https://www.paymentsjournal.com/preparing-for-quantum-day-and-the-risks-to-modern-cryptography/",
-        "publishedAt": "2026-06-17T13:00:00.000Z"
-      },
-      {
-        "name": "McKinsey Financial Services",
-        "title": "Wee Ee Cheong: Calm steward playing the long game for UOB",
-        "url": "https://www.mckinsey.com/featured-insights/future-of-asia/wee-ee-cheong-calm-steward-playing-the-long-game-for-uob",
-        "publishedAt": "2026-06-17T04:00:00.000Z"
-      },
-      {
-        "name": "Payments Dive",
-        "title": "Banks bring BNPL rivalry",
-        "url": "https://www.paymentsdive.com/news/banks-bring-bnpl-rivalry/823141/",
-        "publishedAt": "2026-06-17T14:49:00.000Z"
-      },
-      {
-        "name": "Payments Dive",
-        "title": "Illinois action may curb fraud",
-        "url": "https://www.paymentsdive.com/news/illinois-pritzker-curb-fraud-social-media-kids/823155/",
-        "publishedAt": "2026-06-17T14:49:00.000Z"
+      "Digital Assets": {
+        "brief": "Stablecoin infrastructure is attracting significant investment, with firms raising capital to expand into emerging markets. The intersection of AI and payments is creating new use cases, including agent-based transactions within language models—a frontier for fintech and payment networks.",
+        "sourceLinks": [
+          {
+            "name": "Finextra",
+            "title": "EBAday 2026: ISO 20022 and the evolving global payments ecosystem",
+            "url": "https://www.finextra.com/newsarticle/47943/ebaday-2026-iso-20022-and-the-evolving-global-payments-ecosystem?utm_medium=rssfinextra&utm_source=finextrafeed",
+            "publishedAt": "2026-06-17T14:00:00.000Z"
+          }
+        ]
       }
-    ]
+    }
   },
   {
     "date": "2026-06-16",

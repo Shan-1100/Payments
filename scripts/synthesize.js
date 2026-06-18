@@ -2,11 +2,18 @@
 
 const Anthropic = require('@anthropic-ai/sdk');
 
-const SYSTEM = `You are a senior intelligence analyst for a bank's corporate treasury division. Analyze payments industry news and synthesize it into direct, actionable intelligence for treasury bankers and fintech product teams.
+const SYSTEM = `You are a competitive intelligence analyst specializing in B2B and B2C instant payments.
 
-Focus: RTP, FedNow, ACH, tokenized deposits, B2B stablecoins (bank-issued only — no pure crypto), correspondent banking, treasury management, regulatory developments.
+Primary focus: US market — RTP (Real-Time Payments), FedNow Service, Visa Direct, Mastercard Send, stablecoins.
+Secondary focus: Global B2B/B2C payments developments.
 
-Be direct and specific. Avoid generic statements. Every output must tie to competitive threat, revenue impact, or strategic opportunity for a treasury-serving bank.`;
+Your task: Group news into concise, actionable topic briefs (2-3 sentences each).
+Each brief should clearly state:
+1. What changed/happened
+2. Why it matters (competitive threat, opportunity, or market shift)
+3. Which rail/segment it affects
+
+Stay factual. Only synthesize what the articles state. Be specific about US vs. global implications.`;
 
 function getClient() {
   if (!process.env.ANTHROPIC_API_KEY) throw new Error('ANTHROPIC_API_KEY not set');
@@ -18,40 +25,72 @@ function parseJSON(text) {
   return JSON.parse(cleaned);
 }
 
-async function synthesizeArticle(title, content, sourceUrl, sourceName) {
+// Classify article into a topic group based on keywords
+function classifyTopic(title, content) {
+  const text = `${title} ${content}`.toLowerCase();
+
+  if (text.includes('rtp') || text.includes('real-time payment') || text.includes('real time payment')) return 'RTP';
+  if (text.includes('fednow') || text.includes('fed now')) return 'FedNow';
+  if (text.includes('visa direct') || text.includes('mastercard send') || text.includes('ach')) return 'Traditional Rails';
+  if (text.includes('stablecoin') || text.includes('cbdc') || text.includes('blockchain')) return 'Digital Assets';
+  if (text.includes('cross-border') || text.includes('cross border') || text.includes('international')) return 'Global Payments';
+  if (text.includes('regulation') || text.includes('compliance') || text.includes('regulator')) return 'Regulatory';
+
+  return 'Market Developments';
+}
+
+async function generateTopicBriefs(items, dateStr) {
   const client = getClient();
-  const msg = await client.messages.create({
-    model: 'claude-haiku-4-5-20251001',
-    max_tokens: 900,
-    system: SYSTEM,
-    messages: [{
-      role: 'user',
-      content: `Analyze this payments industry article and return ONLY valid JSON — no markdown, no explanation.
 
-Title: ${title}
-Source: ${sourceName}
-URL: ${sourceUrl}
+  // Group articles by topic
+  const grouped = {};
+  for (const item of items) {
+    const topic = classifyTopic(item.title, item.rawContent || '');
+    if (!grouped[topic]) grouped[topic] = [];
+    grouped[topic].push(item);
+  }
 
-Content excerpt:
-${content.slice(0, 3500)}
+  // Generate a brief for each topic group
+  const briefs = {};
+  for (const [topic, articles] of Object.entries(grouped)) {
+    const digest = articles
+      .slice(0, 5) // Max 5 articles per topic
+      .map(a => `- "${a.title}" (${a.sourceName}): ${(a.rawContent || '').slice(0, 200)}`)
+      .join('\n');
 
-Return exactly this structure:
-{
-  "intelligenceType": "threat | opportunity | expansion | regulatory",
-  "summary": "2-3 sentence factual summary of the article",
-  "businessImpact": "One paragraph stating direct competitive/revenue/strategic impact on treasury-serving banks. Be specific.",
-  "technicalTakeaway": "One sentence on technical implications",
-  "businessTakeaway": "One sentence on business or revenue implications",
-  "treasuryTakeaway": "One sentence on corporate treasury client implications",
-  "primaryTopic": "Brief topic label e.g. FedNow Adoption or Tokenized Deposits",
-  "rail": "RTP | FedNow | ACH | Adjacent | Regulatory",
-  "priorityBand": "high | medium | monitor",
-  "tags": ["tag1", "tag2", "tag3"]
-}`
-    }]
-  });
+    try {
+      const msg = await client.messages.create({
+        model: 'claude-haiku-4-5-20251001',
+        max_tokens: 400,
+        system: SYSTEM,
+        messages: [{
+          role: 'user',
+          content: `Synthesize these ${topic} payment articles from ${dateStr} into ONE concise brief (2-3 sentences max).
+Focus: What changed, why it matters, and implications for B2B/B2C payments.
+Stay factual.
 
-  return parseJSON(msg.content[0].text);
+Articles:
+${digest}
+
+Return ONLY the 2-3 sentence brief. No JSON, no labels, just the text.`
+        }]
+      });
+
+      briefs[topic] = {
+        brief: msg.content[0].text.trim(),
+        sourceLinks: articles.map(a => ({
+          name: a.sourceName,
+          title: a.title,
+          url: a.sourceUrl,
+          publishedAt: a.publishedAt
+        }))
+      };
+    } catch (err) {
+      console.warn(`  Failed to synthesize ${topic}: ${err.message}`);
+    }
+  }
+
+  return briefs;
 }
 
 async function generateWeeklySummary(items) {
@@ -140,4 +179,4 @@ Return ONLY valid JSON:
   return parseJSON(msg.content[0].text);
 }
 
-module.exports = { synthesizeArticle, generateWeeklySummary, generateMonthlySummary, generateDailySummary };
+module.exports = { synthesizeArticle, generateWeeklySummary, generateMonthlySummary, generateTopicBriefs };

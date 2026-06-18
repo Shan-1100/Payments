@@ -223,19 +223,42 @@ function renderSummary() {
   }
 
   const item = summaries[index];
-  const headline = item.headline || item.title || 'Summary';
-  const body = item.summary || item.body || '';
   const dateStr = item.date || item.publishedAt || '';
   const formatted = formatDate(dateStr, tab);
 
-  document.getElementById('summary-headline').textContent = headline;
-  // id="summary-date" is the in-card date display
-  document.getElementById('summary-date').textContent = formatted;
-  // id="current-date" is the nav bar date
-  document.getElementById('current-date').textContent = formatted;
-  document.getElementById('summary-body').innerHTML = formatBody(body);
+  // Support both old format (headline/summary) and new format (briefs)
+  if (item.briefs && typeof item.briefs === 'object') {
+    // New format: topic-grouped briefs
+    document.getElementById('summary-headline').textContent = formatted;
+    document.getElementById('summary-date').textContent = '';
+    document.getElementById('current-date').textContent = formatted;
 
-  renderSources(item);
+    let html = '';
+    for (const [topic, content] of Object.entries(item.briefs)) {
+      html += `<div class="brief-section">
+        <h3 class="brief-topic">${escapeHtml(topic)}</h3>
+        <p class="brief-text">${escapeHtml(content.brief)}</p>
+        <div class="brief-sources">
+          ${content.sourceLinks.map(s => `<a href="${escapeHtml(s.url)}" target="_blank" rel="noopener noreferrer" class="brief-source-link">${escapeHtml(s.name)} — ${escapeHtml(s.title)}</a>`).join('')}
+        </div>
+      </div>`;
+    }
+    document.getElementById('summary-body').innerHTML = html;
+    document.getElementById('sources-container').style.display = 'none';
+  } else {
+    // Legacy format: headline + summary
+    const headline = item.headline || item.title || 'Summary';
+    const body = item.summary || item.body || '';
+
+    document.getElementById('summary-headline').textContent = headline;
+    document.getElementById('summary-date').textContent = formatted;
+    document.getElementById('current-date').textContent = formatted;
+    document.getElementById('summary-body').innerHTML = formatBody(body);
+
+    renderSources(item);
+    document.getElementById('sources-container').style.display = '';
+  }
+
   updatePaginationUI();
 }
 
