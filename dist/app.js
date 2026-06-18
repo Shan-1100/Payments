@@ -470,7 +470,10 @@ function renderPartners() {
 
 /* ─── Fetch utility ──────────────────────────────────────────── */
 async function fetchJSON(url) {
-  const res = await fetch(url);
+  // Cache-bust data files so GitHub Pages always serves fresh content
+  const sep = url.includes('?') ? '&' : '?';
+  const bustUrl = url.includes('data/') ? `${url}${sep}v=${Date.now()}` : url;
+  const res = await fetch(bustUrl);
   if (!res.ok) throw new Error(`HTTP ${res.status} for ${url}`);
   return res.json();
 }

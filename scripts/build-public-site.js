@@ -21,8 +21,9 @@ files.forEach(file => {
   const dst = path.join(DIST_DIR, file);
   if (file === 'index.html') {
     let html = fs.readFileSync(src, 'utf8');
-    // Append ?v=VERSION to local asset references in the built HTML only.
+    // Append ?v=VERSION to local asset references and ensure no caching.
     html = html
+      .replace('</head>', `  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate, max-age=0">\n</head>`)
       .replace('href="styles.css"', `href="styles.css?v=${VERSION}"`)
       .replace('src="app.js"', `src="app.js?v=${VERSION}"`);
     fs.writeFileSync(dst, html);
